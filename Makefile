@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
+#    By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/07/15 15:16:35 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/07/25 15:26:51 by pmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,11 +36,11 @@ SRC_MAIN	=	main.c
 
 SRC_MAIN_EXTRA	= main_parse.c
 
-SRC_EXEC	=	
+SRC_EXEC	=	aux.c
 
 SRC_PARSE	=
 
-SRC_UTILS	=
+SRC_UTILS	= aux.c constructors.c hooks.c cleaners.c
 
 SRCS	=	$(addprefix $(DIR_SRC)/, $(SRC_MAIN)) \
 			$(addprefix $(DIR_SRC)/, $(addprefix $(DIR_EXEC)/, $(SRC_EXEC))) \
@@ -65,7 +65,8 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	$(M_COM)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
 
-$(DIR_OBJ)/%.o: $(DIR_SRC)/%.c | $(DIR_OBJ)
+$(DIR_OBJ)/%.o: $(DIR_SRC)/%.c #| $(DIR_OBJ)
+	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(DIR_OBJ):

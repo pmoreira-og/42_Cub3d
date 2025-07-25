@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/07/15 14:39:51 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/07/25 15:26:13 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // -->┊( LIBS )┊.´-★☆★
 
-#include "cub3d_structs.h"
+#include "minilibx_linux/mlx.h"
 #include <pthread.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -23,9 +23,31 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <math.h>
+#include <limits.h>
+#include "libft/libft.h"
+#include "cub3d_structs.h"
 
 // -->┊( DEFINES )┊.´-★☆★
 
+#define WIDTH 800
+#define HEIGHT 600
+#define KEY_W 119
+#define KEY_A 97
+#define KEY_S 115
+#define KEY_D 100
+#define VK_UP 65362
+#define VK_DOWN 65364
+#define VK_LEFT 65361
+#define VK_RIGHT 65363
+#define ESC 65307
+#define KEY_1 49
+#define KEY_2 50
+#define KEY_3 51
+#define KEY_4 52
+#define SRC_UP 4
+#define SRC_DOWN 5
+#define KEY_T 116
+#define KEY_Y 121
 //-‵,┊ colors
 
 #define DEF "\e[0m"
@@ -113,4 +135,15 @@
 
 // -->┊( FUNCTION PROTOTYPES )┊.´-★☆★
 
+void	merror(char *msg);
+void	init_data(t_game *data, char **map);
+void	put_pixel(t_img_data *data, int x, int y, int color);
+void	print_game_data(t_game *data);
+
+int		close_win_keycode(int keycode, t_game *data);
+int		close_win_mouse(t_game *data);
+
+void	armageddon(t_game *data);
+
 // tbd
+char	**copy_map(char **map);
