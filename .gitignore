@@ -1,0 +1,8 @@
+*/.vscode
+.vscode
+*.out
+*.o
+*.a
+/build
+cub3D
+/include/*/obj

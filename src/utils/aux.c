@@ -1,0 +1,25 @@
+#include "../../include/cub3d.h"
+
+t_type	get_player_dir(int c)
+{
+	if (!c)
+		return (VOID);
+	if (ft_strchr("E", c))
+		return (PLAYER_E);
+	if (ft_strchr("W", c))
+		return (PLAYER_W);
+	if (ft_strchr("S", c))
+		return (PLAYER_S);
+	if (ft_strchr("N", c))
+		return (PLAYER_N);
+	return (VOID);
+}
+
+/// @brief Prints malloc error message on stderr.
+/// @param msg Message for malloc debug porposes.
+void	merror(char *msg)
+{
+	if (msg)
+		printf_fd(2, "Malloc:%s\n", msg);
+}
+
