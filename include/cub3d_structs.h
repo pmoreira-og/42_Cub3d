@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/07/28 15:28:11 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:22:26 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_game
 	t_point		**matrix;
 	size_t		map_width;
 	size_t		map_height;
+	double		scale;
 	t_img_data	*bg;
 	int			file_fd;
 	bool		debug;

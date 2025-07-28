@@ -31,12 +31,15 @@ bool	render_map(t_game *game)
 	// 	y++;
 	// }
 	t_point a,b;
+	t_point	*hit;
 	ft_bzero(&a, sizeof(t_point));
 	a.y = 0;
 	a.x = WIDTH;
 	b.x = 0;
 	b.y = HEIGHT;
 	draw_line(game->bg, a, b, 0xFF350C);
+	if (collider(a, b, game, &hit))
+		printf("bateu\n");
 	mlx_put_image_to_window(game->mlx, game->win, game->bg->img, 0, 0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/07/28 15:32:18 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/28 16:33:57 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,11 +141,12 @@ void	put_pixel(t_img_data *data, int x, int y, int color);
 void	print_map(t_game *data);
 void	print_matrix(t_game *data);
 void	draw_line(t_img_data *img, t_point start, t_point end, int color);
-bool	raycast(t_point start, t_point end, t_point **map, t_point **hit);
+bool	collider(t_point start, t_point end, t_game *game, t_point **hit);
 t_type	get_player_dir(int c);
 
 int		close_win_keycode(int keycode, t_game *data);
 int		close_win_mouse(t_game *data);
+void	get_scale(t_game *game);
 
 void	armageddon(t_game *data);
 void	ft_freed(void **ptr, int size);

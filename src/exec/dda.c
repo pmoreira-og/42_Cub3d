@@ -38,18 +38,18 @@ void	draw_line(t_img_data *img, t_point start, t_point end, int color)
 	}
 }
 
-bool	check_colision(double x0, double y0, t_point **map, t_point **hit)
+static bool	check_colision(double x0, double y0, t_game *game, t_point **hit)
 {
 	int	x;
 	int	y;
 
-	x = (int) x0;
-	y = (int) y0;
-	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+	x = (int) x0 / game->scale;
+	y = (int) y0 / game->scale;
+	if (x0 >= 0 && x0 < WIDTH && y0 >= 0 && y0 < HEIGHT)
 	{
-		if (map[y][x].type == WALL)
+		if (game->matrix[y][x].type == WALL)
 		{
-			*hit = &map[y][x];
+			*hit = &game->matrix[y][x];
 			return (true);
 		}
 	}
@@ -59,7 +59,7 @@ bool	check_colision(double x0, double y0, t_point **map, t_point **hit)
 /// @brief Raycasting function that uses DDA algorithm to check colision.
 /// @param hit Address of a pointer to saves where the colision occured.
 /// @return True on colision.
-bool	raycast(t_point start, t_point end, t_point **map, t_point **hit)
+bool	collider(t_point start, t_point end, t_game *game, t_point **hit)
 {
 	double	d[2];
 	double	coord[2];
@@ -79,10 +79,11 @@ bool	raycast(t_point start, t_point end, t_point **map, t_point **hit)
 	i = -1;
 	while (++i <= steps)
 	{
-		if (check_colision(coord[0], coord[1], map, hit))
+		if (check_colision(coord[0], coord[1], game, hit))
 			return (true);
 		coord[0] += d[0];
 		coord[1] += d[1];
 	}
+	*hit = NULL;
 	return (false);
 }

@@ -100,4 +100,5 @@ void	init_data(t_game *data, char **map)
 	if (!alloc_map_data(data))
 		return (armageddon(data));
 	init_map_data(data);
+	get_scale(data);
 }
