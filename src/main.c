@@ -46,7 +46,7 @@ char	**copy_map(char **map)
 	return (new_map);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_game	game;
 	char *map[] = {
@@ -57,11 +57,19 @@ int	main(void)
 		"111111111",
 		NULL
 	};
+
+	if (ac > 2)
+		return (0);
 	init_data(&game, map);
-	print_game_data(&game);
+	if (ac == 2 && !ft_strcmp("-d", av[1]))
+		game.debug = true;
+	if(game.debug)
+	{
+		print_matrix(&game);
+		print_map(&game);
+	}
 	render_map(&game);
 	manager(&game);
 	mlx_loop(game.mlx);
-	printf("Hello World\n");
 	return (0);
 }

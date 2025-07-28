@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/07/25 15:26:13 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/28 11:14:26 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,12 +138,14 @@
 void	merror(char *msg);
 void	init_data(t_game *data, char **map);
 void	put_pixel(t_img_data *data, int x, int y, int color);
-void	print_game_data(t_game *data);
+void	print_map(t_game *data);
+void	print_matrix(t_game *data);
 
 int		close_win_keycode(int keycode, t_game *data);
 int		close_win_mouse(t_game *data);
 
 void	armageddon(t_game *data);
+void	ft_freed(void **ptr, int size);
 
 // tbd
 char	**copy_map(char **map);

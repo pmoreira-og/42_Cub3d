@@ -6,7 +6,7 @@
 #    By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/07/25 15:26:51 by pmoreira         ###   ########.fr        #
+#    Updated: 2025/07/28 10:43:29 by pmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRC_EXEC	=	aux.c
 
 SRC_PARSE	=
 
-SRC_UTILS	= aux.c constructors.c hooks.c cleaners.c
+SRC_UTILS	= aux.c constructors.c hooks.c cleaners.c printers.c
 
 SRCS	=	$(addprefix $(DIR_SRC)/, $(SRC_MAIN)) \
 			$(addprefix $(DIR_SRC)/, $(addprefix $(DIR_EXEC)/, $(SRC_EXEC))) \
