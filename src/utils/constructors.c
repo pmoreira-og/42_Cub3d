@@ -1,5 +1,51 @@
 #include "../../include/cub3d.h"
 
+static bool	alloc_map_data(t_game *game)
+{
+	size_t	i;
+
+	game->matrix = ft_calloc(game->map_height, sizeof(t_point *));
+	if (!game->matrix)
+		return (merror("game:matrix"), false);
+	i = 0;
+	while (i < game->map_height)
+	{
+		game->matrix[i] = ft_calloc(game->map_width, sizeof(t_point));
+		if (!game->matrix[i])
+		{
+			merror("game.matrix[i]");
+			return (ft_freed((void **) game->matrix, i +1), 0);
+		}
+		i++;
+	}
+	return (true);
+}
+
+static void	init_map_data(t_game *game)
+{
+	size_t	y;
+	size_t	x;
+
+	y = 0;
+	while (game->map[y])
+	{
+		x = 0;
+		while (game->map[y][x])
+		{
+			game->matrix[y][x].abs = x;
+			game->matrix[y][x].ord = y;
+			if (game->map[y][x] == '0')
+				game->matrix[y][x].type = FLOOR;
+			if (game->map[y][x] == '1')
+				game->matrix[y][x].type = WALL;
+			else if (ft_strchr("NSEW", game->map[y][x]))
+				game->matrix[y][x].type = PLAYER;
+			x++;
+		}
+		y++;
+	}
+}
+
 t_img_data	*get_img(t_game *game)
 {
 	t_img_data	*img;
@@ -17,7 +63,7 @@ t_img_data	*get_img(t_game *game)
 	return (img);
 }
 
-bool	init_map(t_game *data)
+static bool	init_map(t_game *data)
 {
 	int	i;
 
@@ -51,4 +97,7 @@ void	init_data(t_game *data, char **map)
 	}
 	data->map = copy_map(map);
 	init_map(data);
+	if (!alloc_map_data(data))
+		return (armageddon(data));
+	init_map_data(data);
 }
