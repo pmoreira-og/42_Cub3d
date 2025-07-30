@@ -1,11 +1,6 @@
 #include "../../include/cub3d.h"
 
-double	ft_min(double n1, double n2)
-{
-	if (n1 < n2)
-		return (n1);
-	return (n2);
-}
+
 
 void	put_pixel(t_img_data *data, int x, int y, int color)
 {

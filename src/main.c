@@ -8,38 +8,28 @@ void	manager(t_game *game)
 
 bool	render_map(t_game *game)
 {
-	// size_t	x;
-	// size_t	y;
-
-	// y = 0;
-	// while(y < game->map_height)
+	t_point a;
+	// t_point	*hit,b;
+	find_player(game, &a);
+	a.x *= game->scale;
+	a.y *= game->scale;
+	// b.x = a.x - 100;
+	// b.y = a.y;
+    printf("Player em: %d, %d\n", a.x, a.y);
+	// if (collider(a, b, game, &hit))
 	// {
-	// 	x = 0;
-	// 	while (x < game->map_width)
-	// 	{
-	// 		if (j != (data->table->cols - 1))
-	// 			handle_line(data->fdf, &data->fdf->map->pts[i][j],
-	// 				&data->fdf->map->pts[i][j + 1]);
-	// 		if (i != (data->table->lines - 1))
-	// 			handle_line(data->fdf, &data->fdf->map->pts[i][j],
-	// 				&data->fdf->map->pts[i + 1][j]);
-	// 		if (x + 1 < game->map_width)
-	// 			draw_line(game->bg, game->matrix[y][x],
-	// 				game->matrix[y][x+1], 0xFFFFFF);
-	// 		x++;
-	// 	}
-	// 	y++;
+	// 	draw_line(game->bg, a, *hit, 0xFF350C);
+	// 	printf("Colidiu em: %d, %d\n", hit->x, hit->y);
 	// }
-	t_point a,b;
-	t_point	*hit;
-	ft_bzero(&a, sizeof(t_point));
-	a.y = 0;
-	a.x = WIDTH;
-	b.x = 0;
-	b.y = HEIGHT;
-	draw_line(game->bg, a, b, 0xFF350C);
-	if (collider(a, b, game, &hit))
-		printf("bateu\n");
+	double angle = 0;
+	while (angle <= 350)
+	{
+		if (collider_angle(a, angle, HEIGHT, game) != -1)
+			draw(a, angle, HEIGHT, game);
+		else
+			printf("Sem colisão\n");
+		angle++;
+	}
 	mlx_put_image_to_window(game->mlx, game->win, game->bg->img, 0, 0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 #    By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/07/28 11:58:26 by pmoreira         ###   ########.fr        #
+#    Updated: 2025/07/30 17:04:15 by pmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ MLX		=	./include/minilibx_linux/libmlx.a
 
 # -->┊( COMMANDS AND FLAGS )┊.´-★☆★
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g
-MLXFLAGS	=	-L ./include/minilibx_linux -lmlx_Linux -lX11 -lXext
+CFLAGS		=	-Wall -Wextra -Werror -g 
+MLXFLAGS	=	-L ./include/minilibx_linux -lmlx_Linux -lX11 -lXext -lm
 VAL			=	valgrind --leak-check=full --show-leak-kinds=all \
 				--track-origins=yes --track-fds=yes -s
 
@@ -36,7 +36,7 @@ SRC_MAIN	=	main.c
 
 SRC_MAIN_EXTRA	= main_parse.c
 
-SRC_EXEC	=	aux.c dda.c
+SRC_EXEC	=	aux.c dda.c getters.c
 
 SRC_PARSE	=
 
