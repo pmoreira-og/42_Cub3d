@@ -2,7 +2,7 @@
 #include "../../include/cub3d.h"
 
 /// @brief Get absolute value of a double type number.
-static double	ft_abs(double nbr)
+double	ft_abs(double nbr)
 {
 	if (nbr < 0)
 		return (nbr * -1);
@@ -93,33 +93,33 @@ static bool	check_colision(double x0, double y0, t_game *game, t_point **hit)
 // 	return (false);
 // }
 
-/// @brief Raycasting collision checker based on trigonometric circle angles.
-/// @param start Start point where the line gonna start.
-/// @param angle Trigonometric circle based angle.
-/// @param max_dist Max distance of the line to check collision.
-/// @param game Main struct.
-/// @return 
-double	collider_angle(t_point start, double angle, double max_dist,
-	t_game *game)
-{
-	double	inc[2];
-	double	coord[2];
-	int		i;
+// /// @brief Raycasting collision checker based on trigonometric circle angles.
+// /// @param start Start point where the line gonna start.
+// /// @param angle Trigonometric circle based angle.
+// /// @param max_dist Max distance of the line to check collision.
+// /// @param game Main struct.
+// /// @return 
+// double	collider_angle(t_point start, double angle, double max_dist,
+// 	t_game *game)
+// {
+// 	double	inc[2];
+// 	double	coord[2];
+// 	int		i;
 
-	inc[0] = cos(angle * (PI / 180));
-	inc[1] = -sin(angle * (PI / 180));
-	coord[0] = start.x;
-	coord[1] = start.y;
-	i = -1;
-	while (++i <= (int)max_dist)
-	{
-		if (check_colision(coord[0], coord[1], game, NULL))
-			return (i);
-		coord[0] += inc[0];
-		coord[1] += inc[1];
-	}
-	return (-1);
-}
+// 	inc[0] = cos(angle * (PI / 180));
+// 	inc[1] = -sin(angle * (PI / 180));
+// 	coord[0] = start.x;
+// 	coord[1] = start.y;
+// 	i = -1;
+// 	while (++i <= (int)max_dist)
+// 	{
+// 		if (check_colision(coord[0], coord[1], game, NULL))
+// 			return (i);
+// 		coord[0] += inc[0];
+// 		coord[1] += inc[1];
+// 	}
+// 	return (-1);
+// }
 
 void	draw(t_point start, double angle, double max_dist, t_game *game)
 {
@@ -144,83 +144,6 @@ void	draw(t_point start, double angle, double max_dist, t_game *game)
 	}
 }
 
-void	init_struct(t_dda *dda, t_point *start, t_game *game, double angle)
-{
-	ft_bzero(dda, sizeof(t_dda));
-	dda->ray_dir_x = cos(angle * (PI / 180));
-	dda->ray_dir_y = -sin(angle * (PI / 180));
-	dda->dx = ft_abs(1.0 / dda->ray_dir_x);
-	dda->dy = ft_abs(1.0 / dda->ray_dir_y);
-	dda->map_x = (int)(start->x / game->scale);
-	dda->map_y = (int)(start->y / game->scale);
-	
-}
-
-void	has_collided(t_dda *dda, t_game *game, t_point *start)
-{
-	if (game->matrix[dda->map_y][dda->map_x].type == WALL)
-	{
-		dda->hit = true;
-		if (dda->side == 0)
-			dda->perp_wall_dist = (dda->map_x - start->x / game->scale + (1 - dda->step_x) / 2) / dda->ray_dir_x;
-		else
-			dda->perp_wall_dist = (dda->map_y - start->y / game->scale + (1 - dda->step_y) / 2) / dda->ray_dir_y;
-	}
-}
-void	next_step(t_dda *dda)
-{
-	if (dda->side_dist_x < dda->side_dist_y)
-	{
-		dda->side_dist_x += dda->dx;
-		dda->map_x += dda->step_x;
-		dda->side = 0;
-	}
-	else
-	{
-		dda->side_dist_y += dda->dy;
-		dda->map_y += dda->step_y;
-		dda->side = 1;
-	}
-}
-
-void	save_hit_pos(t_dda *dda, t_point *hit, t_game *game, t_point *start)
-{
-	if (dda->side == 0)
-	{
-		hit->x = dda->map_x * game->scale;
-		hit->y = start->y + dda->perp_wall_dist * dda->ray_dir_y * game->scale;
-	}
-	else
-	{
-		hit->x = start->x + dda->perp_wall_dist * dda->ray_dir_x * game->scale;
-		hit->y = dda->map_y * game->scale;
-	}
-}
-
-void	get_step(t_dda *dda, t_point *start, t_game *game)
-{
-	if (dda->ray_dir_x < 0)
-	{
-		dda->step_x = -1;
-		dda->side_dist_x = (start->x / game->scale - dda->map_x) * dda->dx;
-	}
-	else
-	{
-		dda->step_x = 1;
-		dda->side_dist_x = ((dda->map_x + 1.0) - start->x / game->scale) * dda->dx;
-	}
-	if (dda->ray_dir_y < 0)
-	{
-		dda->step_y = -1;
-		dda->side_dist_y = (start->y / game->scale - dda->map_y) * dda->dy;
-	}
-	else
-	{
-		dda->step_y = 1;
-		dda->side_dist_y = ((dda->map_y + 1.0) - start->y / game->scale) * dda->dy;
-	}
-}
-
 double	collider_dda(t_point start, double angle, t_game *game, t_point *hit)
 {
 	t_dda	dda;
@@ -232,7 +155,7 @@ double	collider_dda(t_point start, double angle, t_game *game, t_point *hit)
 		next_step(&dda);
 		if (dda.map_x < 0 || dda.map_x >= (int)game->map_width
 			|| dda.map_y < 0 || dda.map_y >= (int)game->map_height)
-			break;
+			break ;
 		has_collided(&dda, game, &start);
 	}
 	if (!dda.hit || dda.perp_wall_dist < 0 || dda.perp_wall_dist > WIDTH)

@@ -6,7 +6,7 @@
 #    By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/07/30 17:04:15 by pmoreira         ###   ########.fr        #
+#    Updated: 2025/08/11 16:35:54 by pmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRC_MAIN	=	main.c
 
 SRC_MAIN_EXTRA	= main_parse.c
 
-SRC_EXEC	=	aux.c dda.c getters.c
+SRC_EXEC	=	aux.c dda.c getters.c dda_aux.c
 
 SRC_PARSE	=
 

@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/08/11 15:42:27 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/08/11 16:36:19 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,3 +158,11 @@ double	collider_angle(t_point start, double angle, double max_dist, t_game *game
 void	draw(t_point start, double angle, double max_dist, t_game *game);
 double	collider_dda(t_point start, double angle, t_game *game, t_point *hit);
 void	draw_line(t_point start, double angle, t_game *game);
+
+// DDA Aux
+void	init_struct(t_dda *dda, t_point *start, t_game *game, double angle);
+void	has_collided(t_dda *dda, t_game *game, t_point *start);
+void	next_step(t_dda *dda);
+void	save_hit_pos(t_dda *dda, t_point *hit, t_game *game, t_point *start);
+void	get_step(t_dda *dda, t_point *start, t_game *game);
+double	ft_abs(double nbr);
