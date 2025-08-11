@@ -9,23 +9,25 @@ void	manager(t_game *game)
 bool	render_map(t_game *game)
 {
 	t_point a;
-	// t_point	*hit,b;
+
 	find_player(game, &a);
 	a.x *= game->scale;
 	a.y *= game->scale;
-	// b.x = a.x - 100;
-	// b.y = a.y;
+	a.x += game->scale / 2;
+	a.y += game->scale / 2;
     printf("Player em: %d, %d\n", a.x, a.y);
-	// if (collider(a, b, game, &hit))
-	// {
-	// 	draw_line(game->bg, a, *hit, 0xFF350C);
-	// 	printf("Colidiu em: %d, %d\n", hit->x, hit->y);
-	// }
-	double angle = 0;
-	while (angle <= 350)
+	double angle = 30;
+	double dist = 0;
+	t_point	hit;
+	while (angle <= 270)
 	{
-		if (collider_angle(a, angle, HEIGHT, game) != -1)
-			draw(a, angle, HEIGHT, game);
+		dist = collider_dda(a, angle, WIDTH, game, &hit);
+		// dist = collider_angle(a, angle, WIDTH, game);
+		if (dist != -1)
+		{
+			draw(a, angle, WIDTH, game);
+			printf("Dst to angle %.0f -> %f\n", angle, dist);
+		}
 		else
 			printf("Sem colisão\n");
 		angle++;
@@ -60,8 +62,8 @@ int	main(int ac, char **av)
 	char *map[] = {
 		"111111",
 		"100101    1",
-		"101001   101",
-		"1100N1    1",
+		"101N01   101",
+		"110001    1",
 		"111111111",
 		NULL
 	};

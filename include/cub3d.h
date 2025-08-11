@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/07/30 17:44:52 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/08/11 11:37:27 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,3 +158,5 @@ void	ft_freed(void **ptr, int size);
 char	**copy_map(char **map);
 double	collider_angle(t_point start, double angle, double max_dist, t_game *game);
 void	draw(t_point start, double angle, double max_dist, t_game *game);
+double	collider_dda(t_point start, double angle, double max_dist,
+	t_game *game, t_point *hit);
