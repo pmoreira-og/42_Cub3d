@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/07/28 16:22:26 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/08/11 15:21:49 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ typedef struct s_img_data
 	int			bpp;
 	int			len;
 	int			endian;
-}				t_img_data;
+}				t_img_data;	// Direction vector
+
 
 typedef struct s_rgb
 {
@@ -58,6 +59,24 @@ typedef struct s_textures
 	char		*WE;
 	char		*EA;
 }				t_textures;
+
+typedef struct s_dda
+{
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	perp_wall_dist;
+	double	dx;
+	double	dy;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	bool	hit;
+}				t_dda;
+
 
 typedef struct s_game
 {

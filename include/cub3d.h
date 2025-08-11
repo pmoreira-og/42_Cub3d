@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/08/11 11:37:27 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/08/11 15:42:27 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,6 @@ void	init_data(t_game *data, char **map);
 void	put_pixel(t_img_data *data, int x, int y, int color);
 void	print_map(t_game *data);
 void	print_matrix(t_game *data);
-void	draw_line(t_img_data *img, t_point start, t_point end, int color);
-bool	collider(t_point start, t_point end, t_game *game, t_point **hit);
 t_type	get_player_dir(int c);
 void	find_player(t_game *game, t_point *save);
 double	ft_min(double n1, double n2);
@@ -158,5 +156,5 @@ void	ft_freed(void **ptr, int size);
 char	**copy_map(char **map);
 double	collider_angle(t_point start, double angle, double max_dist, t_game *game);
 void	draw(t_point start, double angle, double max_dist, t_game *game);
-double	collider_dda(t_point start, double angle, double max_dist,
-	t_game *game, t_point *hit);
+double	collider_dda(t_point start, double angle, t_game *game, t_point *hit);
+void	draw_line(t_point start, double angle, t_game *game);

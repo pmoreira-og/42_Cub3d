@@ -2,12 +2,12 @@
 #include "../../include/cub3d.h"
 
 /// @brief Get absolute value of a double type number.
-// static double	ft_abs(double nbr)
-// {
-// 	if (nbr < 0)
-// 		return (nbr * -1);
-// 	return (nbr);
-// }
+static double	ft_abs(double nbr)
+{
+	if (nbr < 0)
+		return (nbr * -1);
+	return (nbr);
+}
 
 // void	draw_line(t_img_data *img, t_point start, t_point end, int color)
 // {
@@ -143,97 +143,101 @@ void	draw(t_point start, double angle, double max_dist, t_game *game)
 		coord[1] += inc[1];
 	}
 }
-double	collider_dda(t_point start, double angle, double max_dist,
-	t_game *game, t_point *hit)
+
+void	init_struct(t_dda *dda, t_point *start, t_game *game, double angle)
 {
-	// Direction vector
-	double ray_dir_x = cos(angle * (PI / 180));
-	double ray_dir_y = -sin(angle * (PI / 180));
+	ft_bzero(dda, sizeof(t_dda));
+	dda->ray_dir_x = cos(angle * (PI / 180));
+	dda->ray_dir_y = -sin(angle * (PI / 180));
+	dda->dx = ft_abs(1.0 / dda->ray_dir_x);
+	dda->dy = ft_abs(1.0 / dda->ray_dir_y);
+	dda->map_x = (int)(start->x / game->scale);
+	dda->map_y = (int)(start->y / game->scale);
+	
+}
 
-	// Current map cell
-	int map_x = (int)(start.x / game->scale);
-	int map_y = (int)(start.y / game->scale);
-
-	// Length of ray from one x or y-side to next x or y-side
-	double delta_dist_x = fabs(1.0 / ray_dir_x);
-	double delta_dist_y = fabs(1.0 / ray_dir_y);
-
-	// Step direction and initial sideDist
-	int step_x, step_y;
-	double side_dist_x, side_dist_y;
-
-	// Calculate step and initial side_dist
-	if (ray_dir_x < 0)
+void	has_collided(t_dda *dda, t_game *game, t_point *start)
+{
+	if (game->matrix[dda->map_y][dda->map_x].type == WALL)
 	{
-		step_x = -1;
-		side_dist_x = (start.x / game->scale - map_x) * delta_dist_x;
-	}
-	else
-	{
-		step_x = 1;
-		side_dist_x = ((map_x + 1.0) - start.x / game->scale) * delta_dist_x;
-	}
-	if (ray_dir_y < 0)
-	{
-		step_y = -1;
-		side_dist_y = (start.y / game->scale - map_y) * delta_dist_y;
-	}
-	else
-	{
-		step_y = 1;
-		side_dist_y = ((map_y + 1.0) - start.y / game->scale) * delta_dist_y;
-	}
-
-	int collision = 0;
-	int side = 0; // 0 = x-side, 1 = y-side
-	double perp_wall_dist = 0;
-
-	while (!collision)
-	{
-		// Jump to next map square, either in x-direction, or in y-direction
-		if (side_dist_x < side_dist_y)
-		{
-			side_dist_x += delta_dist_x;
-			map_x += step_x;
-			side = 0;
-		}
+		dda->hit = true;
+		if (dda->side == 0)
+			dda->perp_wall_dist = (dda->map_x - start->x / game->scale + (1 - dda->step_x) / 2) / dda->ray_dir_x;
 		else
-		{
-			side_dist_y += delta_dist_y;
-			map_y += step_y;
-			side = 1;
-		}
-
-		// Check if ray is out of bounds
-		if (map_x < 0 || map_x >= (int)game->map_width
-			|| map_y < 0 || map_y >= (int)game->map_height)
-			break;
-
-		// Check for wall hit
-		if (game->matrix[map_y][map_x].type == WALL)
-		{
-			collision = 1;
-			if (side == 0)
-				perp_wall_dist = (map_x - start.x / game->scale + (1 - step_x) / 2) / ray_dir_x;
-			else
-				perp_wall_dist = (map_y - start.y / game->scale + (1 - step_y) / 2) / ray_dir_y;
-		}
+			dda->perp_wall_dist = (dda->map_y - start->y / game->scale + (1 - dda->step_y) / 2) / dda->ray_dir_y;
 	}
-
-	if (!collision || perp_wall_dist < 0 || perp_wall_dist > max_dist)
-		return -1;
-
-	// Compute exact hit position in world coordinates
-	if (side == 0)
+}
+void	next_step(t_dda *dda)
+{
+	if (dda->side_dist_x < dda->side_dist_y)
 	{
-		hit->x = map_x * game->scale;
-		hit->y = start.y + perp_wall_dist * ray_dir_y * game->scale;
+		dda->side_dist_x += dda->dx;
+		dda->map_x += dda->step_x;
+		dda->side = 0;
 	}
 	else
 	{
-		hit->x = start.x + perp_wall_dist * ray_dir_x * game->scale;
-		hit->y = map_y * game->scale;
+		dda->side_dist_y += dda->dy;
+		dda->map_y += dda->step_y;
+		dda->side = 1;
 	}
+}
 
-	return perp_wall_dist * game->scale;
+void	save_hit_pos(t_dda *dda, t_point *hit, t_game *game, t_point *start)
+{
+	if (dda->side == 0)
+	{
+		hit->x = dda->map_x * game->scale;
+		hit->y = start->y + dda->perp_wall_dist * dda->ray_dir_y * game->scale;
+	}
+	else
+	{
+		hit->x = start->x + dda->perp_wall_dist * dda->ray_dir_x * game->scale;
+		hit->y = dda->map_y * game->scale;
+	}
+}
+
+void	get_step(t_dda *dda, t_point *start, t_game *game)
+{
+	if (dda->ray_dir_x < 0)
+	{
+		dda->step_x = -1;
+		dda->side_dist_x = (start->x / game->scale - dda->map_x) * dda->dx;
+	}
+	else
+	{
+		dda->step_x = 1;
+		dda->side_dist_x = ((dda->map_x + 1.0) - start->x / game->scale) * dda->dx;
+	}
+	if (dda->ray_dir_y < 0)
+	{
+		dda->step_y = -1;
+		dda->side_dist_y = (start->y / game->scale - dda->map_y) * dda->dy;
+	}
+	else
+	{
+		dda->step_y = 1;
+		dda->side_dist_y = ((dda->map_y + 1.0) - start->y / game->scale) * dda->dy;
+	}
+}
+
+double	collider_dda(t_point start, double angle, t_game *game, t_point *hit)
+{
+	t_dda	dda;
+
+	init_struct(&dda, &start, game, angle);
+	get_step(&dda, &start, game);
+	while (!dda.hit)
+	{
+		next_step(&dda);
+		if (dda.map_x < 0 || dda.map_x >= (int)game->map_width
+			|| dda.map_y < 0 || dda.map_y >= (int)game->map_height)
+			break;
+		has_collided(&dda, game, &start);
+	}
+	if (!dda.hit || dda.perp_wall_dist < 0 || dda.perp_wall_dist > WIDTH)
+		return (-1);
+	if (hit)
+		save_hit_pos(&dda, hit, game, &start);
+	return (dda.perp_wall_dist * game->scale);
 }

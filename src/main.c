@@ -21,11 +21,12 @@ bool	render_map(t_game *game)
 	t_point	hit;
 	while (angle <= 270)
 	{
-		dist = collider_dda(a, angle, WIDTH, game, &hit);
+		dist = collider_dda(a, angle, game, &hit);
 		// dist = collider_angle(a, angle, WIDTH, game);
 		if (dist != -1)
 		{
 			draw(a, angle, WIDTH, game);
+			// draw_line(a, angle, game);
 			printf("Dst to angle %.0f -> %f\n", angle, dist);
 		}
 		else
@@ -60,9 +61,9 @@ int	main(int ac, char **av)
 {
 	t_game	game;
 	char *map[] = {
-		"111111",
-		"100101    1",
-		"101N01   101",
+		"001111",
+		"100001    1",
+		"100N01   101",
 		"110001    1",
 		"111111111",
 		NULL
