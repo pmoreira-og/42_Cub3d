@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/08/11 15:21:49 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/08/12 10:53:06 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,32 @@ typedef struct s_img_data
 	int			bpp;
 	int			len;
 	int			endian;
-}				t_img_data;	// Direction vector
-
+}				t_img_data;
 
 typedef struct s_rgb
 {
-	int			R;
-	int			G;
-	int			B;
+	int			r;
+	int			g;
+	int			b;
 }				t_rgb;
 
 typedef struct s_textures
 {
-	char		*NO;
-	char		*SO;
-	char		*WE;
-	char		*EA;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
 }				t_textures;
 
+/// @brief DDA Struct (Line = start + Direction * increment)
+/// @param side 0 (X axis) 1 (Y axis)
+/// @param ray_dir_y Direction where the vector grows on the Y axis
+/// @param ray_dir_x Direction where the vector grows on the X axis
+/// @param dx increment in X axis.
+/// @param dy increment in Y axis.
+/// @param step_x Grid Direction on X axis.
+/// If ray_dir_x < 0: step = -1 (left).
+/// @param step_y Grid Direction on Y axis.
 typedef struct s_dda
 {
 	double	ray_dir_x;
@@ -76,7 +84,6 @@ typedef struct s_dda
 	int		side;
 	bool	hit;
 }				t_dda;
-
 
 typedef struct s_game
 {
