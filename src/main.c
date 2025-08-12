@@ -3,32 +3,25 @@
 void	manager(t_game *game)
 {
 	mlx_hook(game->win, 17, 0, close_win_mouse, game);
-	mlx_hook(game->win, 2, 1L << 0, close_win_keycode, game);
+	mlx_hook(game->win, 2, 1L << 0, key_manager, game);
 }
 
-bool	render_map(t_game *game)
+int	render_map(t_game *game)
 {
-	t_point a;
+	t_point	a;
 
-	find_player(game, &a);
-	a.x *= game->scale;
-	a.y *= game->scale;
-	a.x += game->scale / 2;
-	a.y += game->scale / 2;
-    printf("Player em: %d, %d\n", a.x, a.y);
-	double angle = 30;
+	a.x = game->player.pos_x;
+	a.y = game->player.pos_y;
+	// a.x += game->scale / 2;
+	// a.y += game->scale / 2;
+	double angle = game->player.direction - 45;
 	double dist = 0;
 	t_point	hit;
-	while (angle <= 270)
+	while (angle <= game->player.direction + 45)
 	{
 		dist = collider_dda(a, angle, game, &hit);
-		// dist = collider_angle(a, angle, WIDTH, game);
 		if (dist != -1)
-		{
 			draw(a, angle, WIDTH, game);
-			// draw_line(a, angle, game);
-			printf("Dst to angle %.0f -> %f\n", angle, dist);
-		}
 		else
 			printf("Sem colisão\n");
 		angle++;
@@ -63,8 +56,8 @@ int	main(int ac, char **av)
 	char *map[] = {
 		"111111",
 		"100101    1",
-		"101N01   101",
-		"110001    1",
+		"101001   101",
+		"110S01    1",
 		"111111111",
 		NULL
 	};
@@ -79,8 +72,8 @@ int	main(int ac, char **av)
 		print_matrix(&game);
 		print_map(&game);
 	}
-	render_map(&game);
 	manager(&game);
+	mlx_loop_hook(game.mlx, render_map, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

@@ -15,6 +15,15 @@ t_type	get_player_dir(int c)
 	return (VOID);
 }
 
+bool	valid_move(t_point *check)
+{
+	if (is_player(check))
+		return (true);
+	if (check->type == FLOOR)
+		return (true);
+	return (false);
+}
+
 /// @brief Prints malloc error message on stderr.
 /// @param msg Message for malloc debug porposes.
 void	merror(char *msg)

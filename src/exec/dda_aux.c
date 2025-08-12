@@ -7,13 +7,13 @@ void	init_struct(t_dda *dda, t_point *start, t_game *game, double angle)
 	dda->ray_dir_y = -sin(angle * (PI / 180));
 	dda->dx = ft_abs(1.0 / dda->ray_dir_x);
 	dda->dy = ft_abs(1.0 / dda->ray_dir_y);
-	dda->map_x = (int)(start->x / game->scale);
-	dda->map_y = (int)(start->y / game->scale);
+	dda->map_x = (start->x / game->scale);
+	dda->map_y = (start->y / game->scale);
 }
 
 void	has_collided(t_dda *dda, t_game *game, t_point *start)
 {
-	if (game->matrix[dda->map_y][dda->map_x].type == WALL)
+	if (game->matrix[(int)dda->map_y][(int)dda->map_x].type == WALL)
 	{
 		dda->hit = true;
 		if (dda->side == 0)
