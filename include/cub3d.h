@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/08/13 16:05:37 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:41:30 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,50 +140,51 @@
 // -->┊( FUNCTION PROTOTYPES )┊.´-★☆★
 
 //*	Exec - aux
-bool	is_player(t_point *ptr);
+bool		is_player(t_point *ptr);
 
+//*	Constructors
+void		init_data(t_game *data, char **map);
+t_img_data	*get_img(t_game *game);
 
-void	merror(char *msg);
-void	init_data(t_game *data, char **map);
-void	put_pixel(t_img_data *data, int x, int y, int color);
-void	print_map(t_game *data);
-void	print_matrix(t_game *data);
-t_type	get_player_dir(int c);
-void	get_scale(t_game *game);
+void		put_pixel(t_img_data *data, int x, int y, int color);
+void		print_map(t_game *data);
+void		print_matrix(t_game *data);
+void		get_scale(t_game *game);
 
 //*	Utils - aux
-bool	valid_move(t_point *check);
-
+bool		valid_move(t_point *check);
+bool		get_next_img(t_game *game);
+void		merror(char *msg);
+t_type		get_player_dir(int c);
 
 //*	Hooks
-int		close_win_keycode(int keycode, t_game *data);
-int		close_win_mouse(t_game *data);
-int		key_manager(int keycode, t_game *data);
+int			close_win_mouse(t_game *data);
+int			key_manager(int keycode, t_game *data);
 
 //*	Getters
-void	find_player(t_game *game, t_point *save);
-void	set_player_dir(t_game *game, t_point *src);
-double	ft_min(double n1, double n2);
+void		find_player(t_game *game, t_point *save);
+void		set_player_dir(t_game *game, t_point *src);
+double		ft_min(double n1, double n2);
 
 //*	Cleaners
-void	armageddon(t_game *data);
-void	ft_freed(void **ptr, int size);
+void		armageddon(t_game *data);
+void		ft_freed(void **ptr, int size);
 
 //*	Printers
-char	*get_type(t_type type);
+char		*get_type(t_type type);
 
 
 //*	DDA
-double	collider_dda(t_point start, double angle, t_game *game, t_point *hit);
-void	draw(t_point start, double angle, double max_dist, t_game *game);
-double	ft_abs(double nbr);
+double		collider_dda(t_point start, double angle, t_game *game, t_point *hit);
+void		draw(t_point start, double angle, double max_dist, t_game *game);
+double		ft_abs(double nbr);
 
 //*	DDA Aux
-void	init_struct(t_dda *dda, t_point *start, t_game *game, double angle);
-void	has_collided(t_dda *dda, t_game *game, t_point *start);
-void	next_step(t_dda *dda);
-void	save_hit_pos(t_dda *dda, t_point *hit, t_game *game, t_point *start);
-void	get_step(t_dda *dda, t_point *start, t_game *game);
+void		init_struct(t_dda *dda, t_point *start, t_game *game, double angle);
+void		has_collided(t_dda *dda, t_game *game, t_point *start);
+void		next_step(t_dda *dda);
+void		save_hit_pos(t_dda *dda, t_point *hit, t_game *game, t_point *start);
+void		get_step(t_dda *dda, t_point *start, t_game *game);
 
 // tbd
-char	**copy_map(char **map);
+char		**copy_map(char **map);
