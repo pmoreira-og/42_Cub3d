@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/08/12 14:59:30 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/08/13 16:05:37 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@
 #define KEY_T 116
 #define KEY_Y 121
 #define PI 3.14159265359
+#define PLAYER_RADIUS_TILES 0.20
+
 //-‵,┊ colors
 
 #define DEF "\e[0m"

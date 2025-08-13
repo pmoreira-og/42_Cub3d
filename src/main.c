@@ -12,18 +12,18 @@ int	render_map(t_game *game)
 
 	a.x = game->player.pos_x;
 	a.y = game->player.pos_y;
-	// a.x += game->scale / 2;
-	// a.y += game->scale / 2;
 	double angle = game->player.direction - 45;
 	double dist = 0;
 	t_point	hit;
 	while (angle <= game->player.direction + 45)
 	{
+		put_pixel(game->bg, a.x, a.y, 0x00FF00);
 		dist = collider_dda(a, angle, game, &hit);
 		if (dist != -1)
-			draw(a, angle, WIDTH, game);
-		else
 			printf("Sem colisão\n");
+			// draw(a, angle, WIDTH, game);
+		// else
+		// 	printf("Sem colisão\n");
 		angle++;
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->bg->img, 0, 0);
@@ -57,7 +57,7 @@ int	main(int ac, char **av)
 		"111111",
 		"100101    1",
 		"101001   101",
-		"110S01    1",
+		"10S001    1",
 		"111111111",
 		NULL
 	};
