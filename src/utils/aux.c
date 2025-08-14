@@ -45,3 +45,20 @@ bool	get_next_img(t_game *game)
 		return (merror("get_next_img"), false);
 	return (true);
 }
+
+bool	is_moved(t_game *g)
+{
+	static	double	x;
+	static	double	y;
+	static	double	dir;
+
+	if (x != g->player.pos_x || y != g->player.pos_y
+		|| dir != g->player.direction)
+	{
+		x = g->player.pos_x;
+		y = g->player.pos_y;
+		dir = g->player.direction;
+		return (true);
+	}
+	return (false);
+}

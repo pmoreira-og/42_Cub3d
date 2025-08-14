@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/08/12 14:09:57 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/08/14 13:11:45 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,10 @@ typedef struct s_player
 	double	pos_x;
 	double	pos_y;
 	double	direction;
+	int		move_x;
+	int		move_y;
+	int		rotate;
+	int		has_moved;
 }				t_player;
 
 

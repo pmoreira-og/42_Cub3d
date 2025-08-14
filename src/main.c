@@ -3,13 +3,17 @@
 void	manager(t_game *game)
 {
 	mlx_hook(game->win, 17, 0, close_win_mouse, game);
-	mlx_hook(game->win, 2, 1L << 0, key_manager, game);
+	mlx_hook(game->win, 2, 1L << 0, key_press_manager, game);
+	mlx_hook(game->win, 3, 1L << 1, key_release_manager, game);
 }
 
 int	render_map(t_game *game)
 {
 	t_point	a;
 
+	move_handler(game);
+	if (!is_moved(game))
+		return (1);
 	if (game->bg && !get_next_img(game))
 		return (0);
 	a.x = game->player.pos_x;
@@ -25,6 +29,7 @@ int	render_map(t_game *game)
 			draw(a, angle, WIDTH, game);
 		angle++;
 	}
+	printf("desenhou\n");
 	mlx_put_image_to_window(game->mlx, game->win, game->bg->img, 0, 0);
 	return (1);
 }
@@ -71,6 +76,7 @@ int	main(int ac, char **av)
 		print_matrix(&game);
 		print_map(&game);
 	}
+	// is_moved(&game);
 	manager(&game);
 	mlx_loop_hook(game.mlx, render_map, &game);
 	mlx_loop(game.mlx);

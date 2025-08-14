@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/08/13 17:41:30 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/08/14 13:39:18 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@
 #define KEY_Y 121
 #define PI 3.14159265359
 #define PLAYER_RADIUS_TILES 0.20
-
+#define MOVESPEED 1
+#define ROTSPEED 0.5
 //-‵,┊ colors
 
 #define DEF "\e[0m"
@@ -156,10 +157,12 @@ bool		valid_move(t_point *check);
 bool		get_next_img(t_game *game);
 void		merror(char *msg);
 t_type		get_player_dir(int c);
+bool		is_moved(t_game *g);
 
 //*	Hooks
 int			close_win_mouse(t_game *data);
-int			key_manager(int keycode, t_game *data);
+int			key_press_manager(int keycode, t_game *data);
+int			key_release_manager(int keycode, t_game *data);
 
 //*	Getters
 void		find_player(t_game *game, t_point *save);
@@ -185,6 +188,9 @@ void		has_collided(t_dda *dda, t_game *game, t_point *start);
 void		next_step(t_dda *dda);
 void		save_hit_pos(t_dda *dda, t_point *hit, t_game *game, t_point *start);
 void		get_step(t_dda *dda, t_point *start, t_game *game);
+
+//*	Player_move
+void		move_handler(t_game *g);
 
 // tbd
 char		**copy_map(char **map);

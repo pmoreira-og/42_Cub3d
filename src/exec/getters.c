@@ -63,4 +63,5 @@ void	set_player_dir(t_game *game, t_point *src)
 		game->player.direction = 270;
 	if (src->type == PLAYER_N)
 		game->player.direction = 90;
+	game->player.has_moved = true;
 }
