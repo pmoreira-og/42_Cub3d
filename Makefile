@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/07/30 17:04:15 by pmoreira         ###   ########.fr        #
+#    Updated: 2025/08/15 10:13:07 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRC_MAIN_EXTRA	= main_parse.c
 
 SRC_EXEC	=	aux.c dda.c getters.c
 
-SRC_PARSE	=
+SRC_PARSE	=	get_map.c
 
 SRC_UTILS	= aux.c constructors.c hooks.c cleaners.c printers.c
 
@@ -84,11 +84,13 @@ extra: $(OBJS_EXTRA) $(LIBFT) $(MLX)
 	$(M_COMP_P)
 	@$(CC) $(CFLAGS) $(OBJS_EXTRA) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
 	$(M_DONE)
-	./$(NAME)
 
 # -->┊( EXECUTION RULES )┊.´-★☆★
 exe: all
 	./$(NAME)
+
+extra_map1: extra
+	$(VAL) ./$(NAME) maps/map_1.cub
 
 val: all
 	$(VAL) ./$(NAME)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/07/30 17:44:52 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/08/15 10:30:45 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@
 
 // -->┊( FUNCTION PROTOTYPES )┊.´-★☆★
 
+
 void	merror(char *msg);
 void	init_data(t_game *data, char **map);
 void	put_pixel(t_img_data *data, int x, int y, int color);
@@ -158,3 +159,10 @@ void	ft_freed(void **ptr, int size);
 char	**copy_map(char **map);
 double	collider_angle(t_point start, double angle, double max_dist, t_game *game);
 void	draw(t_point start, double angle, double max_dist, t_game *game);
+
+//-‵,┊ parse fts
+
+bool get_map(t_game	*game, char *input);
+void	safe_close(int fd);
+char **extract_map_from_file(char *input, int fd);
+int	get_file_line_count(int fd);
