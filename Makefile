@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/08/15 10:13:07 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/08/17 17:24:20 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRC_MAIN_EXTRA	= main_parse.c
 
 SRC_EXEC	=	aux.c dda.c getters.c
 
-SRC_PARSE	=	get_map.c
+SRC_PARSE	=	get_map.c utils.c setup_exctract.c extract_header.c extract_map.c 
 
 SRC_UTILS	= aux.c constructors.c hooks.c cleaners.c printers.c
 

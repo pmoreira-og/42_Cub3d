@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/08/15 10:30:45 by rduro-pe         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #pragma once
 
@@ -26,6 +15,7 @@
 #include <limits.h>
 #include "libft/libft.h"
 #include "cub3d_structs.h"
+#include "cub3d_defines.h"
 
 // -->┊( DEFINES )┊.´-★☆★
 
@@ -162,7 +152,27 @@ void	draw(t_point start, double angle, double max_dist, t_game *game);
 
 //-‵,┊ parse fts
 
-bool get_map(t_game	*game, char *input);
+// -- get_map
+bool	get_map(t_game	*game, char *input);
+void	init_parse_struct(t_parse *parse, char *input);
+
+// -- setup_extract
+bool	setup_for_extraction(t_parse *parse);
+int		get_file_line_count(int fd);
+char	**make_literal_copy(int fd, int lc);
+
+// -- extract_header
+bool	extract_header_info(t_parse *parse);
+bool	valid_identifier(t_parse *parse, char *line);
+bool	extract_path(t_texture *tx, char *path, int fd);
+bool	extract_color(t_colors *cl, char *code);
+bool	valid_color_format(char *code);
+bool	assign_color_code(char *code, t_rgb *type);
+
+// -- extract_map
+bool	extract_map(t_parse *parse);
+
+// -- utils
 void	safe_close(int fd);
-char **extract_map_from_file(char *input, int fd);
-int	get_file_line_count(int fd);
+int		len_until(char *str, char c);
+void	cleanup_parse(t_parse *parse);

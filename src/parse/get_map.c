@@ -1,65 +1,34 @@
 #include "../../include/cub3d.h"
 
-# define M_FEXT	"incorrect file extention in inputed map path\n"
-# define M_NOOP "couldn't open inputed map\n"
-# define M_ERRO "Error\n"
-# define M_LC "insuficient lines\n"
-
 bool get_map(t_game	*game, char *input)
 {
-	int	fd;
+	t_parse parse;
 
 	// -- basic checks
 	if (ft_strncmp(".cub", input + ft_strlen(input) - 4, 4))
 		return (printf_fd(2, M_FEXT), false);
-	fd = open(input, O_RDONLY);
-	if (fd < 3)
-		return (printf_fd(2, M_NOOP), false);
+	init_parse_struct(&parse, input);
 	
-	// -- reading the map, extracting and verifying it
-	game->map = extract_map_from_file(input, fd);
-	if (!game->map)
+	// -- setups and validations
+	if (!setup_for_extraction(&parse))
 		return (false);
+	if (!extract_header_info(&parse))
+		return (cleanup_parse(&parse), false);
+	if (!extract_map(&parse))
+		return (cleanup_parse(&parse), false);
 
-	
+	// -- pass info to game struct
+	(void)game;
+
+	// -- free and close up parse 
+	cleanup_parse(&parse);
 	return (true);
 }
 
-/// @brief Closes FD if it is bigger than 2
-/// @param fd File descriptor to close
-void	safe_close(int fd)
+void init_parse_struct(t_parse *parse, char *input)
 {
-	if (fd > 2)
-		close(fd);
-}
-
-char **extract_map_from_file(char *input, int fd)
-{
-	int lc;
-	lc = get_file_line_count(fd);
-	ft_printf("line_count: %d\n", lc);
-	if (lc < 3)
-		return (printf_fd(2, M_ERRO M_LC), NULL);
-	fd = open(input, O_RDONLY);
-
-	safe_close(fd);
-	return (printf_fd(2, M_ERRO), NULL);
-}
-
-int	get_file_line_count(int fd)
-{
-	int 	lc;
-	char	*file_line;
-
-	lc = 0;
-	while (1)
-	{
-		file_line = get_next_line(fd);
-		if (!file_line)
-			break ;
-		free(file_line);
-		lc++;
-	}
-	safe_close(fd);
-	return (lc);
+	ft_bzero(parse, sizeof(t_parse));
+	parse->path = input;
+	parse->cl.floor = (t_rgb){-1, -1, -1};
+	parse->cl.ceiling = (t_rgb){-1, -1, -1};
 }
