@@ -30,8 +30,6 @@ int	close_win_mouse(t_game *data)
 // 	}
 // }
 
-
-
 int	key_press_manager(int keycode, t_game *data)
 {
 	if (keycode == ESC)
@@ -41,9 +39,9 @@ int	key_press_manager(int keycode, t_game *data)
 	if (keycode == VK_RIGHT)
 		data->player.rotate = -1;
 	if (keycode == KEY_W)
-		data->player.move_y = -1;
-	if (keycode == KEY_S)
 		data->player.move_y = 1;
+	if (keycode == KEY_S)
+		data->player.move_y = -1;
 	if (keycode == KEY_A)
 		data->player.move_x = -1;
 	if (keycode == KEY_D)
@@ -55,9 +53,9 @@ int	key_release_manager(int keycode, t_game *data)
 {
 	if (keycode == ESC)
 		close_win_mouse(data);
-	if (keycode == KEY_W && data->player.move_y == -1)
+	if (keycode == KEY_W && data->player.move_y == 1)
 		data->player.move_y = 0;
-	if (keycode == KEY_S && data->player.move_y == 1)
+	if (keycode == KEY_S && data->player.move_y == -1)
 		data->player.move_y = 0;
 	if (keycode == KEY_A && data->player.move_x == -1)
 		data->player.move_x += 1;
