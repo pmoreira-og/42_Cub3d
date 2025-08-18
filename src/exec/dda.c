@@ -144,23 +144,23 @@ void	draw(t_point start, double angle, double max_dist, t_game *game)
 	}
 }
 
-double	collider_dda(t_point start, double angle, t_game *game, t_point *hit)
+double	collider_dda(t_point start, double angle, t_game *g, t_point *hit)
 {
 	t_dda	dda;
 
-	init_struct(&dda, &start, game, angle);
-	get_step(&dda, &start, game);
+	init_struct(&dda, &start, g, angle);
+	get_step(&dda, &start, g);
 	while (!dda.hit)
 	{
 		next_step(&dda);
-		if (dda.map_x < 0 || dda.map_x >= (int)game->map_width
-			|| dda.map_y < 0 || dda.map_y >= (int)game->map_height)
+		if (dda.map_x < 0 || dda.map_x >= (int)g->map_width
+			|| dda.map_y < 0 || dda.map_y >= (int)g->map_height)
 			break ;
-		has_collided(&dda, game, &start);
+		has_collided(&dda, g, &start);
 	}
 	if (!dda.hit || dda.perp_wall_dist < 0 || dda.perp_wall_dist > WIDTH)
 		return (-1);
 	if (hit)
-		save_hit_pos(&dda, hit, game, &start);
-	return (dda.perp_wall_dist * game->scale);
+		save_hit_pos(&dda, hit, g, &start);
+	return (dda.perp_wall_dist * g->scale);
 }

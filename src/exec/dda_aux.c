@@ -41,17 +41,17 @@ void	next_step(t_dda *dda)
 	}
 }
 
-void	save_hit_pos(t_dda *dda, t_point *hit, t_game *game, t_point *start)
+void	save_hit_pos(t_dda *dda, t_point *hit, t_game *g, t_point *start)
 {
 	if (dda->side == 0)
 	{
-		hit->x = dda->map_x * game->scale;
-		hit->y = start->y + dda->perp_wall_dist * dda->ray_dir_y * game->scale;
+		hit->x = dda->map_x * g->scale;
+		hit->y = start->y + dda->perp_wall_dist * dda->ray_dir_y * g->scale;
 	}
 	else
 	{
-		hit->x = start->x + dda->perp_wall_dist * dda->ray_dir_x * game->scale;
-		hit->y = dda->map_y * game->scale;
+		hit->x = start->x + dda->perp_wall_dist * dda->ray_dir_x * g->scale;
+		hit->y = dda->map_y * g->scale;
 	}
 }
 

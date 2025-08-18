@@ -29,7 +29,6 @@ int	render_map(t_game *game)
 			draw(a, angle, WIDTH, game);
 		angle++;
 	}
-	printf("desenhou\n");
 	mlx_put_image_to_window(game->mlx, game->win, game->bg->img, 0, 0);
 	return (1);
 }
@@ -76,7 +75,6 @@ int	main(int ac, char **av)
 		print_matrix(&game);
 		print_map(&game);
 	}
-	// is_moved(&game);
 	manager(&game);
 	mlx_loop_hook(game.mlx, render_map, &game);
 	mlx_loop(game.mlx);
