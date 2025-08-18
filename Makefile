@@ -6,7 +6,7 @@
 #    By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/07/30 17:04:15 by pmoreira         ###   ########.fr        #
+#    Updated: 2025/08/18 15:20:06 by pmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,11 @@ MLX		=	./include/minilibx_linux/libmlx.a
 
 # -->┊( COMMANDS AND FLAGS )┊.´-★☆★
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g 
+SPEED		=	0.125
+CFLAGS		=	-Wall -Wextra -Werror -g -DMOVESPEED=$(SPEED)
 MLXFLAGS	=	-L ./include/minilibx_linux -lmlx_Linux -lX11 -lXext -lm
 VAL			=	valgrind --leak-check=full --show-leak-kinds=all \
 				--track-origins=yes --track-fds=yes -s
-
 # -->┊( DIRECTORIES )┊.´-★☆★
 DIR_SRC		=	src
 DIR_OBJ		=	build
@@ -36,7 +36,7 @@ SRC_MAIN	=	main.c
 
 SRC_MAIN_EXTRA	= main_parse.c
 
-SRC_EXEC	=	aux.c dda.c getters.c
+SRC_EXEC	=	aux.c dda.c getters.c dda_aux.c player_move.c
 
 SRC_PARSE	=
 
@@ -87,10 +87,12 @@ extra: $(OBJS_EXTRA) $(LIBFT) $(MLX)
 	./$(NAME)
 
 # -->┊( EXECUTION RULES )┊.´-★☆★
-exe: all
+exe: fclean
+	make all
 	./$(NAME)
 
-val: all
+val: fclean
+	make all SPEED=1
 	$(VAL) ./$(NAME)
 
 # -->┊( STANDARD RULES )┊.´-★☆★
