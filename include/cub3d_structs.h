@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d_structs.h                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/08/14 13:11:45 by pmoreira         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #pragma once
 
@@ -51,13 +40,34 @@ typedef struct s_rgb
 	int			b;
 }				t_rgb;
 
-typedef struct s_textures
+typedef struct s_texture
 {
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
-}				t_textures;
+
+	char		*NO;
+	char		*SO;
+	char		*WE;
+	char		*EA;
+}				t_texture;
+
+typedef struct s_colors
+{
+	t_rgb		floor;
+	t_rgb		ceiling;
+}				t_colors;
+
+typedef struct s_parse
+{
+	int 		fd;
+	int 		lc;
+	char		*path;
+	t_texture	tx;
+	t_colors	cl;
+	size_t 		heigth;
+	size_t 		width;
+	char		**literal;
+	int 		start;
+	char		**padded;
+}				t_parse;
 
 /// @brief DDA Struct (Line = start + Direction * increment)
 /// @param side 0 (X axis) 1 (Y axis)
@@ -99,7 +109,6 @@ typedef struct s_player
 	int		rotate;
 	int		has_moved;
 }				t_player;
-
 
 typedef struct s_game
 {

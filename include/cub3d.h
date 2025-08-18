@@ -1,31 +1,21 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 15:22:02 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/08/18 14:52:34 by pmoreira         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 // -->┊( LIBS )┊.´-★☆★
 
-# include "minilibx_linux/mlx.h"
-# include <pthread.h>
-# include <stdbool.h>
-# include <stdint.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <sys/time.h>
-# include <unistd.h>
-# include <math.h>
-# include <limits.h>
-# include "libft/libft.h"
-# include "cub3d_structs.h"
+#include "minilibx_linux/mlx.h"
+#include <pthread.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/time.h>
+#include <unistd.h>
+#include <math.h>
+#include <limits.h>
+#include "libft/libft.h"
+#include "cub3d_structs.h"
+#include "cub3d_defines.h"
 
 // -->┊( DEFINES )┊.´-★☆★
 
@@ -195,5 +185,34 @@ void		get_step(t_dda *dda, t_point *start, t_game *game);
 void		move_handler(t_game *g);
 
 // tbd
-char		**copy_map(char **map);
+char	**copy_map(char **map);
+double	collider_angle(t_point start, double angle, double max_dist, t_game *game);
+void	draw(t_point start, double angle, double max_dist, t_game *game);
+
+//-‵,┊ parse fts
+
+// -- get_map
+bool	get_map(t_game	*game, char *input);
+void	init_parse_struct(t_parse *parse, char *input);
+
+// -- setup_extract
+bool	setup_for_extraction(t_parse *parse);
+int		get_file_line_count(int fd);
+char	**make_literal_copy(int fd, int lc);
+
+// -- extract_header
+bool	extract_header_info(t_parse *parse);
+bool	valid_identifier(t_parse *parse, char *line);
+bool	extract_path(t_texture *tx, char *path, int fd);
+bool	extract_color(t_colors *cl, char *code);
+bool	valid_color_format(char *code);
+bool	assign_color_code(char *code, t_rgb *type);
+
+// -- extract_map
+bool	extract_map(t_parse *parse);
+
+// -- utils
+void	safe_close(int fd);
+int		len_until(char *str, char c);
+void	cleanup_parse(t_parse *parse);
 #endif
