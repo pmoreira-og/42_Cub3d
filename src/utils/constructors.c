@@ -80,13 +80,14 @@ static bool	init_map(t_game *data)
 
 void	init_data(t_game *data, char **map)
 {
+	t_point	a;
 	if (!map)
 		return ;
 	ft_bzero(data, sizeof(t_game));
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		return (merror("data.mlx"));
-	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Cub3d Ultimate");
+	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, TITLE);
 	if (!data->win)
 		return (free(data->mlx), merror("data.win"));
 	data->bg = get_img(data);
@@ -101,4 +102,6 @@ void	init_data(t_game *data, char **map)
 		return (armageddon(data));
 	init_map_data(data);
 	get_scale(data);
+	find_player(data,&a);
+	set_player_dir(data, &a);
 }
