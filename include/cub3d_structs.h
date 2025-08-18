@@ -35,9 +35,9 @@ typedef struct s_img_data
 
 typedef struct s_rgb
 {
-	int			r;
-	int			g;
-	int			b;
+	int			R;
+	int			G;
+	int			B;
 }				t_rgb;
 
 typedef struct s_texture

@@ -51,6 +51,7 @@ bool	extract_path(t_texture *tx, char *path, int fd)
 	char	**type;
 	char	*texture;
 
+	type = NULL;
 	if (!ft_strncmp(path, "NO ", 3))
 		type = &tx->NO;
 	else if (!ft_strncmp(path, "SO ", 3))
@@ -83,6 +84,7 @@ bool	extract_color(t_colors *cl, char *code)
 	t_rgb	*type;
 
 	
+	type = NULL;
 	if (!ft_strncmp(code, "F ", 2))
 		type = &cl->floor;
 	else if (!ft_strncmp(code, "C ", 2))
