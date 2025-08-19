@@ -65,8 +65,9 @@ typedef struct s_parse
 	size_t 		heigth;
 	size_t 		width;
 	char		**literal;
-	int 		start;
+	char		**map_st;
 	char		**padded;
+	t_type		player;
 }				t_parse;
 
 /// @brief DDA Struct (Line = start + Direction * increment)
