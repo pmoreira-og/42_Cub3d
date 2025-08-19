@@ -1,8 +1,5 @@
 #include "../include/cub3d.h"
 
-# define M_ARGAMT	"incorrect amount of arguments provided!\n"
-# define M_USAGE	"usage: ./cub3D [path to .cub map file] [-d option (optional)]\n"
-
 int	main(int ac, char **av)
 {
 	ft_printf("Hello Parse World\n");
@@ -20,31 +17,30 @@ int	main(int ac, char **av)
 void	manager(t_game *game)
 {
 	mlx_hook(game->win, 17, 0, close_win_mouse, game);
-	mlx_hook(game->win, 2, 1L << 0, close_win_keycode, game);
+	mlx_hook(game->win, 2, 1L << 0, key_press_manager, game);
+	mlx_hook(game->win, 3, 1L << 1, key_release_manager, game);
 }
 
-bool	render_map(t_game *game)
+int	render_map(t_game *game)
 {
-	t_point a;
-	// t_point	*hit,b;
-	find_player(game, &a);
-	a.x *= game->scale;
-	a.y *= game->scale;
-	// b.x = a.x - 100;
-	// b.y = a.y;
-    printf("Player em: %d, %d\n", a.x, a.y);
-	// if (collider(a, b, game, &hit))
-	// {
-	// 	draw_line(game->bg, a, *hit, 0xFF350C);
-	// 	printf("Colidiu em: %d, %d\n", hit->x, hit->y);
-	// }
-	double angle = 0;
-	while (angle <= 350)
+	t_point	a;
+
+	move_handler(game);
+	if (!is_moved(game))
+		return (1);
+	if (game->bg && !get_next_img(game))
+		return (0);
+	a.x = game->player.pos_x;
+	a.y = game->player.pos_y;
+	double angle = game->player.direction - 45;
+	double dist = 0;
+	t_point	hit;
+	while (angle <= game->player.direction + 45)
 	{
-		if (collider_angle(a, angle, HEIGHT, game) != -1)
-			draw(a, angle, HEIGHT, game);
-		else
-			printf("Sem colisão\n");
+		put_pixel(game->bg, a.x, a.y, 0x00FF00);
+		dist = collider_dda(a, angle, game, &hit);
+		if (dist != -1)
+			draw(a, angle, WIDTH, game);
 		angle++;
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->bg->img, 0, 0);

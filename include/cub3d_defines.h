@@ -117,6 +117,8 @@
 # define CYNHB "\e[0;106m"
 # define WHTHB "\e[0;107m"
 
+# define M_ARGAMT	"incorrect amount of arguments provided!\n"
+# define M_USAGE	"usage: ./cub3D [path to .cub map file] [-d option (optional)]\n"
 # define M_FEXT "incorrect file extention in inputed map path\n"
 # define M_NOOP "couldn't open inputed map\n"
 # define M_ERRO "Error\n"
@@ -129,4 +131,5 @@
 # define M_COLF "incorrect color format\n"
 # define M_NOTINF "not all necessary information found\n"
 # define M_MAPSZ "insuficient map size\n"
+
 #endif
