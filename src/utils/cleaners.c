@@ -34,6 +34,16 @@ void	clean_mlx(t_game *data)
 	free(data->mlx);
 }
 
+void	destroy_img(t_img_data *data, t_game *g)
+{
+	if (data)
+	{
+		mlx_destroy_image(g->mlx, data->img);
+		free(data);
+		data = NULL;
+	}
+}
+
 void	armageddon(t_game *data)
 {
 	if (data->file_fd > 2)

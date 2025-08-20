@@ -35,12 +35,8 @@ void	merror(char *msg)
 bool	get_next_img(t_game *game)
 {
 	if (game->bg->img)
-	{
-		mlx_destroy_image(game->mlx, game->bg->img);
-		free(game->bg);
-		game->bg = NULL;
-	}
-	game->bg = get_img(game);
+		destroy_img(game->bg, game);
+	game->bg = get_img(game, WIDTH, HEIGHT);
 	if (!game->bg)
 		return (merror("get_next_img"), false);
 	return (true);

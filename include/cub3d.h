@@ -21,9 +21,21 @@
 //*	Exec - aux
 bool		is_player(t_point *ptr);
 
+//*	Sprites
+char		*get_sprite_data(t_game *g, char *path);
+
+
+//*	Rendering
+
+int			render_map(t_game *game);
+
+//*	Draw Aux
+void		draw_section(t_game *g, double perpWallDist, int x);
+
+
 //*	Constructors
 void		init_data(t_game *data, char **map);
-t_img_data	*get_img(t_game *game);
+t_img_data	*get_img(t_game *game, int width, int height);
 
 void		put_pixel(t_img_data *data, int x, int y, int color);
 void		print_map(t_game *data);
@@ -46,10 +58,12 @@ int			key_release_manager(int keycode, t_game *data);
 void		find_player(t_game *game, t_point *save);
 void		set_player_dir(t_game *game, t_point *src);
 double		ft_min(double n1, double n2);
+int			get_pixel(t_img_data *img, int x, int y);
 
 //*	Cleaners
 void		armageddon(t_game *data);
 void		ft_freed(void **ptr, int size);
+void		destroy_img(t_img_data *data, t_game *g);
 
 //*	Printers
 char		*get_type(t_type type);

@@ -7,32 +7,6 @@ void	manager(t_game *game)
 	mlx_hook(game->win, 3, 1L << 1, key_release_manager, game);
 }
 
-int	render_map(t_game *game)
-{
-	t_point	a;
-
-	move_handler(game);
-	if (!is_moved(game))
-		return (1);
-	if (game->bg && !get_next_img(game))
-		return (0);
-	a.x = game->player.pos_x;
-	a.y = game->player.pos_y;
-	double angle = game->player.direction - 45;
-	double dist = 0;
-	t_point	hit;
-	while (angle <= game->player.direction + 45)
-	{
-		put_pixel(game->bg, a.x, a.y, 0x00FF00);
-		dist = collider_dda(a, angle, game, &hit);
-		if (dist != -1)
-			draw(a, angle, WIDTH, game);
-		angle++;
-	}
-	mlx_put_image_to_window(game->mlx, game->win, game->bg->img, 0, 0);
-	return (1);
-}
-
 char	**copy_map(char **map)
 {
 	char	**new_map;
@@ -60,7 +34,7 @@ int	main(int ac, char **av)
 		"111111",
 		"100101    1",
 		"101001   101",
-		"10S001    1",
+		"10N001    1",
 		"111111111",
 		NULL
 	};

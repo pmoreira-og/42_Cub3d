@@ -46,14 +46,14 @@ static void	init_map_data(t_game *game)
 	}
 }
 
-t_img_data	*get_img(t_game *game)
+t_img_data	*get_img(t_game *game, int width, int height)
 {
 	t_img_data	*img;
 
 	img = ft_calloc(1, sizeof(t_img_data));
 	if (!img)
 		return (printf_fd(2, "img alloc error\n"), NULL);
-	img->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	img->img = mlx_new_image(game->mlx, width, height);
 	if (!img->img)
 		return (free(img), printf_fd(2, "mlx img error\n"), NULL);
 	img->addr = mlx_get_data_addr(img->img, &img->bpp,
@@ -90,7 +90,7 @@ void	init_data(t_game *data, char **map)
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, TITLE);
 	if (!data->win)
 		return (free(data->mlx), merror("data.win"));
-	data->bg = get_img(data);
+	data->bg = get_img(data, WIDTH, HEIGHT);
 	if (!data->bg)
 	{
 		mlx_destroy_window(data->mlx, data->win);

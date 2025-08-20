@@ -65,3 +65,11 @@ void	set_player_dir(t_game *game, t_point *src)
 		game->player.direction = 90;
 	game->player.has_moved = true;
 }
+
+int	get_pixel(t_img_data *img, int x, int y)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->len + x * (img->bpp / 8));
+	return (*(unsigned int *)dst);
+}
