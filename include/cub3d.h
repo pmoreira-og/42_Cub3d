@@ -1,4 +1,3 @@
-
 #pragma once
 // -->┊( LIBS )┊.´-★☆★
 
@@ -24,14 +23,12 @@ bool		is_player(t_point *ptr);
 //*	Sprites
 char		*get_sprite_data(t_game *g, char *path);
 
-
 //*	Rendering
 
 int			render_map(t_game *game);
 
 //*	Draw Aux
 void		draw_section(t_game *g, double perpWallDist, int x);
-
 
 //*	Constructors
 void		init_data(t_game *data, char **map);
@@ -74,11 +71,11 @@ void		draw(t_point start, double angle, double max_dist, t_game *game);
 double		ft_abs(double nbr);
 
 //*	DDA Aux
-void		init_struct(t_dda *dda, t_point *start, t_game *game, double angle);
-void		has_collided(t_dda *dda, t_game *game, t_point *start);
+void		init_struct(t_dda *dda, t_point *start, double angle);
+void		has_collided(t_dda *dda, t_game *game);
+void		get_step(t_dda *dda, t_point *start);
 void		next_step(t_dda *dda);
-void		save_hit_pos(t_dda *dda, t_point *hit, t_game *g, t_point *start);
-void		get_step(t_dda *dda, t_point *start, t_game *game);
+void		save_hit_pos(t_dda *dda, t_point *hit, t_point *start);
 
 //*	Player_move
 void		move_handler(t_game *g);

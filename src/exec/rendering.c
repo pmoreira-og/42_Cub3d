@@ -23,18 +23,8 @@
 // }
 
 #ifndef FOV_DEG
-# define FOV_DEG 60.0   // typical FOV
+# define FOV_DEG 66.0   // typical FOV
 #endif
-
-static inline double deg2rad(double deg) {
-    return deg * PI / 180.0;
-}
-
-static inline double normalize_deg(double deg) {
-    while (deg < 0.0)   deg += 360.0;
-    while (deg >= 360.0) deg -= 360.0;
-    return deg;
-}
 
 void draw_section(t_game *g, double perpWallDist, int x)
 {
@@ -67,8 +57,8 @@ void draw_map(t_game *game)
     t_point a;
     t_point hit;
 
-    a.x = game->player.pos_x;
-    a.y = game->player.pos_y;
+    a.x = game->player.pos_x / game->scale;
+    a.y = game->player.pos_y / game->scale;
 
     // Map FOV across the screen columns
     const double half_fov = FOV_DEG * 0.5;
@@ -89,21 +79,22 @@ void draw_map(t_game *game)
         double ray_angle = start_angle + x * step;
 
         // If your collider_dda expects angles in [0,360), normalize:
-        double dda_angle = normalize_deg(ray_angle);
+        // double dda_angle = normalize_deg(ray_angle);
 
-        double dist = collider_angle(a, dda_angle, WIDTH, game);
+        // double dist = collider_angle(a, dda_angle, WIDTH, game);
+        double dist = collider_dda(a, ray_angle, game, &hit);
         if (dist < 0) {
             // No hit: skip wall slice (background already drawn)
             continue;
         }
 
         // Perpendicular distance correction to avoid fisheye
-        double angle_diff = ray_angle - game->player.direction;
-        double perp = dist * cos(deg2rad(angle_diff));
+        // double angle_diff = ray_angle - game->player.direction;
+        // double perp = dist * cos(deg2rad(angle_diff));
 
         // If your collider_dda already returns perpendicular distance,
         // use 'dist' directly instead of 'perp'.
-        draw_section(game, perp, x);
+        draw_section(game, dist * game->scale , x);
     }
 
     mlx_put_image_to_window(game->mlx, game->win, game->bg->img, 0, 0);

@@ -1,4 +1,3 @@
-
 #include "../../include/cub3d.h"
 
 /// @brief Get absolute value of a double type number.
@@ -116,19 +115,19 @@ double	collider_dda(t_point start, double angle, t_game *g, t_point *hit)
 {
 	t_dda	dda;
 
-	init_struct(&dda, &start, g, angle);
-	get_step(&dda, &start, g);
+	init_struct(&dda, &start, angle);
+	get_step(&dda, &start);
 	while (!dda.hit)
 	{
 		next_step(&dda);
 		if (dda.map_x < 0 || dda.map_x >= (int)g->map_width
 			|| dda.map_y < 0 || dda.map_y >= (int)g->map_height)
-			break ;
-		has_collided(&dda, g, &start);
+			return (-1.0);
+		has_collided(&dda, g);
 	}
-	if (!dda.hit || dda.perp_wall_dist < 0 || dda.perp_wall_dist > WIDTH)
-		return (-1);
+	if (!isfinite(dda.perp_wall_dist) || dda.perp_wall_dist < 0.0)
+		return (-1.0);
 	if (hit)
-		save_hit_pos(&dda, hit, g, &start);
-	return (dda.perp_wall_dist * g->scale);
+		save_hit_pos(&dda, hit, &start);
+	return (dda.perp_wall_dist);
 }
