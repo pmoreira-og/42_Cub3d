@@ -31,17 +31,11 @@ bool	valid_identifier(t_parse *parse, char *line)
 	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
 		|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3))
 	{
-		if (extract_path(&parse->tx, line, 0))
-			return (true);
-		else
-			return (false);
+		return (extract_path(&parse->tx, line, 0));
 	}
 	else if (!ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))
 	{
-		if (extract_color(&parse->cl, line))
-			return (true);
-		else
-			return (false);
+		return (extract_color(&parse->cl, line));
 	}
 	return (printf_fd(2, M_ERRO M_INVID), false);
 }
