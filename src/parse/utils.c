@@ -15,7 +15,6 @@ int	len_until(char *str, char c)
 	i = 0;
 	while (str[i] && str[i] != c)
 		i++;
-	printf("len: %d\n", i);
 	return (i);
 }
 

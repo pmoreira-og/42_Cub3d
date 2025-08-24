@@ -11,7 +11,7 @@ int	main(int ac, char **av)
 	ft_printf("valid av\n");
 	if (!get_map(&game, av[1]))
 		return (1);
-	
+	return (printf_fd(2, "survived main\n"), armageddon(&game), 0);
 }
 
 void	manager(t_game *game)

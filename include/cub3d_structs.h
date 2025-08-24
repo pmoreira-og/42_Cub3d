@@ -64,6 +64,8 @@ typedef struct s_parse
 	t_colors	cl;
 	size_t 		heigth;
 	size_t 		width;
+	int 		margin_l;
+	int 		margin_r;
 	char		**literal;
 	char		**map_st;
 	char		**padded;
@@ -117,8 +119,8 @@ typedef struct s_game
 	void		*win;
 	char		**map;
 	t_point		**matrix;
-	size_t		map_width;
 	size_t		map_height;
+	size_t		map_width;
 	double		scale;
 	t_img_data	*bg;
 	t_player	player;

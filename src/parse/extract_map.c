@@ -11,7 +11,7 @@ bool	extract_map(t_parse *parse)
 	if (!check_surrounding_walls(parse))
 		return (printf_fd(2, M_ERRO M_WALLS), false);
 	safe_close(parse->fd);
-	return (printf_fd(2, "survived map\n"), false);
+	return (printf_fd(2, "survived map\n"), true);
 }
 
 bool	invalid_characters(char **map, size_t *heigth, size_t *width,

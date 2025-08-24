@@ -16,10 +16,13 @@ bool	get_map(t_game *game, char *input)
 	if (!extract_map(&parse))
 		return (cleanup_parse(&parse), false);
 	// -- pass info to game struct
-	(void)game;
+	if (!pass_map_to_game(&parse, game))
+		return (cleanup_parse(&parse), armageddon(game), false);
+	
+	// init mlx
 	// -- free and close up parse
 	cleanup_parse(&parse);
-	return (true);
+	return (printf_fd(2, "survived PARSE\n"), true);
 }
 
 void	init_parse_struct(t_parse *parse, char *input)
@@ -28,4 +31,6 @@ void	init_parse_struct(t_parse *parse, char *input)
 	parse->path = input;
 	parse->cl.floor = (t_rgb){-1, -1, -1};
 	parse->cl.ceiling = (t_rgb){-1, -1, -1};
+	parse->margin_l = -1;
+	parse->margin_r = -1;
 }

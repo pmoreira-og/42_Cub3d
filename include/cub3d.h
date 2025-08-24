@@ -118,3 +118,13 @@ int			space_flood_fill(int y, int x, t_parse *parse);
 void		safe_close(int fd);
 int			len_until(char *str, char c);
 void		cleanup_parse(t_parse *parse);
+
+// -- map_to_game
+
+bool		pass_map_to_game(t_parse *parse, t_game *game);
+void		get_exact_hei_wid(t_parse *parse);
+t_point		**make_point_map(t_parse *parse);
+t_type		get_point_type(int c);
+void	pass_info_to_map(t_parse *parse, t_game *game);
+
+
