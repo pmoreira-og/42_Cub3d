@@ -42,7 +42,7 @@ bool	get_next_img(t_game *game)
 	return (true);
 }
 
-bool	is_moved(t_game *g)
+bool	has__moved(t_game *g)
 {
 	static	double	x;
 	static	double	y;

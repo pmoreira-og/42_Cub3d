@@ -1,26 +1,37 @@
 #include "../../include/cub3d.h"
 
-// void	draw_section(t_game *g, double perpWallDist, int x)
-// {
-// 	 if (perpWallDist <= 0.000001) perpWallDist = 0.000001; // avoid div-by-zero
+//! Probably gonna need 1 more param to get the right wall text.
 
-//     int lineHeight = (int)(HEIGHT / perpWallDist);
+/// @brief Draw the vertical section of the wall
+/// @param g Game struct.
+/// @param perpWallDist Dist between the player and the object.
+/// @param x X position on the screen to draw.
+void	draw_section(t_game *g, double perpWallDist, int x)
+{
+	int	start;
+	int	end;
+	int	height;
+	int	y;
 
-//     int drawStart = -lineHeight / 2 + HEIGHT / 2;
-//     if (drawStart < 0) drawStart = 0;
+	if (perpWallDist <= 0.000001)
+		perpWallDist = 0.000001;
+	height = (int) (HEIGHT/ perpWallDist);
+	start = -height / 2 + HEIGHT / 2;
+	if (start < 0)
+		start = 0;
+	end = height / 2 + HEIGHT / 2;
+	if (end >= HEIGHT)
+		end = HEIGHT - 1;
+	y = -1;
+	while (++y < start)
+		put_pixel(g->bg, x, y, 0x202020);
+	while(++y <= end)
+		put_pixel(g->bg, x, y, 0x00FF00);
+	while(++y < HEIGHT)
+		put_pixel(g->bg, x, y, 0x404040);
+}
 
-//     int drawEnd = lineHeight / 2 + HEIGHT / 2;
-//     if (drawEnd >= HEIGHT) drawEnd = HEIGHT - 1;
-
-//     // optional: fill ceiling
-//     for (int y = 0; y < drawStart; y++)
-//         put_pixel(g->bg, x, y, 0x202020);
-
-//     // wall slice
-//     for (int y = drawStart; y <= drawEnd; y++)
-//         put_pixel(g->bg, x, y, 0x00FF00);
-
-//     // optional: fill floor
-//     for (int y = drawEnd + 1; y < HEIGHT; y++)
-//         put_pixel(g->bg, x, y, 0x404040);
-// }
+double	get_perp_dist(double hyp, double angle, double p_angle)
+{
+	return (hyp * cos(angle - p_angle));
+}

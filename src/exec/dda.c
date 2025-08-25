@@ -1,4 +1,3 @@
-
 #include "../../include/cub3d.h"
 
 /// @brief Get absolute value of a double type number.
@@ -9,126 +8,43 @@ double	ft_abs(double nbr)
 	return (nbr);
 }
 
-// void	draw_line(t_img_data *img, t_point start, t_point end, int color)
+//! Adapt to minimap function
+// static bool	check_colision(double x0, double y0, t_game *game, t_point **hit)
 // {
-// 	double	dx;
-// 	double	dy;
-// 	double	steps;
-// 	double	coord[2];
-// 	int		i;
+// 	int	x;
+// 	int	y;
 
-// 	dx = end.x - start.x;
-// 	dy = end.y - start.y;
-// 	if (ft_abs(dx) >= ft_abs(dy))
-// 		steps = ft_abs(dx);
-// 	else
-// 		steps = ft_abs(dy);
-// 	dx /= steps;
-// 	dy /= steps;
-// 	coord[0] = start.x;
-// 	coord[1] = start.y;
-// 	i = -1;
-// 	while (++i <= steps)
+// 	x = (int)(x0 / game->scale);
+// 	y = (int)(y0 / game->scale);
+// 	(void) hit;
+// 	if (x >= 0 && x < (int )game->map_width
+// 		&& y >= 0 && y < (int )game->map_height)
 // 	{
-// 		if (coord[0] >= 0 && coord[0] < WIDTH
-// 			&& coord[1] >= 0 && coord[1] < HEIGHT)
-// 			put_pixel(img, (int) coord[0], (int) coord[1], color);
-// 		coord[0] += dx;
-// 		coord[1] += dy;
+// 		if (game->matrix[y][x].type == WALL)
+// 		{
+// 			return (true);
+// 		}
 // 	}
+// 	return (false);
 // }
-
-// *hit = &game->matrix[y][x];
-// (*hit)->x *= game->scale;
-// (*hit)->y *= game->scale;
-
-static bool	check_colision(double x0, double y0, t_game *game, t_point **hit)
-{
-	int	x;
-	int	y;
-
-	x = (int)(x0 / game->scale);
-	y = (int)(y0 / game->scale);
-	(void) hit;
-	if (x >= 0 && x < (int )game->map_width
-		&& y >= 0 && y < (int )game->map_height)
-	{
-		if (game->matrix[y][x].type == WALL)
-		{
-			return (true);
-		}
-	}
-	return (false);
-}
-
-/// @brief Raycasting collision checker based on trigonometric circle angles.
-/// @param start Start point where the line gonna start.
-/// @param angle Trigonometric circle based angle.
-/// @param max_dist Max distance of the line to check collision.
-/// @param game Main struct.
-/// @return 
-double	collider_angle(t_point start, double angle, double max_dist,
-	t_game *game)
-{
-	double	inc[2];
-	double	coord[2];
-	int		i;
-
-	inc[0] = cos(angle * (PI / 180));
-	inc[1] = -sin(angle * (PI / 180));
-	coord[0] = start.x;
-	coord[1] = start.y;
-	i = -1;
-	while (++i <= (int)max_dist)
-	{
-		if (check_colision(coord[0], coord[1], game, NULL))
-			return (i);
-		coord[0] += inc[0];
-		coord[1] += inc[1];
-	}
-	return (-1);
-}
-
-void	draw(t_point start, double angle, double max_dist, t_game *game)
-{
-	double	inc[2];
-	double	coord[2];
-	int		i;
-
-	inc[0] = cos(angle * (PI / 180));
-	inc[1] = -sin(angle * (PI / 180));
-	coord[0] = start.x;
-	coord[1] = start.y;
-	i = -1;
-	while (++i <= (int)max_dist)
-	{
-		if (coord[0] >= 0 && coord[0] < WIDTH
-			&& coord[1] >= 0 && coord[1] < HEIGHT)
-			put_pixel(game->bg, (int) coord[0], (int) coord[1], 0xFFC000);
-		if (check_colision(coord[0], coord[1], game, NULL))
-			return ;
-		coord[0] += inc[0];
-		coord[1] += inc[1];
-	}
-}
 
 double	collider_dda(t_point start, double angle, t_game *g, t_point *hit)
 {
 	t_dda	dda;
 
-	init_struct(&dda, &start, g, angle);
-	get_step(&dda, &start, g);
+	init_struct(&dda, &start, angle);
+	get_step(&dda, &start);
 	while (!dda.hit)
 	{
 		next_step(&dda);
 		if (dda.map_x < 0 || dda.map_x >= (int)g->map_width
 			|| dda.map_y < 0 || dda.map_y >= (int)g->map_height)
-			break ;
-		has_collided(&dda, g, &start);
+			return (-1.0);
+		has_collided(&dda, g);
 	}
-	if (!dda.hit || dda.perp_wall_dist < 0 || dda.perp_wall_dist > WIDTH)
-		return (-1);
+	if (!isfinite(dda.dist) || dda.dist < 0.0)
+		return (-1.0);
 	if (hit)
-		save_hit_pos(&dda, hit, g, &start);
-	return (dda.perp_wall_dist * g->scale);
+		save_hit_pos(&dda, hit, &start);
+	return (dda.dist);
 }
