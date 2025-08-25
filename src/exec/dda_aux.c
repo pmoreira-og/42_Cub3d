@@ -3,8 +3,8 @@
 void	init_struct(t_dda *dda, t_point *start, double angle)
 {
 	ft_bzero(dda, sizeof(t_dda));
-	dda->ray_dir_x = cos(angle * (PI / 180));
-	dda->ray_dir_y = -sin(angle * (PI / 180));
+	dda->ray_dir_x = cos(angle);
+	dda->ray_dir_y = -sin(angle);
 	if (dda->ray_dir_x == 0.0)
 		dda->dx = 1e30;
 	else
@@ -63,9 +63,9 @@ void	has_collided(t_dda *dda, t_game *game)
 	{
 		dda->hit = true;
 		if (dda->side == 0)
-			dda->perp_wall_dist = dda->side_dist_x - dda->dx;
+			dda->dist = dda->side_dist_x - dda->dx;
 		else
-			dda->perp_wall_dist = dda->side_dist_y - dda->dy;
+			dda->dist = dda->side_dist_y - dda->dy;
 	}
 }
 
@@ -74,8 +74,8 @@ void	save_hit_pos(t_dda *dda, t_point *hit, t_point *start)
 	double	hx;
 	double	hy;
 
-	hx = start->x + dda->perp_wall_dist * dda->ray_dir_x;
-	hy = start->y + dda->perp_wall_dist * dda->ray_dir_y;
+	hx = start->x + dda->dist * dda->ray_dir_x;
+	hy = start->y + dda->dist * dda->ray_dir_y;
 	hit->x = hx;
 	hit->y = hy;
 }
