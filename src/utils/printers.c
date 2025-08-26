@@ -3,19 +3,19 @@
 char	*get_type(t_type type)
 {
 	if (type == WALL)
-		return("WALL");
+		return( MAG "WALLS" DEF );
 	if (type == FLOOR)
-		return("FLOOR");
+		return( YEL "FLOOR" DEF);
 	if (type == PLAYER_E)
-		return("PLAYER_E");
+		return( BLU "PLAYE" DEF);
 	if (type == PLAYER_W)
-		return("PLAYER_W");
+		return( BLU "PLAYW" DEF);
 	if (type == PLAYER_N)
-		return("PLAYER_N");
+		return( BLU "PLAYN" DEF);
 	if (type == PLAYER_S)
-		return("PLAYER_S");
+		return( BLU "PLAYS" DEF);
 	if (type == VOID)
-		return("VOID");
+		return("VOIDS");
 	return ("");
 }
 

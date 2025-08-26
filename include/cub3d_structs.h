@@ -124,6 +124,8 @@ typedef struct s_game
 	double		scale;
 	t_img_data	*bg;
 	t_player	player;
+	unsigned int	floor_color;
+	unsigned int	ceiling_color;
 	int			file_fd;
 	bool		debug;
 }				t_game;

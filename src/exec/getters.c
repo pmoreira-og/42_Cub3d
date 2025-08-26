@@ -50,6 +50,7 @@ double	ft_min(double n1, double n2)
 
 void	set_player_dir(t_game *game, t_point *src)
 {
+	
 	game->player.pos_x = src->x * (game->scale);
 	game->player.pos_y = src->y * (game->scale);
 	game->player.pos_x += (game->scale / 2);

@@ -16,10 +16,8 @@ bool	get_map(t_game *game, char *input)
 	if (!extract_map(&parse))
 		return (cleanup_parse(&parse), false);
 	// -- pass info to game struct
-	if (!pass_map_to_game(&parse, game))
+	if (!map_to_game(&parse, game))
 		return (cleanup_parse(&parse), armageddon(game), false);
-	
-	// init mlx
 	// -- free and close up parse
 	cleanup_parse(&parse);
 	return (printf_fd(2, "survived PARSE\n"), true);
