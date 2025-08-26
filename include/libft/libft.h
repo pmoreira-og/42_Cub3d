@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/08/17 18:12:29 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:48:27 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ char				**ft_split(char const *s, char c);
 char				**matrix_add_to_index(char **matrix, char *add, size_t idx,
 						size_t len);
 char				**matrix_add_front(char *add, char **original);
+void				**matrix_allocer(long row_size, long col_size, size_t rows,
+						size_t columns);
 char				**matrix_dup_char(char **original_matrix);
+void				matrix_print(char **matrix);
 
 // FT NUM
 int					ft_atoi(const char *str);

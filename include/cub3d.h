@@ -89,26 +89,55 @@ char		**copy_map(char **map);
 //-‵,┊ parse fts
 
 // -- get_map
+
 bool		get_map(t_game	*game, char *input);
 void		init_parse_struct(t_parse *parse, char *input);
 
 // -- setup_extract
+
 bool		setup_for_extraction(t_parse *parse);
 int			get_file_line_count(int fd);
 char		**make_literal_copy(int fd, int lc);
 
 // -- extract_header
+
 bool		extract_header_info(t_parse *parse);
 bool		valid_identifier(t_parse *parse, char *line);
 bool		extract_path(t_texture *tx, char *path, int fd);
+char		**assign_direction(char *dir, t_texture *tx);
+
+// -- extract_color
+
 bool		extract_color(t_colors *cl, char *code);
 bool		valid_color_format(char *code);
 bool		assign_color_code(char *code, t_rgb *type);
 
 // -- extract_map
+
 bool		extract_map(t_parse *parse);
+bool		invalid_characters(char **map, size_t *heigth, size_t *width, t_type *player);
+bool		assign_player_pos(t_type *player, char type);
+char		**make_padded_map(t_parse *parse);
+
+// -- wall_check
+
+bool		check_surrounding_walls(t_parse *parse);
+int			space_flood_fill(int y, int x, t_parse *parse);
 
 // -- utils
+
 void		safe_close(int fd);
 int			len_until(char *str, char c);
 void		cleanup_parse(t_parse *parse);
+
+// -- map_to_game
+
+bool		map_to_game(t_parse *parse, t_game *game);
+void		get_exact_hei_wid(t_parse *parse);
+t_point		**make_point_map(t_parse *parse);
+t_type		get_point_type(int c);
+void	pass_info_to_map(t_parse *parse, t_game *game);
+
+// -- start_mlx
+
+bool	setup_mlx(t_game *game);

@@ -6,7 +6,7 @@
 #    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/06/22 16:29:07 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/08/19 16:48:03 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,8 @@ SRC_LST		=	$(addprefix ft_lst/, ft_lstadd_back.c ft_lstadd_front.c \
 				ft_lstmap.c ft_lstnew.c ft_lstsize.c)
 				
 SRC_MATRIX	=	$(addprefix ft_matrix/, free_matrix_until.c free_matrix.c \
-				ft_matrixlen.c ft_split.c matrix_add_front.c \
-				matrix_add_to_index.c matrix_dup_char.c)
+				ft_matrixlen.c ft_split.c matrix_add_front.c matrix_add_to_index.c \
+				matrix_allocer.c matrix_dup_char.c matrix_print.c)
 
 SRC_NUM		=	$(addprefix ft_num/, ft_atoi.c ft_itoa.c int_check.c \
 				long_check.c)

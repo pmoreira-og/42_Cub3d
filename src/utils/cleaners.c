@@ -53,5 +53,5 @@ void	armageddon(t_game *data)
 	if (data->mlx)
 		clean_mlx(data);
 	if (data->matrix)
-		ft_freed((void **) data->matrix, data->map_height);
+		free_matrix((void **)data->matrix);
 }

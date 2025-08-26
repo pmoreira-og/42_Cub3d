@@ -6,6 +6,7 @@
 # include "cub3d.h"
 
 // -->┊( DEFINES )┊.´-★☆★
+
 # define TITLE "Absolute Cinema3D"
 # define LOGO "./textures/logo_cub3d.xpm"
 # define EASTER "./textures/easter_egg.xpm"
@@ -40,6 +41,7 @@
 # ifndef ROTSPEED
 #  define ROTSPEED 1
 # endif
+
 //-‵,┊ colors
 
 # define DEF "\e[0m"
@@ -123,19 +125,27 @@
 # define CYNHB "\e[0;106m"
 # define WHTHB "\e[0;107m"
 
+//-‵,┊ messages
+
 # define M_ARGAMT	"incorrect amount of arguments provided!\n"
 # define M_USAGE	"usage: ./cub3D [path to .cub map file] [-d option (optional)]\n"
-# define M_FEXT "incorrect file extention in inputed map path\n"
-# define M_NOOP "couldn't open inputed map\n"
-# define M_ERRO "Error\n"
-# define M_LC "insuficient lines\n"
-# define M_MFL "malloc: failure\n"
-# define M_HEAD "wasn't able to get header info\n"
-# define M_INVID "invalid identifier\n"
-# define M_REP "repeated identifier\n"
-# define M_NOOPTX "couldn't open inputed texture file\n"
-# define M_COLF "incorrect color format\n"
-# define M_NOTINF "not all necessary information found\n"
-# define M_MAPSZ "insuficient map size\n"
+# define M_FEXT 	"incorrect file extention in inputed map path, needs to be .cub\n"
+# define M_NOOP 	"couldn't open inputed map\n"
+# define M_ERRO 	"Error\n"
+# define M_LC 		"insuficient lines\n"
+# define M_MFL 		"malloc: failure\n"
+# define M_HEAD 	"wasn't able to get header info\n"
+# define M_INVID 	"invalid identifier\n"
+# define M_REP 		"repeated identifier\n"
+# define M_NOXPM 	"incorrect file extention in texture file, needs to be .xpm\n"
+# define M_NOOPTX	"couldn't open inputed texture file\n"
+# define M_COLF		"incorrect color format\n"
+# define M_NOTINF	"not all necessary information found\n"
+# define M_MAPSZ	"insuficient map size\n"
+# define M_MAPEMP "empty line in the map\n"
+# define M_MAPCH "invalid characters found in map\n"
+# define M_PPOS "repeated player position\n"
+# define M_MPPOS "missing player position\n"
+# define M_WALLS "missing surrounding walls\n"
 
 #endif

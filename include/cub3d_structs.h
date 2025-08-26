@@ -64,9 +64,12 @@ typedef struct s_parse
 	t_colors	cl;
 	size_t 		heigth;
 	size_t 		width;
+	int 		margin_l;
+	int 		margin_r;
 	char		**literal;
-	int 		start;
+	char		**map_st;
 	char		**padded;
+	t_type		player;
 }				t_parse;
 
 /// @brief DDA Struct (Line = start + Direction * increment)
@@ -116,11 +119,13 @@ typedef struct s_game
 	void		*win;
 	char		**map;
 	t_point		**matrix;
-	size_t		map_width;
 	size_t		map_height;
+	size_t		map_width;
 	double		scale;
 	t_img_data	*bg;
 	t_player	player;
+	unsigned int	floor_color;
+	unsigned int	ceiling_color;
 	int			file_fd;
 	bool		debug;
 }				t_game;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/08/26 14:49:21 by pmoreira         ###   ########.fr        #
+#    Updated: 2025/08/26 13:00:20 by rduro-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,9 @@ SRC_MAIN_EXTRA	= main_parse.c
 SRC_EXEC	=	aux.c dda.c getters.c dda_aux.c player_move.c rendering.c sprites.c\
 				draw_aux.c
 
-SRC_PARSE	=	get_map.c utils.c setup_exctract.c extract_header.c extract_map.c 
+SRC_PARSE	=	get_map.c utils.c setup_exctract.c extract_header.c \
+				extract_color.c extract_map.c wall_check.c \
+				map_to_game.c start_mlx.c
 
 SRC_UTILS	= aux.c constructors.c hooks.c cleaners.c printers.c
 
