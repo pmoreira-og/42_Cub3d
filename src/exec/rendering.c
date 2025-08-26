@@ -1,29 +1,36 @@
 #include "../../include/cub3d.h"
 
-
 //? dir - fov/2 + x * step DIGITAL APPROACH
 //? dir + fov/2 - (x + 0.5 ) * step MATH APPROACH
+
+
+/// @brief Draw the map in 3d.
+///
+/// var[0] start_angle;
+///var[1] step;
+///var[2] perpDist;
 void	draw_map(t_game *g)
 {
 	t_point	p;
-	double	angle;
-	double	step;
+	double	var[3];
 	int		x;
-	double	dist;
+	t_dda	dda;
 
 	p.x = g->player.pos_x / g->scale;
 	p.y = g->player.pos_y / g->scale;
-	angle = g->player.direction + deg2rad(FOV / 2);
+	var[0] = g->player.direction + deg2rad(FOV / 2);
 	x = -1;
-	dist = -1;
-	step = deg2rad(FOV / (double) WIDTH);
+	var[2] = -1;
+	var[1] = deg2rad(FOV / (double) WIDTH);
+	// printf("Player looking at: (%f) Rads (%f) degrees\n", g->player.direction, g->player.direction / (PI/180));
 	while (++x < WIDTH)
 	{
-		dist = collider_dda(p, angle - ((x + 0.5) * step), g, NULL);
-		if (dist == -1)
+		var[2] = collider_dda(p, var[0] - ((x + 0.5) * var[1]), g, &dda);
+		if (var[2] == -1)
 			continue ;
-		dist = get_perp_dist(dist, angle - ((x + 0.5) * step), g->player.direction);
-		draw_section(g, dist * g->scale * 0.1, x);
+		// get_wall_text(g, &dda);
+		var[2] = get_perp_dist(var[2], var[0] - ((x + 0.5) * var[1]), g->player.direction);
+		draw_section(g, var[2] * g->scale * 0.1, x);
 	}
 	mlx_put_image_to_window(g->mlx, g->win, g->bg->img, 0, 0);
 }
@@ -39,6 +46,11 @@ void	draw_map(t_game *g)
 
 // 	dist = 0;
 // 	a.x = game->player.pos_x;
+// t_img_data	get_wall_text(t_game *g)
+// {
+// 	if (g->player.direction )
+// 	g->player.direction
+// }
 // 	a.y = game->player.pos_y;
 // 	angle = game->player.direction;
 // 	while (1/* angle <= game->player.direction + 34 */)
@@ -65,6 +77,7 @@ int	render_map(t_game *game)
 		return (1);
 	if (game->bg && !get_next_img(game))
 		return (0);
+	game->player.direction = normalize_rad(game->player.direction);
 	draw_map(game);
 	// render_minimap(game);
 	return (1);

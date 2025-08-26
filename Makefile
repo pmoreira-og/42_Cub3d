@@ -6,7 +6,7 @@
 #    By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/08/25 13:10:47 by pmoreira         ###   ########.fr        #
+#    Updated: 2025/08/26 14:49:21 by pmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ MLX		=	./include/minilibx_linux/libmlx.a
 
 # -->┊( COMMANDS AND FLAGS )┊.´-★☆★
 CC			=	cc
-SPEED		=	1
+SPEED		=	0.250
 ROT_SPD		=	1
 CFLAGS		=	-Wall -Wextra -Werror -g -DMOVESPEED=$(SPEED) -DROTSPEED=$(ROT_SPD)
 MLXFLAGS	=	-L ./include/minilibx_linux -lmlx_Linux -lX11 -lXext -lm

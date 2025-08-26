@@ -69,13 +69,13 @@ void	has_collided(t_dda *dda, t_game *game)
 	}
 }
 
-void	save_hit_pos(t_dda *dda, t_point *hit, t_point *start)
+void	save_hit_pos(t_dda *dda, t_point *start)
 {
 	double	hx;
 	double	hy;
 
 	hx = start->x + dda->dist * dda->ray_dir_x;
 	hy = start->y + dda->dist * dda->ray_dir_y;
-	hit->x = hx;
-	hit->y = hy;
+	dda->hit_point.x = hx;
+	dda->hit_point.y = hy;
 }

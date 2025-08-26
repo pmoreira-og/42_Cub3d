@@ -34,3 +34,28 @@ void	set_player_dir(t_game *game, t_point *src)
 	if (src->type == PLAYER_N)
 		game->player.direction = deg2rad(90);
 }
+
+double	normalize_rad(double rad)
+{
+	double	inc;
+
+	if (rad < 0)
+		inc = 2 * PI;
+	else
+		inc = -2 * PI;
+	while (rad > 2 * PI || rad < 0)
+		rad += inc;
+	return (rad);
+}
+
+// t_img_data	*get_wall_text(t_game *g, t_dda *dda)
+// {
+// 	if (dda->side == 1)
+// 	{
+		
+// 	}
+// 	else
+// 	{
+		
+// 	}
+// }
