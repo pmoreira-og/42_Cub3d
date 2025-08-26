@@ -87,7 +87,7 @@ typedef struct s_dda
 	double	ray_dir_y;
 	double	side_dist_x;
 	double	side_dist_y;
-	double	perp_wall_dist;
+	double	dist;
 	double	dx;
 	double	dy;
 	double	map_x;
@@ -96,12 +96,13 @@ typedef struct s_dda
 	int		step_y;
 	int		side;
 	bool	hit;
+	t_point	hit_point;
 }				t_dda;
 
 /// @brief Struct to save player info.
 /// @param pos_x Position of the player on the map in X axis.
 /// @param pos_y Position of the player on the map in Y axis.
-/// @param direction angle where the player is looking.
+/// @param direction angle (in rad) where the player is looking.
 typedef struct s_player
 {
 	double	pos_x;
@@ -110,7 +111,6 @@ typedef struct s_player
 	int		move_x;
 	int		move_y;
 	int		rotate;
-	int		has_moved;
 }				t_player;
 
 typedef struct s_game

@@ -1,4 +1,3 @@
-
 #pragma once
 // -->┊( LIBS )┊.´-★☆★
 
@@ -19,23 +18,37 @@
 // -->┊( FUNCTION PROTOTYPES )┊.´-★☆★
 
 //*	Exec - aux
-bool		is_player(t_point *ptr);
+double		deg2rad(double angle);
+void		set_player_dir(t_game *game, t_point *src);
+void		get_scale(t_game *game);
+void		put_pixel(t_img_data *data, int x, int y, int color);
+double		normalize_rad(double rad);
+
+//*	Sprites
+char		*get_sprite_data(t_game *g, char *path);
+
+//*	Rendering
+
+int			render_map(t_game *game);
+
+//*	Exec -	Draw Aux
+void		draw_section(t_game *g, double perpWallDist, int x);
+double		get_perp_dist(double hyp, double angle, double p_angle);
+t_img_data	*get_wall_text(t_game *g, t_dda *dda);
 
 //*	Constructors
 void		init_data(t_game *data, char **map);
-t_img_data	*get_img(t_game *game);
+t_img_data	*get_img(t_game *game, int width, int height);
 
-void		put_pixel(t_img_data *data, int x, int y, int color);
 void		print_map(t_game *data);
 void		print_matrix(t_game *data);
-void		get_scale(t_game *game);
 
 //*	Utils - aux
 bool		valid_move(t_point *check);
 bool		get_next_img(t_game *game);
 void		merror(char *msg);
 t_type		get_player_dir(int c);
-bool		is_moved(t_game *g);
+bool		has__moved(t_game *g);
 
 //*	Hooks
 int			close_win_mouse(t_game *data);
@@ -44,36 +57,34 @@ int			key_release_manager(int keycode, t_game *data);
 
 //*	Getters
 void		find_player(t_game *game, t_point *save);
-void		set_player_dir(t_game *game, t_point *src);
 double		ft_min(double n1, double n2);
+int			get_pixel(t_img_data *img, int x, int y);
+bool		is_player(t_point *ptr);
 
 //*	Cleaners
 void		armageddon(t_game *data);
 void		ft_freed(void **ptr, int size);
+void		destroy_img(t_img_data *data, t_game *g);
 
 //*	Printers
 char		*get_type(t_type type);
 
 //*	DDA
-double		collider_dda(t_point start, double angle, t_game *g, t_point *hit);
-void		draw(t_point start, double angle, double max_dist, t_game *game);
+double		collider_dda(t_point start, double angle, t_game *g, t_dda *ptr);
 double		ft_abs(double nbr);
 
 //*	DDA Aux
-void		init_struct(t_dda *dda, t_point *start, t_game *game, double angle);
-void		has_collided(t_dda *dda, t_game *game, t_point *start);
+void		init_struct(t_dda *dda, t_point *start, double angle);
+void		has_collided(t_dda *dda, t_game *game);
+void		get_step(t_dda *dda, t_point *start);
 void		next_step(t_dda *dda);
-void		save_hit_pos(t_dda *dda, t_point *hit, t_game *g, t_point *start);
-void		get_step(t_dda *dda, t_point *start, t_game *game);
+void		save_hit_pos(t_dda *dda, t_point *start);
 
 //*	Player_move
 void		move_handler(t_game *g);
 
 // tbd
 char		**copy_map(char **map);
-double		collider_angle(t_point start, double angle, double max_dist,
-				t_game *game);
-void		draw(t_point start, double angle, double max_dist, t_game *game);
 
 //-‵,┊ parse fts
 

@@ -48,21 +48,10 @@ double	ft_min(double n1, double n2)
 	return (n2);
 }
 
-void	set_player_dir(t_game *game, t_point *src)
+int	get_pixel(t_img_data *img, int x, int y)
 {
-	
-	game->player.pos_x = src->x * (game->scale);
-	game->player.pos_y = src->y * (game->scale);
-	game->player.pos_x += (game->scale / 2);
-	game->player.pos_y += (game->scale / 2);
+	char	*dst;
 
-	if (src->type == PLAYER_E)
-		game->player.direction = 0;
-	if (src->type == PLAYER_W)
-		game->player.direction = 180;
-	if (src->type == PLAYER_S)
-		game->player.direction = 270;
-	if (src->type == PLAYER_N)
-		game->player.direction = 90;
-	game->player.has_moved = true;
+	dst = img->addr + (y * img->len + x * (img->bpp / 8));
+	return (*(unsigned int *)dst);
 }

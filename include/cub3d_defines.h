@@ -8,8 +8,13 @@
 // -->┊( DEFINES )┊.´-★☆★
 
 # define TITLE "Absolute Cinema3D"
-# define WIDTH 1920
-# define HEIGHT 1080
+# define LOGO "./textures/logo_cub3d.xpm"
+# define EASTER "./textures/easter_egg.xpm"
+# define DUCK "./textures/duck.xpm"
+# define TEST "./textures/north.xpm"
+# define GRID "./textures/grid.xpm"
+# define WIDTH 1280
+# define HEIGHT 960
 # define KEY_W 119
 # define KEY_A 97
 # define KEY_S 115
@@ -28,7 +33,8 @@
 # define KEY_T 116
 # define KEY_Y 121
 # define PI 3.14159265359
-# define PLAYER_RADIUS_TILES 0.20
+# define FOV 66
+# define PLAYER_RADIUS_TILES 0.1
 # ifndef MOVESPEED
 #  define MOVESPEED 1
 # endif

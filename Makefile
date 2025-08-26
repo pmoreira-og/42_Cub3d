@@ -18,7 +18,7 @@ MLX		=	./include/minilibx_linux/libmlx.a
 # -->┊( COMMANDS AND FLAGS )┊.´-★☆★
 CC			=	cc
 SPEED		=	0.250
-ROT_SPD		=	0.250
+ROT_SPD		=	1
 CFLAGS		=	-Wall -Wextra -Werror -g -DMOVESPEED=$(SPEED) -DROTSPEED=$(ROT_SPD)
 MLXFLAGS	=	-L ./include/minilibx_linux -lmlx_Linux -lX11 -lXext -lm
 VAL			=	valgrind --leak-check=full --show-leak-kinds=all \
@@ -37,7 +37,8 @@ SRC_MAIN	=	main.c
 
 SRC_MAIN_EXTRA	= main_parse.c
 
-SRC_EXEC	=	aux.c dda.c getters.c dda_aux.c player_move.c
+SRC_EXEC	=	aux.c dda.c getters.c dda_aux.c player_move.c rendering.c sprites.c\
+				draw_aux.c
 
 SRC_PARSE	=	get_map.c utils.c setup_exctract.c extract_header.c \
 				extract_color.c extract_map.c wall_check.c \
