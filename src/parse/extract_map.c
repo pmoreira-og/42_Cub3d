@@ -2,7 +2,7 @@
 
 bool	extract_map(t_parse *parse)
 {
-	if (invalid_characters(parse->map_st, &parse->heigth, &parse->width,
+	if (invalid_chars(parse->map_st, &parse->heigth, &parse->width,
 			&parse->player))
 		return (false);
 	parse->padded = make_padded_map(parse);
@@ -14,8 +14,7 @@ bool	extract_map(t_parse *parse)
 	return (printf_fd(2, "survived map\n"), true);
 }
 
-bool	invalid_characters(char **map, size_t *heigth, size_t *width,
-		t_type *player)
+bool	invalid_chars(char **map, size_t *heigth, size_t *width, t_type *player)
 {
 	size_t	i;
 
@@ -73,7 +72,7 @@ char	**make_padded_map(t_parse *parse)
 	while (new[++i + 2])
 		ft_memcpy(&new[i + 1][1], parse->map_st[i], len_until(parse->map_st[i],
 				'\n'));
-	ft_printf("\nPADDED MAP:\n");
-	matrix_print(new);
+	// ft_printf("\nPADDED MAP:\n");
+	// matrix_print(new);
 	return (new);
 }

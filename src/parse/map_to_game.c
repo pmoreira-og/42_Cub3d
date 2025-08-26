@@ -8,7 +8,7 @@ bool	map_to_game(t_parse *parse, t_game *game)
 	if (!game->matrix)
 		return (printf_fd(2, M_ERRO M_MFL), false);
 	pass_info_to_map(parse, game);
-	print_map(game);
+	// print_map(game);
 	return (printf_fd(2, "survived map to game\n"), true);
 }
 
@@ -25,7 +25,7 @@ void	get_exact_hei_wid(t_parse *parse)
 	while (!ft_strchr(parse->map_st[i], '1'))
 		i--;
 	parse->heigth = i + 1;
-	printf("exact map heigth: %ld\n", parse->heigth);
+	// printf("exact map heigth: %ld\n", parse->heigth);
 	i = -1;
 	while (++i < (int)parse->heigth)
 	{
@@ -38,9 +38,9 @@ void	get_exact_hei_wid(t_parse *parse)
 			parse->margin_r = margin;
 	}
 	parse->width = parse->width - parse->margin_l - parse->margin_r;
-	printf("exact map width: %ld\n", parse->width);
-	printf("margin_l: %d\n", parse->margin_l);
-	printf("margin_r: %d\n", parse->margin_r);
+	// printf("exact map width: %ld\n", parse->width);
+	// printf("margin_l: %d\n", parse->margin_l);
+	// printf("margin_r: %d\n", parse->margin_r);
 }
 
 t_point	**make_point_map(t_parse *parse)

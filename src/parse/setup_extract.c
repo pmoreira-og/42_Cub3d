@@ -6,7 +6,7 @@ bool	setup_for_extraction(t_parse *parse)
 	if (parse->fd < 3)
 		return (printf_fd(2, M_NOOP), false);
 	parse->lc = get_file_line_count(parse->fd);
-	ft_printf("line_count: %d\n", parse->lc);
+	// ft_printf("line_count: %d\n", parse->lc);
 	if (parse->lc < 9)
 		return (printf_fd(2, M_ERRO M_LC), false);
 	parse->fd = open(parse->path, O_RDONLY);

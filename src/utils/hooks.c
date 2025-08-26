@@ -1,5 +1,12 @@
 #include "../../include/cub3d.h"
 
+void	manager(t_game *game)
+{
+	mlx_hook(game->win, 17, 0, close_win_mouse, game);
+	mlx_hook(game->win, 2, 1L << 0, key_press_manager, game);
+	mlx_hook(game->win, 3, 1L << 1, key_release_manager, game);
+}
+
 int	close_win_mouse(t_game *data)
 {
 	armageddon(data);

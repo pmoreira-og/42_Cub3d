@@ -20,10 +20,10 @@ int	len_until(char *str, char c)
 
 void	cleanup_parse(t_parse *parse)
 {
-	free(parse->tx.SO);
-	free(parse->tx.NO);
-	free(parse->tx.WE);
-	free(parse->tx.EA);
+	free(parse->tx.no);
+	free(parse->tx.so);
+	free(parse->tx.we);
+	free(parse->tx.ea);
 	free_matrix((void **)parse->literal);
 	free_matrix((void **)parse->padded);
 }

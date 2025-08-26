@@ -42,9 +42,8 @@ bool	valid_color_format(char *code)
 	{
 		j = -1;
 		num_len = len_until(&code[i], ',');
-		if (num_len < 1 || num_len > 3 || \
-			(field < 2 && code[i + num_len] != ',') || \
-			(field == 2 && code[i + num_len]))
+		if (num_len < 1 || num_len > 3 || (field < 2 && code[i
+				+ num_len] != ',') || (field == 2 && code[i + num_len]))
 			return (false);
 		while (++j < num_len)
 			if (!ft_isdigit(code[i + j]))
@@ -79,6 +78,6 @@ bool	assign_color_code(char *code, t_rgb *type)
 		param++;
 		code += num_len + 1;
 	}
-	ft_printf("color is: R%d G%d B%d\n", type->R, type->G, type->B);
+	// ft_printf("color is: R%d G%d B%d\n", type->R, type->G, type->B);
 	return (true);
 }

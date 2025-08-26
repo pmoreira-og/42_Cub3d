@@ -15,13 +15,13 @@ bool	check_surrounding_walls(t_parse *parse)
 		{
 			if (parse->padded[y][x] == ' ')
 			{
-				printf("sending flood on: y%d x%d\n", y, x);
+				// printf("sending flood on: y%d x%d\n", y, x);
 				errors = space_flood_fill(y, x, parse);
 			}
 		}
 	}
-	ft_printf("\nFILLED MAP:\n");
-	matrix_print(parse->padded);
+	// ft_printf("\nFILLED MAP:\n");
+	// matrix_print(parse->padded);
 	if (errors)
 		return (false);
 	return (true);

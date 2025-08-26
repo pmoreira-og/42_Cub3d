@@ -46,10 +46,8 @@ void	destroy_img(t_img_data *data, t_game *g)
 
 void	armageddon(t_game *data)
 {
-	if (data->file_fd > 2)
-		close(data->file_fd);
-	if (data->map)
-		clean_matrix(data->map);
+	// if (data->map)
+	// 	clean_matrix(data->map);
 	if (data->mlx)
 		clean_mlx(data);
 	if (data->matrix)

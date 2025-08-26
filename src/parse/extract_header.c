@@ -54,7 +54,7 @@ bool	extract_path(t_texture *tx, char *path, int fd)
 	*type = ft_strndup(&path[i], len_until(&path[i], '\n'));
 	if (!*type)
 		return (printf_fd(2, M_MFL), false);
-	ft_printf("path is: %s\n", *type);
+	// ft_printf("path is: %s\n", *type);
 	if (ft_strncmp(".xpm", *type + ft_strlen(*type) - 4, 4))
 		return (printf_fd(2, M_ERRO M_NOXPM), false);
 	fd = open(*type, O_RDONLY);
@@ -66,13 +66,13 @@ bool	extract_path(t_texture *tx, char *path, int fd)
 char	**assign_direction(char *dir, t_texture *tx)
 {
 	if (!ft_strncmp(dir, "NO ", 3))
-		return (&tx->NO);
+		return (&tx->no);
 	else if (!ft_strncmp(dir, "SO ", 3))
-		return (&tx->SO);
+		return (&tx->so);
 	else if (!ft_strncmp(dir, "WE ", 3))
-		return (&tx->WE);
+		return (&tx->we);
 	else if (!ft_strncmp(dir, "EA ", 3))
-		return (&tx->EA);
+		return (&tx->ea);
 	else
 		return (NULL);
 }
