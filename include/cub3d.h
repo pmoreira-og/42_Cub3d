@@ -37,7 +37,6 @@ double		get_perp_dist(double hyp, double angle, double p_angle);
 t_img_data	*get_wall_text(t_game *g, t_dda *dda);
 
 //*	Constructors
-void		init_data(t_game *data, char **map);
 t_img_data	*get_img(t_game *game, int width, int height);
 
 void		print_map(t_game *data);

@@ -3,7 +3,6 @@
 //? dir - fov/2 + x * step DIGITAL APPROACH
 //? dir + fov/2 - (x + 0.5 ) * step MATH APPROACH
 
-
 /// @brief Draw the map in 3d.
 ///
 /// var[0] start_angle;
@@ -22,7 +21,6 @@ void	draw_map(t_game *g)
 	x = -1;
 	var[2] = -1;
 	var[1] = deg2rad(FOV / (double) WIDTH);
-	// printf("Player looking at: (%f) Rads (%f) degrees\n", g->player.direction, g->player.direction / (PI/180));
 	while (++x < WIDTH)
 	{
 		var[2] = collider_dda(p, var[0] - ((x + 0.5) * var[1]), g, &dda);
@@ -30,7 +28,7 @@ void	draw_map(t_game *g)
 			continue ;
 		// get_wall_text(g, &dda);
 		var[2] = get_perp_dist(var[2], var[0] - ((x + 0.5) * var[1]), g->player.direction);
-		draw_section(g, var[2] * g->scale * 0.1, x);
+		draw_section(g, var[2] * g->scale * 0.05, x);
 	}
 	mlx_put_image_to_window(g->mlx, g->win, g->bg->img, 0, 0);
 }

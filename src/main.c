@@ -30,20 +30,14 @@ char	**copy_map(char **map)
 int	main(int ac, char **av)
 {
 	t_game	game;
-	char *map[] = {
-		"111111",
-		"100101    1",
-		"101111   101",
-		"1N0001    1",
-		"111111111",
-		NULL
-	};
 
-	if (ac > 2)
-		return (0);
-	init_data(&game, map);
-	if (ac == 2 && !ft_strcmp("-d", av[1]))
-		game.debug = true;
+	if (ac > 3 || (ac == 3 && ft_strcmp("-d", av[2])) || ac < 2 )
+		return (printf_fd(2, M_ARGAMT M_USAGE), 2);
+	ft_printf("valid av\n");
+	if (!get_map(&game, av[1]))
+		return (1);
+	if (!setup_mlx(&game))
+		return (armageddon(&game), 1);
 	if(game.debug)
 	{
 		print_matrix(&game);

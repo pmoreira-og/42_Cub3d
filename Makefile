@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
+#    By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/08/26 13:00:20 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/08/26 15:38:22 by pmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ MLX		=	./include/minilibx_linux/libmlx.a
 
 # -->┊( COMMANDS AND FLAGS )┊.´-★☆★
 CC			=	cc
-SPEED		=	0.250
+SPEED		=	1
 ROT_SPD		=	1
 CFLAGS		=	-Wall -Wextra -Werror -g -DMOVESPEED=$(SPEED) -DROTSPEED=$(ROT_SPD)
 MLXFLAGS	=	-L ./include/minilibx_linux -lmlx_Linux -lX11 -lXext -lm
@@ -92,7 +92,7 @@ extra: $(OBJS_EXTRA) $(LIBFT) $(MLX)
 # -->┊( EXECUTION RULES )┊.´-★☆★
 exe: fclean
 	make all
-	./$(NAME)
+	./$(NAME) maps/map_1.cub
 
 
 extra_map1: extra
@@ -100,7 +100,7 @@ extra_map1: extra
 
 val: fclean
 	make all SPEED=2 ROT_SPD=1
-	$(VAL) ./$(NAME)
+	$(VAL) ./$(NAME) maps/map_1.cub
 
 # -->┊( STANDARD RULES )┊.´-★☆★
 clean:

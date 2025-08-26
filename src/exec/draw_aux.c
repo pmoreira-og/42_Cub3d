@@ -24,11 +24,11 @@ void	draw_section(t_game *g, double perpWallDist, int x)
 		end = HEIGHT - 1;
 	y = -1;
 	while (++y < start)
-		put_pixel(g->bg, x, y, 0x202020);
+		put_pixel(g->bg, x, y, g->ceiling_color);
 	while(++y <= end)
 		put_pixel(g->bg, x, y, 0x00FF00);
 	while(++y < HEIGHT)
-		put_pixel(g->bg, x, y, 0x404040);
+		put_pixel(g->bg, x, y, g->floor_color);
 }
 
 double	get_perp_dist(double hyp, double angle, double p_angle)

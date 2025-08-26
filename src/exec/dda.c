@@ -47,7 +47,7 @@ double	collider_dda(t_point start, double angle, t_game *g, t_dda *ptr)
 	if (ptr)
 	{
 		save_hit_pos(&dda, &start);
-		ft_memcmp(ptr, &dda, sizeof(t_dda));
+		ft_memcpy(ptr, &dda, sizeof(t_dda));
 	}
 	return (dda.dist);
 }
