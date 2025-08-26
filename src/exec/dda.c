@@ -28,7 +28,7 @@ double	ft_abs(double nbr)
 // 	return (false);
 // }
 
-double	collider_dda(t_point start, double angle, t_game *g, t_point *hit)
+double	collider_dda(t_point start, double angle, t_game *g, t_dda *ptr)
 {
 	t_dda	dda;
 
@@ -44,7 +44,10 @@ double	collider_dda(t_point start, double angle, t_game *g, t_point *hit)
 	}
 	if (!isfinite(dda.dist) || dda.dist < 0.0)
 		return (-1.0);
-	if (hit)
-		save_hit_pos(&dda, hit, &start);
+	if (ptr)
+	{
+		save_hit_pos(&dda, &start);
+		ft_memcmp(ptr, &dda, sizeof(t_dda));
+	}
 	return (dda.dist);
 }

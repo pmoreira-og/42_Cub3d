@@ -22,6 +22,7 @@ double		deg2rad(double angle);
 void		set_player_dir(t_game *game, t_point *src);
 void		get_scale(t_game *game);
 void		put_pixel(t_img_data *data, int x, int y, int color);
+double		normalize_rad(double rad);
 
 //*	Sprites
 char		*get_sprite_data(t_game *g, char *path);
@@ -33,6 +34,7 @@ int			render_map(t_game *game);
 //*	Exec -	Draw Aux
 void		draw_section(t_game *g, double perpWallDist, int x);
 double		get_perp_dist(double hyp, double angle, double p_angle);
+t_img_data	*get_wall_text(t_game *g, t_dda *dda);
 
 //*	Constructors
 void		init_data(t_game *data, char **map);
@@ -68,7 +70,7 @@ void		destroy_img(t_img_data *data, t_game *g);
 char		*get_type(t_type type);
 
 //*	DDA
-double		collider_dda(t_point start, double angle, t_game *g, t_point *hit);
+double		collider_dda(t_point start, double angle, t_game *g, t_dda *ptr);
 double		ft_abs(double nbr);
 
 //*	DDA Aux
@@ -76,7 +78,7 @@ void		init_struct(t_dda *dda, t_point *start, double angle);
 void		has_collided(t_dda *dda, t_game *game);
 void		get_step(t_dda *dda, t_point *start);
 void		next_step(t_dda *dda);
-void		save_hit_pos(t_dda *dda, t_point *hit, t_point *start);
+void		save_hit_pos(t_dda *dda, t_point *start);
 
 //*	Player_move
 void		move_handler(t_game *g);

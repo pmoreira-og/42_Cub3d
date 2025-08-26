@@ -93,6 +93,7 @@ typedef struct s_dda
 	int		step_y;
 	int		side;
 	bool	hit;
+	t_point	hit_point;
 }				t_dda;
 
 /// @brief Struct to save player info.
