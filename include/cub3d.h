@@ -25,14 +25,15 @@ void		put_pixel(t_img_data *data, int x, int y, int color);
 double		normalize_rad(double rad);
 
 //*	Sprites
-char		*get_sprite_data(t_game *g, char *path);
+bool		get_sprite_data(t_game *g, t_img_data *ptr, char *path);
+bool		load_walls(t_game *g);
 
 //*	Rendering
 
 int			render_map(t_game *game);
 
 //*	Exec -	Draw Aux
-void		draw_section(t_game *g, double perpWallDist, int x);
+void		draw_section(t_game *g, t_dda *dda, int x, t_point *p);
 double		get_perp_dist(double hyp, double angle, double p_angle);
 t_img_data	*get_wall_text(t_game *g, t_dda *dda);
 
@@ -47,7 +48,7 @@ bool		valid_move(t_point *check);
 bool		get_next_img(t_game *game);
 void		merror(char *msg);
 t_type		get_player_dir(int c);
-bool		has__moved(t_game *g);
+bool		has_moved(t_game *g);
 
 //*	Hooks
 void		manager(t_game *game);
