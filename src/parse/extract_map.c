@@ -1,5 +1,7 @@
 #include "../../include/cub3d.h"
 
+/// @brief extracts and validates the map
+/// @return true on success, false on failure
 bool	extract_map(t_parse *parse)
 {
 	if (invalid_chars(parse->map_st, &parse->heigth, &parse->width,
@@ -14,6 +16,12 @@ bool	extract_map(t_parse *parse)
 	return (printf_fd(2, "survived map\n"), true);
 }
 
+/// @brief checks if the map contains any invalid chars or repeated player positions
+/// @param map the matrix with the whole map
+/// @param heigth map heigth will be stored here
+/// @param width max width will be stored here
+/// @param player the direction of the player is stored here
+/// @return true when invalid, false when valid
 bool	invalid_chars(char **map, size_t *heigth, size_t *width, t_type *player)
 {
 	size_t	i;

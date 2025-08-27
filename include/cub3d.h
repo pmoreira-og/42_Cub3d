@@ -1,4 +1,5 @@
 #pragma once
+
 // -->┊( LIBS )┊.´-★☆★
 
 #include "minilibx_linux/mlx.h"
@@ -85,34 +86,34 @@ void		save_hit_pos(t_dda *dda, t_point *start);
 //*	Player_move
 void		move_handler(t_game *g);
 
-// tbd
-char		**copy_map(char **map);
-
 //-‵,┊ parse fts
 
 // -- get_map
 
 bool		get_map(t_game	*game, char *input);
 void		init_parse_struct(t_parse *parse, char *input);
+void		safe_close(int fd);
+int			len_until(char *str, char c);
+void		cleanup_parse(t_parse *parse);
 
 // -- setup_extract
 
 bool		setup_for_extraction(t_parse *parse);
 int			get_file_line_count(int fd);
-char		**make_literal_copy(int fd, int lc);
+char		**file_literal_copy(int fd, int lc);
 
 // -- extract_header
 
-bool		extract_header_info(t_parse *parse);
-bool		valid_identifier(t_parse *parse, char *line);
-bool		extract_path(t_texture *tx, char *path, int fd);
-char		**assign_direction(char *dir, t_texture *tx);
+bool		extract_header(t_parse *parse);
+bool		valid_identifier(t_header *hd, char *line);
+bool		extract_path(t_header *tx, char *path);
+char		**assign_direction(char *dir, t_header *tx);
 
 // -- extract_color
 
-bool		extract_color(t_colors *cl, char *code);
+bool		extract_color(t_header *cl, char *code);
 bool		valid_color_format(char *code);
-bool		assign_color_code(char *code, t_rgb *type);
+bool		assign_color_code(char *code, int *type);
 
 // -- extract_map
 
@@ -128,9 +129,7 @@ int			space_flood_fill(int y, int x, t_parse *parse);
 
 // -- utils
 
-void		safe_close(int fd);
-int			len_until(char *str, char c);
-void		cleanup_parse(t_parse *parse);
+
 
 // -- map_to_game
 

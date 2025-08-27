@@ -1,18 +1,22 @@
 #include "../../include/cub3d.h"
 
-bool	extract_color(t_colors *cl, char *code)
+/// @brief gets color code from CODE and sees if its a valid color
+/// @param cl header struct containig the colors
+/// @param code full line with color identifier and code
+/// @return true on success, false on failure
+bool	extract_color(t_header *cl, char *code)
 {
 	int		i;
 	int		color_len;
 	char	color[12];
-	t_rgb	*type;
+	int		*type;
 
 	type = NULL;
 	if (!ft_strncmp(code, "F ", 2))
 		type = &cl->floor;
 	else if (!ft_strncmp(code, "C ", 2))
 		type = &cl->ceiling;
-	if (type->r != -1 || type->g != -1 || type->b != -1)
+	if (*type != -1)
 		return (printf_fd(2, M_ERRO M_REP), false);
 	i = 2;
 	while (code[i] == ' ')
@@ -29,6 +33,8 @@ bool	extract_color(t_colors *cl, char *code)
 	return (true);
 }
 
+/// @brief sees if CODE is in the [0-255],[0-255],[0-255] format
+/// @return true when valid, false when invalid
 bool	valid_color_format(char *code)
 {
 	int	i;
@@ -53,7 +59,11 @@ bool	valid_color_format(char *code)
 	return (true);
 }
 
-bool	assign_color_code(char *code, t_rgb *type)
+/// @brief converts CODE into an hex color number
+/// @param code RGB string
+/// @param type pointer to the floor or ceiling color
+/// @return true on success, false on failure
+bool	assign_color_code(char *code, int *type)
 {
 	char	color[4];
 	int		num_len;
@@ -61,6 +71,7 @@ bool	assign_color_code(char *code, t_rgb *type)
 	int		val;
 
 	param = 1;
+	*type = 0;
 	while (*code)
 	{
 		ft_bzero(color, sizeof(color));
@@ -70,14 +81,13 @@ bool	assign_color_code(char *code, t_rgb *type)
 		if (val > 255)
 			return (false);
 		if (param == 1)
-			type->r = val;
+			*type |= (val << 16);
 		else if (param == 2)
-			type->g = val;
+			*type |= (val << 8);
 		else if (param == 3)
-			type->b = val;
+			*type |= (val);
 		param++;
 		code += num_len + 1;
 	}
-	// ft_printf("color is: R%d G%d B%d\n", type->R, type->G, type->B);
 	return (true);
 }
