@@ -52,6 +52,8 @@ int	get_pixel(t_img_data *img, int x, int y)
 {
 	char	*dst;
 
+	if (x < 0 || y < 0 || x > img->width || y > img->height)
+		return (0);
 	dst = img->addr + (y * img->len + x * (img->bpp / 8));
 	return (*(unsigned int *)dst);
 }

@@ -11,7 +11,7 @@
 void	draw_map(t_game *g)
 {
 	t_point	p;
-	double	var[3];
+	double	var[2];
 	int		x;
 	t_dda	dda;
 
@@ -19,22 +19,20 @@ void	draw_map(t_game *g)
 	p.y = g->player.pos_y / g->scale;
 	var[0] = g->player.direction + deg2rad(FOV / 2);
 	x = -1;
-	var[2] = -1;
 	var[1] = deg2rad(FOV / (double) WIDTH);
 	while (++x < WIDTH)
 	{
-		var[2] = collider_dda(p, var[0] - ((x + 0.5) * var[1]), g, &dda);
-		if (var[2] == -1)
+		if (collider_dda(p, var[0] - ((x + 0.5) * var[1]), g, &dda) == -1)
 			continue ;
-		// get_wall_text(g, &dda);
-		var[2] = get_perp_dist(var[2], var[0] - ((x + 0.5) * var[1]), g->player.direction);
-		draw_section(g, var[2] * g->scale * 0.05, x);
+		dda.dist = get_perp_dist(dda.dist, var[0] - ((x + 0.5) * var[1]), g->player.direction);
+		dda.dist *= g->scale * 0.05;
+		draw_section(g, &dda, x, &p);
 	}
 	mlx_put_image_to_window(g->mlx, g->win, g->bg->img, 0, 0);
 }
 
 
-//! ADAPT TO NEW WAY
+//! ADAPT TO NEW WAYw
 // void	render_minimap(t_game *game)
 // {
 // 	t_point	a;
@@ -69,9 +67,8 @@ void	draw_map(t_game *g)
 
 int	render_map(t_game *game)
 {
-
 	move_handler(game);
-	if (!has__moved(game))
+	if (!has_moved(game))
 		return (1);
 	if (game->bg && !get_next_img(game))
 		return (0);

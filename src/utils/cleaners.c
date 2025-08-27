@@ -22,7 +22,7 @@ void	clean_matrix(char **matrix)
 
 void	clean_mlx(t_game *data)
 {
-	if (data->bg->img)
+	if (data->bg && data->bg->img)
 	{
 		mlx_destroy_image(data->mlx, data->bg->img);
 		free(data->bg);

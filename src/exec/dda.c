@@ -28,26 +28,20 @@ double	ft_abs(double nbr)
 // 	return (false);
 // }
 
-double	collider_dda(t_point start, double angle, t_game *g, t_dda *ptr)
+double	collider_dda(t_point start, double angle, t_game *g, t_dda *dda)
 {
-	t_dda	dda;
-
-	init_struct(&dda, &start, angle);
-	get_step(&dda, &start);
-	while (!dda.hit)
+	init_struct(dda, &start, angle);
+	get_step(dda, &start);
+	while (!dda->hit)
 	{
-		next_step(&dda);
-		if (dda.map_x < 0 || dda.map_x >= (int)g->map_width
-			|| dda.map_y < 0 || dda.map_y >= (int)g->map_height)
+		next_step(dda);
+		if (dda->map_x < 0 || dda->map_x >= (int)g->map_width
+			|| dda->map_y < 0 || dda->map_y >= (int)g->map_height)
 			return (-1.0);
-		has_collided(&dda, g);
+		has_collided(dda, g);
 	}
-	if (!isfinite(dda.dist) || dda.dist < 0.0)
+	if (!isfinite(dda->dist) || dda->dist < 0.0)
 		return (-1.0);
-	if (ptr)
-	{
-		save_hit_pos(&dda, &start);
-		ft_memcpy(ptr, &dda, sizeof(t_dda));
-	}
-	return (dda.dist);
+	save_hit_pos(dda, &start);
+	return (dda->dist);
 }
