@@ -109,6 +109,9 @@ typedef struct s_wall
 	double		tex_pos;
 	t_img_data	*texture;
 	int			color;
+	int			start;
+	int			end;
+	int			height;
 }					t_wall;
 
 /// @brief Struct to save player info.

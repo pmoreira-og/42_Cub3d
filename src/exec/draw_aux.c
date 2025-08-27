@@ -2,15 +2,23 @@
 
 //! Probably gonna need 1 more param to get the right wall text.
 
-void	get_wall_step(t_game *g, t_wall *wall, t_dda *dda, int height)
+void	get_wall_step(t_game *g, t_wall *wall, t_dda *dda)
 {
+	if (dda->dist <= 0.000001)
+		dda->dist = 0.000001;
+	wall->height = (int) (HEIGHT/ dda->dist);
+	wall->start = -wall->height / 2 + HEIGHT / 2;
+	if (wall->start < 0)
+		wall->start = 0;
+	wall->end = wall->height / 2 + HEIGHT / 2;
+	if (wall->end >= HEIGHT)
+		wall->end = HEIGHT - 1;
 	wall->texture = get_wall_text(g, dda);
-	wall->step = (double)wall->texture->height / (double)height;
+	wall->step = (double)wall->texture->height / (double)wall->height;
 }
 
-void	init_wall(t_point *p, t_dda *dda, t_game *g, t_wall *wall)
+void	init_wall(t_point *p, t_dda *dda, t_wall *wall)
 {
-	(void) g;
 	if (dda->side == 0)
 		wall->wallX = p->y + dda->dist * dda->ray_dir_y;
 	else
@@ -28,84 +36,43 @@ void	init_wall(t_point *p, t_dda *dda, t_game *g, t_wall *wall)
 /// @param g Game struct.
 /// @param perpWallDist Dist between the player and the object.
 /// @param x X position on the screen to draw.
-void draw_section(t_game *g, t_dda *dda, int x, t_point *p)
+void draw_wall(t_game *g, t_dda *dda, int x, t_wall *wall)
 {
-	int		start;
-	int		end;
-	int		height;
+	int		y;
+	
+	if (wall->start < 0)
+		wall->tex_pos = (-wall->start) * wall->step;
+	put_pixel(&g->bg, x, wall->start, 0);
+	y = wall->start;
+	while (y <= wall->end)
+	{
+		wall->texY = (int)wall->tex_pos;
+		if ( wall->texY >= wall->texture->height)
+			wall->texY = wall->texture->height - 1;
+		wall->tex_pos += wall->step;
+		wall->color = get_pixel(wall->texture, wall->texX, wall->texY);
+		if (dda->side == 1)
+			wall->color = (wall->color >> 1) & 0x7F7F7F;
+		put_pixel(&g->bg, x, y, wall->color);
+		y++;
+	}
+	put_pixel(&g->bg, x, wall->end, 0);
+}
+
+void	draw_section(t_game *g, t_dda *dda, int x, t_point *p)
+{
 	int		y;
 	t_wall	wall;
 
-	if (dda->dist < 1e-6)
-		dda->dist = 1e-6;
-	height = (int) (HEIGHT/ dda->dist);
-	start = -height / 2 + HEIGHT / 2;
-	if (start < 0)
-		start = 0;
-	end = height / 2 + HEIGHT / 2;
-	if (end >= HEIGHT)
-		end = HEIGHT - 1;
 	y = -1;
-	get_wall_step(g,&wall, dda, height);
-	init_wall(p, dda, g, &wall);
-	if (start < 0)
-	{
-		wall.tex_pos = (-start) * wall.step;  // COMPENSA O CLIPPING
-		start = 0;
-	}
-    if (end >= HEIGHT)
-        end = HEIGHT - 1;
-
-    // Teto
-    for (int y = 0; y < start; ++y)
-        put_pixel(&g->bg, x, y, g->ceiling_color);
-
-    // Parede
-    for (int y = start; y <= end; ++y)
-    {
-         wall.texY = (int)wall.tex_pos;
-        if ( wall.texY >= wall.texture->height) wall.texY = wall.texture->height - 1;  // seguro p/ não-potência de 2
-        wall.tex_pos += wall.step;
-
-        wall.color = get_pixel(wall.texture, wall.texX, wall.texY);
-        if (dda->side == 1)
-            wall.color = (wall.color >> 1) & 0x7F7F7F; // alternativa mais clara p/ escurecer
-        put_pixel(&g->bg, x, y, wall.color);
-    }
-
-    // Chão
-    for (int y = end + 1; y < HEIGHT; ++y)
-        put_pixel(&g->bg, x, y, g->floor_color);
-}
-
-// void	draw_section(t_game *g, double perpWallDist, int x, t_img_data *wall)
-// {
-// 	int	start;
-// 	int	end;
-// 	int	height;
-// 	int	y;
-
-// 	if (perpWallDist <= 0.000001)
-// 		perpWallDist = 0.000001;
-// 	height = (int) (HEIGHT/ perpWallDist);
-// 	start = -height / 2 + HEIGHT / 2;
-// 	if (start < 0)
-// 		start = 0;
-// 	end = height / 2 + HEIGHT / 2;
-// 	if (end >= HEIGHT)
-// 		end = HEIGHT - 1;
-// 	y = -1;
-// 	while (++y < start)
-// 		put_pixel(g->bg, x, y, g->ceiling_color);
-// 	while(++y <= end)
-// 		put_pixel(g->bg, x, y, get_pixel(wall, x,y));
-// 	while(++y < HEIGHT)
-// 		put_pixel(g->bg, x, y, g->floor_color);
-// }
-
-double	get_perp_dist(double hyp, double angle, double p_angle)
-{
-	return (hyp * cos(angle - p_angle));
+	get_wall_step(g,&wall, dda);
+	init_wall(p, dda, &wall);
+	while (++y < wall.start)
+		put_pixel(&g->bg, x, y, g->ceiling_color);
+	draw_wall(g, dda, x, &wall);
+	y = wall.end;
+	while(++y < HEIGHT)
+		put_pixel(&g->bg, x, y, g->floor_color);
 }
 
 t_img_data	*get_wall_text(t_game *g, t_dda *dda)

@@ -48,3 +48,8 @@ bool	has_moved(t_game *g)
 	}
 	return (false);
 }
+
+double	get_perp_dist(double hyp, double angle, double p_angle)
+{
+	return (hyp * cos(angle - p_angle));
+}

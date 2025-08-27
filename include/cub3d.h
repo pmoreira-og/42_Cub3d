@@ -35,7 +35,6 @@ int			render_map(t_game *game);
 //*	Exec -	Draw Aux
 void		draw_section(t_game *g, t_dda *dda, int x, t_point *p);
 // void		draw_section(t_game *g, double perpWallDist, int x);
-double		get_perp_dist(double hyp, double angle, double p_angle);
 t_img_data	*get_wall_text(t_game *g, t_dda *dda);
 
 //*	Constructors
@@ -46,7 +45,7 @@ void		print_matrix(t_game *data);
 
 //*	Utils - aux
 bool		valid_move(t_point *check);
-
+double		get_perp_dist(double hyp, double angle, double p_angle);
 void		merror(char *msg);
 t_type		get_player_dir(int c);
 bool		has_moved(t_game *g);
