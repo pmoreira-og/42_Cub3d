@@ -33,7 +33,8 @@ bool		load_walls(t_game *g);
 int			render_map(t_game *game);
 
 //*	Exec -	Draw Aux
-void		draw_section(t_game *g, double perpWallDist, int x);
+void		draw_section(t_game *g, t_dda *dda, int x, t_point *p);
+// void		draw_section(t_game *g, double perpWallDist, int x);
 double		get_perp_dist(double hyp, double angle, double p_angle);
 t_img_data	*get_wall_text(t_game *g, t_dda *dda);
 

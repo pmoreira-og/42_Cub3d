@@ -1,9 +1,9 @@
-NO ./textures/path_to_the_north_texture.xpm
-SO ./textures/path_to_the_south_texture.xpm
-WE ./textures/path_to_the_west_texture.xpm
-EA ./textures/path_to_the_east_texture.xpm
+NO ./textures/north.xpm
+SO ./textures/duck.xpm
+WE ./textures/logo_cub3d.xpm
+EA ./textures/easter_egg.xpm
 C 88,212,255
-F 105,30,0
+F 0,150,0
  
  
  
@@ -25,8 +25,8 @@ F 105,30,0
                 10001 1100011 10000000001111
                 10001   100011 10000000000011
                 1000011100011 1000000000001
-                10S000000011 1000000000001 
-                100000000011 1000000000001
+                10W100000011 1000000000001 
+                101000000011 1000000000001
                 100000000011 1000000000001
                 111111111111 1111111111111
  

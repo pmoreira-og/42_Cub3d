@@ -47,15 +47,3 @@ double	normalize_rad(double rad)
 		rad += inc;
 	return (rad);
 }
-
-// t_img_data	*get_wall_text(t_game *g, t_dda *dda)
-// {
-// 	if (dda->side == 1)
-// 	{
-		
-// 	}
-// 	else
-// 	{
-		
-// 	}
-// }
