@@ -31,6 +31,8 @@ typedef struct s_img_data
 	int				bpp;
 	int				len;
 	int				endian;
+	int				width;
+	int				height;
 }					t_img_data;
 
 typedef struct s_rgb
@@ -98,6 +100,17 @@ typedef struct s_dda
 	t_point			hit_point;
 }					t_dda;
 
+typedef struct s_wall
+{
+	double		wallX;
+	double		texX;
+	double		texY;
+	double		step;
+	double		tex_pos;
+	t_img_data	*texture;
+	int			color;
+}					t_wall;
+
 /// @brief Struct to save player info.
 /// @param pos_x Position of the player on the map in X axis.
 /// @param pos_y Position of the player on the map in Y axis.
@@ -125,4 +138,6 @@ typedef struct s_game
 	unsigned int	floor_color;
 	unsigned int	ceiling_color;
 	bool			debug;
+	t_img_data		walls[4];
+	t_parse			info;
 }					t_game;
