@@ -33,19 +33,19 @@ bool		load_walls(t_game *g);
 int			render_map(t_game *game);
 
 //*	Exec -	Draw Aux
-void		draw_section(t_game *g, t_dda *dda, int x, t_point *p);
+void		draw_section(t_game *g, double perpWallDist, int x);
 double		get_perp_dist(double hyp, double angle, double p_angle);
 t_img_data	*get_wall_text(t_game *g, t_dda *dda);
 
 //*	Constructors
-t_img_data	*get_img(t_game *game, int width, int height);
+bool		get_img(t_game *game, int width, int height);
 
 void		print_map(t_game *data);
 void		print_matrix(t_game *data);
 
 //*	Utils - aux
 bool		valid_move(t_point *check);
-bool		get_next_img(t_game *game);
+
 void		merror(char *msg);
 t_type		get_player_dir(int c);
 bool		has_moved(t_game *g);

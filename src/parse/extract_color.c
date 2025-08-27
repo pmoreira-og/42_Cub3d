@@ -12,7 +12,7 @@ bool	extract_color(t_colors *cl, char *code)
 		type = &cl->floor;
 	else if (!ft_strncmp(code, "C ", 2))
 		type = &cl->ceiling;
-	if (type->R != -1 || type->G != -1 || type->B != -1)
+	if (type->r != -1 || type->g != -1 || type->b != -1)
 		return (printf_fd(2, M_ERRO M_REP), false);
 	i = 2;
 	while (code[i] == ' ')
@@ -70,11 +70,11 @@ bool	assign_color_code(char *code, t_rgb *type)
 		if (val > 255)
 			return (false);
 		if (param == 1)
-			type->R = val;
+			type->r = val;
 		else if (param == 2)
-			type->G = val;
+			type->g = val;
 		else if (param == 3)
-			type->B = val;
+			type->b = val;
 		param++;
 		code += num_len + 1;
 	}

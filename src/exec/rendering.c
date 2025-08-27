@@ -6,8 +6,8 @@
 /// @brief Draw the map in 3d.
 ///
 /// var[0] start_angle;
-///var[1] step;
-///var[2] perpDist;
+/// var[1] step;
+/// var[2] perpDist;
 void	draw_map(t_game *g)
 {
 	t_point	p;
@@ -20,19 +20,19 @@ void	draw_map(t_game *g)
 	var[0] = g->player.direction + deg2rad(FOV / 2);
 	x = -1;
 	var[2] = -1;
-	var[1] = deg2rad(FOV / (double) WIDTH);
+	var[1] = deg2rad(FOV / (double)WIDTH);
 	while (++x < WIDTH)
 	{
 		var[2] = collider_dda(p, var[0] - ((x + 0.5) * var[1]), g, &dda);
 		if (var[2] == -1)
 			continue ;
 		// get_wall_text(g, &dda);
-		var[2] = get_perp_dist(var[2], var[0] - ((x + 0.5) * var[1]), g->player.direction);
+		var[2] = get_perp_dist(var[2], var[0] - ((x + 0.5) * var[1]),
+				g->player.direction);
 		draw_section(g, var[2] * g->scale * 0.05, x);
 	}
-	mlx_put_image_to_window(g->mlx, g->win, g->bg->img, 0, 0);
+	mlx_put_image_to_window(g->mlx, g->win, g->bg.img, 0, 0);
 }
-
 
 //! ADAPT TO NEW WAY
 // void	render_minimap(t_game *game)
@@ -55,26 +55,21 @@ void	draw_map(t_game *g)
 // 	{
 // 		dist = collider_angle(a, angle, WIDTH, game);
 // 		// dist = collider_dda(a, angle, game, &hit);
-	
+
 // 		printf("[%f]dist:%f\n", angle, dist);
 // 		if (dist != -1)
 // 			draw(a, angle, WIDTH, game);
 // 		angle++;
-// 		break;
+// 		break ;
 // 	}
 // 	mlx_put_image_to_window(game->mlx, game->win, game->bg->img, 0, 0);
 // }
 
-
-
 int	render_map(t_game *game)
 {
-
 	move_handler(game);
-	if (!has__moved(game))
+	if (!has_moved(game))
 		return (1);
-	if (game->bg && !get_next_img(game))
-		return (0);
 	game->player.direction = normalize_rad(game->player.direction);
 	draw_map(game);
 	// render_minimap(game);

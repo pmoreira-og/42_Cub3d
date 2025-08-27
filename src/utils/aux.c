@@ -32,21 +32,11 @@ void	merror(char *msg)
 		printf_fd(2, "Malloc:%s\n", msg);
 }
 
-bool	get_next_img(t_game *game)
+bool	has_moved(t_game *g)
 {
-	if (game->bg->img)
-		destroy_img(game->bg, game);
-	game->bg = get_img(game, WIDTH, HEIGHT);
-	if (!game->bg)
-		return (merror("get_next_img"), false);
-	return (true);
-}
-
-bool	has__moved(t_game *g)
-{
-	static	double	x;
-	static	double	y;
-	static	double	dir;
+	static double	x;
+	static double	y;
+	static double	dir;
 
 	if (x != g->player.pos_x || y != g->player.pos_y
 		|| dir != g->player.direction)

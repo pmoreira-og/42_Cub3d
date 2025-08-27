@@ -10,8 +10,8 @@ bool	setup_mlx(t_game *game)
 		return (merror("game.win"), false);
 	if (!load_walls(game))
 		return (merror("load_walls"), false);
-	game->bg = get_img(game, WIDTH, HEIGHT);
-	if (!game->bg)
-		return (merror("game.bg.img"), false);
+	if (!get_img(game, WIDTH, HEIGHT))
+		return (merror("game.bg"), false);
+
 	return (printf_fd(2, "survived mlx setup\n"), true);
 }

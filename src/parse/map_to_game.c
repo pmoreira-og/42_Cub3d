@@ -91,12 +91,12 @@ void	pass_info_to_map(t_parse *parse, t_game *game)
 {
 	t_point	a;
 
-	game->floor_color = game->floor_color | (parse->cl.floor.R << 16);
-	game->floor_color = game->floor_color | (parse->cl.floor.G << 8);
-	game->floor_color = game->floor_color | (parse->cl.floor.B);
-	game->ceiling_color = game->ceiling_color | (parse->cl.ceiling.R << 16);
-	game->ceiling_color = game->ceiling_color | (parse->cl.ceiling.G << 8);
-	game->ceiling_color = game->ceiling_color | (parse->cl.ceiling.B);
+	game->floor_color = game->floor_color | (parse->cl.floor.r << 16);
+	game->floor_color = game->floor_color | (parse->cl.floor.g << 8);
+	game->floor_color = game->floor_color | (parse->cl.floor.b);
+	game->ceiling_color = game->ceiling_color | (parse->cl.ceiling.r << 16);
+	game->ceiling_color = game->ceiling_color | (parse->cl.ceiling.g << 8);
+	game->ceiling_color = game->ceiling_color | (parse->cl.ceiling.b);
 	game->map_height = parse->heigth;
 	game->map_width = parse->width;
 	get_scale(game);

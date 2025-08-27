@@ -37,9 +37,9 @@ typedef struct s_img_data
 
 typedef struct s_rgb
 {
-	int				R;
-	int				G;
-	int				B;
+	int				r;
+	int				g;
+	int				b;
 }					t_rgb;
 
 typedef struct s_texture
@@ -133,7 +133,7 @@ typedef struct s_game
 	size_t			map_height;
 	size_t			map_width;
 	double			scale;
-	t_img_data		*bg;
+	t_img_data		bg;
 	t_player		player;
 	unsigned int	floor_color;
 	unsigned int	ceiling_color;
