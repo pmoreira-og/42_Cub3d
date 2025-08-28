@@ -14,7 +14,7 @@ bool	get_sprite_data(t_game *g, t_img_data *ptr, char *path)
 
 bool	load_walls(t_game *g)
 {
-	if(!get_sprite_data(g, &g->walls[0], "./textures/north.xpm"))
+	if(!get_sprite_data(g, &g->walls[0], "./textures/cobblestone.xpm"))
 		return (false);
 	if(!get_sprite_data(g, &g->walls[1], "./textures/easter_egg.xpm"))
 		return (false);

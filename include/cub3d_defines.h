@@ -32,7 +32,7 @@
 # define SRC_DOWN 5
 # define KEY_T 116
 # define KEY_Y 121
-# define PI 3.14159265359
+# define PI 3.14159265358979323846
 # define FOV 66
 # define PLAYER_RADIUS_TILES 0.1
 # ifndef MOVESPEED

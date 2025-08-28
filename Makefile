@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+         #
+#    By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/08/26 17:00:21 by rduro-pe         ###   ########.fr        #
+#    Updated: 2025/08/28 15:53:28 by pmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ MLX		=	./include/minilibx_linux/libmlx.a
 
 # -->┊( COMMANDS AND FLAGS )┊.´-★☆★
 CC			=	cc
-SPEED		=	1
+SPEED		=	0.8
 ROT_SPD		=	1
 CFLAGS		=	-Wall -Wextra -Werror -g -DMOVESPEED=$(SPEED) -DROTSPEED=$(ROT_SPD)
 MLXFLAGS	=	-L ./include/minilibx_linux -lmlx_Linux -lX11 -lXext -lm

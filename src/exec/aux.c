@@ -43,7 +43,7 @@ double	normalize_rad(double rad)
 		inc = 2 * PI;
 	else
 		inc = -2 * PI;
-	while (rad > 2 * PI || rad < 0)
+	while (rad >= 2 * PI || rad < 0)
 		rad += inc;
 	return (rad);
 }

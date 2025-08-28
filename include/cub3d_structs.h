@@ -88,6 +88,7 @@ typedef struct s_dda
 	double			ray_dir_y;
 	double			side_dist_x;
 	double			side_dist_y;
+	double			perp_dist;
 	double			dist;
 	double			dx;
 	double			dy;

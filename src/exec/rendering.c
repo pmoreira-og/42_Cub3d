@@ -3,6 +3,11 @@
 //? dir - fov/2 + x * step DIGITAL APPROACH
 //? dir + fov/2 - (x + 0.5 ) * step MATH APPROACH
 
+double	get_dot(t_dda *dda, t_player *p)
+{
+	return (dda->ray_dir_x * cos(p->direction) + dda->ray_dir_y * -sin(p->direction));
+}
+
 /// @brief Draw the map in 3d.
 ///
 /// var[0] start_angle;
@@ -19,13 +24,13 @@ void	draw_map(t_game *g)
 	p.y = g->player.pos_y / g->scale;
 	var[0] = g->player.direction + deg2rad(FOV / 2);
 	x = -1;
-	var[1] = deg2rad(FOV / (double) WIDTH);
+	var[1] = deg2rad((double) FOV / (double) WIDTH);
 	while (++x < WIDTH)
 	{
 		if (collider_dda(p, var[0] - ((x + 0.5) * var[1]), g, &dda) == -1)
 			continue ;
-		dda.dist = get_perp_dist(dda.dist, var[0] - ((x + 0.5) * var[1]), g->player.direction);
-		dda.dist *= g->scale * 0.05;
+		// dda.perp_dist = get_dot(&dda, &g->player);
+		dda.perp_dist = get_perp_dist(dda.dist, var[0] - ((x + 0.5) * var[1]), g->player.direction);
 		draw_section(g, &dda, x, &p);
 	}
 	mlx_put_image_to_window(g->mlx, g->win, g->bg.img, 0, 0);

@@ -4,17 +4,22 @@
 
 void	get_wall_step(t_game *g, t_wall *wall, t_dda *dda)
 {
-	if (dda->dist <= 0.000001)
-		dda->dist = 0.000001;
-	wall->height = (int) (HEIGHT/ dda->dist);
+	if (dda->perp_dist < 0.000001)
+		dda->perp_dist = 0.000001;
+	wall->height = (int) (HEIGHT/ dda->perp_dist);
 	wall->start = -wall->height / 2 + HEIGHT / 2;
-	if (wall->start < 0)
-		wall->start = 0;
+	
 	wall->end = wall->height / 2 + HEIGHT / 2;
 	if (wall->end >= HEIGHT)
 		wall->end = HEIGHT - 1;
 	wall->texture = get_wall_text(g, dda);
 	wall->step = (double)wall->texture->height / (double)wall->height;
+	wall->tex_pos = 0;
+	if (wall->start < 0)
+	{
+		wall->tex_pos = (-wall->start) * wall->step;
+		wall->start = 0;
+	}
 }
 
 void	init_wall(t_point *p, t_dda *dda, t_wall *wall)
@@ -29,7 +34,6 @@ void	init_wall(t_point *p, t_dda *dda, t_wall *wall)
 		wall->texX = wall->texture->width - wall->texX - 1;
 	if (dda->side == 1 && dda->ray_dir_y < 0)
 		wall->texX= wall->texture->width - wall->texX - 1;
-	wall->tex_pos = 0;
 }
 
 /// @brief Draw the vertical section of the wall
@@ -39,9 +43,7 @@ void	init_wall(t_point *p, t_dda *dda, t_wall *wall)
 void draw_wall(t_game *g, t_dda *dda, int x, t_wall *wall)
 {
 	int		y;
-	
-	if (wall->start < 0)
-		wall->tex_pos = (-wall->start) * wall->step;
+
 	put_pixel(&g->bg, x, wall->start, 0);
 	y = wall->start;
 	while (y <= wall->end)
