@@ -71,15 +71,19 @@ void		destroy_img(t_img_data *data, t_game *g);
 char		*get_type_print(t_type type);
 
 //*	DDA
-double		collider_dda(t_point start, double angle, t_game *g, t_dda *ptr);
+double		collider_dda(t_player p, double cameraX, t_game *g, t_dda *dda);
+// double		collider_dda(t_point start, double angle, t_game *g, t_dda *ptr);
 double		ft_abs(double nbr);
 
 //*	DDA Aux
-void		init_struct(t_dda *dda, t_point *start, double angle);
-void		has_collided(t_dda *dda, t_game *game);
-void		get_step(t_dda *dda, t_point *start);
+// void		init_struct(t_dda *dda, t_player *start, double angle);
+void		init_struct(t_dda *dda, t_player *p, double cameraX);
+// void		has_collided(t_dda *dda, t_game *game);
+void		has_collided(t_dda *dda, t_game *game, t_player *p);
+void		get_step(t_dda *dda, t_player *start);
 void		next_step(t_dda *dda);
-void		save_hit_pos(t_dda *dda, t_point *start);
+void		save_hit_pos(t_dda *dda, t_player *p);
+// void		save_hit_pos(t_dda *dda, t_player *start);
 
 //*	Player_move
 void		move_handler(t_game *g);
