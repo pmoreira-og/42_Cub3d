@@ -103,9 +103,9 @@ typedef struct s_dda
 
 typedef struct s_wall
 {
-	double		wallX;
-	double		texX;
-	double		texY;
+	double		wall_x;
+	double		tex_x;
+	double		tex_y;
 	double		step;
 	double		tex_pos;
 	t_img_data	*texture;
@@ -127,6 +127,7 @@ typedef struct s_player
 	double			dir_y;
 	double			plane_x;
 	double			plane_y;
+	double			plane_mag;
 	double			direction;
 	int				move_x;
 	int				move_y;
@@ -141,6 +142,7 @@ typedef struct s_game
 	size_t			map_height;
 	size_t			map_width;
 	double			scale;
+	double			minimap_scale;
 	t_img_data		bg;
 	t_player		player;
 	unsigned int	floor_color;

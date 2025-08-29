@@ -1,4 +1,5 @@
 #include "../../include/cub3d.h"
+
 void	put_pixel(t_img_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -15,7 +16,7 @@ void	get_scale(t_game *game)
 
 double	deg2rad(double angle)
 {
-	return (angle * (PI/180));
+	return (angle * (PI / 180));
 }
 
 void	set_player_dir(t_game *game, t_point *src)
@@ -24,7 +25,7 @@ void	set_player_dir(t_game *game, t_point *src)
 	game->player.pos_y = src->y * (game->scale);
 	game->player.pos_x += (game->scale / 2);
 	game->player.pos_y += (game->scale / 2);
-
+	game->player.plane_mag = tan(deg2rad((double) FOV) / 2.0);
 	if (src->type == PLAYER_E)
 		game->player.direction = deg2rad(0);
 	if (src->type == PLAYER_W)

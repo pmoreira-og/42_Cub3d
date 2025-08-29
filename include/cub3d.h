@@ -33,9 +33,7 @@ bool		load_walls(t_game *g);
 int			render_map(t_game *game);
 
 //*	Exec -	Draw Aux
-void		draw_section(t_game *g, t_dda *dda, int x, t_point *p);
-// void		draw_section(t_game *g, double perpWallDist, int x);
-t_img_data	*get_wall_text(t_game *g, t_dda *dda);
+void		draw_section(t_game *g, t_dda *dda, int x, t_player *p);
 
 //*	Constructors
 bool		get_img(t_game *game, int width, int height);
@@ -72,24 +70,17 @@ char		*get_type_print(t_type type);
 
 //*	DDA
 double		collider_dda(t_player p, double cameraX, t_game *g, t_dda *dda);
-// double		collider_dda(t_point start, double angle, t_game *g, t_dda *ptr);
 double		ft_abs(double nbr);
 
 //*	DDA Aux
-// void		init_struct(t_dda *dda, t_player *start, double angle);
 void		init_struct(t_dda *dda, t_player *p, double cameraX);
-// void		has_collided(t_dda *dda, t_game *game);
 void		has_collided(t_dda *dda, t_game *game, t_player *p);
 void		get_step(t_dda *dda, t_player *start);
 void		next_step(t_dda *dda);
 void		save_hit_pos(t_dda *dda, t_player *p);
-// void		save_hit_pos(t_dda *dda, t_player *start);
 
 //*	Player_move
 void		move_handler(t_game *g);
-
-// tbd
-char		**copy_map(char **map);
 
 //-‵,┊ parse fts
 
@@ -120,7 +111,8 @@ bool		assign_color_code(char *code, t_rgb *type);
 // -- extract_map
 
 bool		extract_map(t_parse *parse);
-bool		invalid_chars(char **map, size_t *heigth, size_t *width, t_type *player);
+bool		invalid_chars(char **map, size_t *heigth, size_t *width,
+				t_type *player);
 bool		assign_player_pos(t_type *player, char type);
 char		**make_padded_map(t_parse *parse);
 

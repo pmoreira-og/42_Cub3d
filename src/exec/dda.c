@@ -8,26 +8,6 @@ double	ft_abs(double nbr)
 	return (nbr);
 }
 
-//! Adapt to minimap function
-// static bool	check_colision(double x0, double y0, t_game *game, t_point **hit)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	x = (int)(x0 / game->scale);
-// 	y = (int)(y0 / game->scale);
-// 	(void) hit;
-// 	if (x >= 0 && x < (int )game->map_width
-// 		&& y >= 0 && y < (int )game->map_height)
-// 	{
-// 		if (game->matrix[y][x].type == WALL)
-// 		{
-// 			return (true);
-// 		}
-// 	}
-// 	return (false);
-// }
-
 double	collider_dda(t_player p, double cameraX, t_game *g, t_dda *dda)
 {
 	init_struct(dda, &p, cameraX);

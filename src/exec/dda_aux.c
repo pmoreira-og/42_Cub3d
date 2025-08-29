@@ -65,10 +65,10 @@ void	has_collided(t_dda *dda, t_game *game, t_player *p)
 		dda->hit = true;
 		if (dda->side == 0)
 			dda->dist = (dda->map_x - p->pos_x + (1 - dda->step_x) / 2.0)
-				 / dda->ray_dir_x;
+				/ dda->ray_dir_x;
 		else
 			dda->dist = (dda->map_y - p->pos_y + (1 - dda->step_y) / 2.0)
-				 / dda->ray_dir_y;
+				/ dda->ray_dir_y;
 	}
 }
 
