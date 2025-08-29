@@ -34,6 +34,7 @@ void	set_player_dir(t_game *game, t_point *src)
 		game->player.direction = deg2rad(270);
 	if (src->type == PLAYER_N)
 		game->player.direction = deg2rad(90);
+	init_minimap(game);
 }
 
 double	normalize_rad(double rad)

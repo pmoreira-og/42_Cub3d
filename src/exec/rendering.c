@@ -32,40 +32,22 @@ void	draw_map(t_game *g)
 		}
 		++x;
 	}
-	mlx_put_image_to_window(g->mlx, g->win, g->bg.img, 0, 0);
 }
 
 //! ADAPT TO NEW WAY
 
-// void	render_minimap(t_game *game)
-// {
-// 	t_point	a;
-// 	double	angle;
-// 	double	dist;
-// 	// t_point	hit;
+void	render_minimap(t_game *game)
+{
+	t_player	p;
 
-// 	dist = 0;
-// 	a.x = game->player.pos_x;
-// t_img_data	get_wall_text(t_game *g)
-// {
-// 	if (g->player.direction )
-// 	g->player.direction
-// }
-// 	a.y = game->player.pos_y;
-// 	angle = game->player.direction;
-// 	while (1/* angle <= game->player.direction + 34 */)
-// 	{
-// 		dist = collider_angle(a, angle, WIDTH, game);
-// 		// dist = collider_dda(a, angle, game, &hit);
-
-// 		printf("[%f]dist:%f\n", angle, dist);
-// 		if (dist != -1)
-// 			draw(a, angle, WIDTH, game);
-// 		angle++;
-// 		break ;
-// 	}
-// 	mlx_put_image_to_window(game->mlx, game->win, game->bg->img, 0, 0);
-// }
+	p = game->player;
+	p.pos_x /= game->scale;
+	p.pos_y /= game->scale;
+	fill_border(game);
+	// draw_grid(game, &p);
+	// draw_player(game, &p);
+	// draw_rays(game, &p);
+}
 
 int	render_map(t_game *game)
 {
@@ -75,6 +57,7 @@ int	render_map(t_game *game)
 	game->player.direction = normalize_rad(game->player.direction);
 	player_update_dir_plane(&game->player);
 	draw_map(game);
-	// render_minimap(game);
+	render_minimap(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->bg.img, 0, 0);
 	return (1);
 }

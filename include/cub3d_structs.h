@@ -134,6 +134,15 @@ typedef struct s_player
 	int				rotate;
 }					t_player;
 
+typedef struct s_minimap
+{
+	int			offset;
+	int			tile;
+	int			width;
+	int			height;
+	t_player	p;
+}					t_minimap;
+
 typedef struct s_game
 {
 	void			*mlx;
@@ -142,9 +151,9 @@ typedef struct s_game
 	size_t			map_height;
 	size_t			map_width;
 	double			scale;
-	double			minimap_scale;
 	t_img_data		bg;
 	t_player		player;
+	t_minimap		mini;
 	unsigned int	floor_color;
 	unsigned int	ceiling_color;
 	bool			debug;

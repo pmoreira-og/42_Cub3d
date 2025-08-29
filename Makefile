@@ -6,7 +6,7 @@
 #    By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 12:30:07 by rduro-pe          #+#    #+#              #
-#    Updated: 2025/08/29 09:37:12 by pmoreira         ###   ########.fr        #
+#    Updated: 2025/08/29 13:27:20 by pmoreira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRC_MAIN	=	main.c
 SRC_MAIN_EXTRA	= main_parse.c
 
 SRC_EXEC	=	aux.c dda.c getters.c dda_aux.c player_move.c rendering.c sprites.c\
-				draw_aux.c
+				draw_aux.c minimap.c
 
 SRC_PARSE	=	get_map.c utils.c setup_extract.c extract_header.c \
 				extract_color.c extract_map.c wall_check.c \

@@ -32,6 +32,13 @@ bool		load_walls(t_game *g);
 
 int			render_map(t_game *game);
 
+//*	Minimap
+void		draw_rays(t_game *g, t_player *p);
+void		draw_grid(t_game *g, t_player *p);
+void		fill_border(t_game *g);
+void		draw_player(t_game *g, t_player *p);
+void		init_minimap(t_game *g);
+
 //*	Exec -	Draw Aux
 void		draw_section(t_game *g, t_dda *dda, int x, t_player *p);
 
