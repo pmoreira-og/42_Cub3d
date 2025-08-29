@@ -1,19 +1,18 @@
 #pragma once
+
 // -->┊( LIBS )┊.´-★☆★
 
-#include "minilibx_linux/mlx.h"
-#include "libft/libft.h"
-#include "cub3d_structs.h"
 #include "cub3d_defines.h"
+#include "cub3d_structs.h"
+#include "libft/libft.h"
+#include "minilibx_linux/mlx.h"
+#include <limits.h>
+#include <math.h>
 #include <pthread.h>
-#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#include <unistd.h>
-#include <math.h>
-#include <limits.h>
 
 // -->┊( FUNCTION PROTOTYPES )┊.´-★☆★
 
@@ -93,34 +92,37 @@ void		move_handler(t_game *g);
 
 // -- get_map
 
-bool		get_map(t_game	*game, char *input);
+bool		get_map(t_game *game, char *input);
 void		init_parse_struct(t_parse *parse, char *input);
+void		safe_close(int fd);
+int			len_until(char *str, char c);
+void		cleanup_parse(t_parse *parse);
 
 // -- setup_extract
 
 bool		setup_for_extraction(t_parse *parse);
 int			get_file_line_count(int fd);
-char		**make_literal_copy(int fd, int lc);
+char		**file_literal_copy(int fd, int lc);
 
 // -- extract_header
 
-bool		extract_header_info(t_parse *parse);
-bool		valid_identifier(t_parse *parse, char *line);
-bool		extract_path(t_texture *tx, char *path, int fd);
-char		**assign_direction(char *dir, t_texture *tx);
+bool		extract_header(t_parse *parse);
+bool		valid_identifier(t_header *hd, char *line);
+bool		extract_path(t_header *tx, char *path);
+char		**assign_direction(char *dir, t_header *tx);
 
 // -- extract_color
 
-bool		extract_color(t_colors *cl, char *code);
+bool		extract_color(t_header *cl, char *code);
 bool		valid_color_format(char *code);
-bool		assign_color_code(char *code, t_rgb *type);
+bool		assign_color_code(char *code, int *type);
 
 // -- extract_map
 
 bool		extract_map(t_parse *parse);
 bool		invalid_chars(char **map, size_t *heigth, size_t *width,
 				t_type *player);
-bool		assign_player_pos(t_type *player, char type);
+bool		assign_player_pos(char dir, t_type *player);
 char		**make_padded_map(t_parse *parse);
 
 // -- wall_check
@@ -128,19 +130,13 @@ char		**make_padded_map(t_parse *parse);
 bool		check_surrounding_walls(t_parse *parse);
 int			space_flood_fill(int y, int x, t_parse *parse);
 
-// -- utils
-
-void		safe_close(int fd);
-int			len_until(char *str, char c);
-void		cleanup_parse(t_parse *parse);
-
 // -- map_to_game
 
 bool		map_to_game(t_parse *parse, t_game *game);
 void		get_exact_hei_wid(t_parse *parse);
 t_point		**make_point_map(t_parse *parse);
-t_type		get_point_type(int c);
-void		pass_info_to_map(t_parse *parse, t_game *game);
+t_type		assign_point_type(int c);
+bool		info_to_game(t_parse *parse, t_game *game);
 
 // -- start_mlx
 

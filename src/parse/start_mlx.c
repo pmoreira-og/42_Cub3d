@@ -10,6 +10,7 @@ bool	setup_mlx(t_game *game)
 		return (merror("game.win"), false);
 	if (!load_walls(game))
 		return (merror("load_walls"), false);
+	// ! CHANGE MESSAGE!!!!!!
 	if (!get_img(game, WIDTH, HEIGHT))
 		return (merror("game.bg"), false);
 

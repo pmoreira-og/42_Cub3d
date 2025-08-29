@@ -1,6 +1,8 @@
 #include "../../include/cub3d.h"
 
-bool	extract_header_info(t_parse *parse)
+/// @brief extracts the 6 needed ids and sees if their content is valid
+/// @return true on success, false on failure
+bool	extract_header(t_parse *parse)
 {
 	int	i;
 	int	info;
@@ -11,7 +13,7 @@ bool	extract_header_info(t_parse *parse)
 	{
 		if (!ft_strcmp(parse->literal[i], "\n"))
 			continue ;
-		if (!valid_identifier(parse, parse->literal[i]))
+		if (!valid_identifier(&parse->hd, parse->literal[i]))
 			return (printf_fd(2, M_HEAD), false);
 		else
 			info++;
@@ -26,24 +28,33 @@ bool	extract_header_info(t_parse *parse)
 	return (printf_fd(2, "survived header\n"), true);
 }
 
-bool	valid_identifier(t_parse *parse, char *line)
+/// @brief sees if LINE starts with "NO ", "SO ", "WE ", "EA ", "F " or "C "
+/// @param hd header struct where to store the info after the id
+/// @param line containing the texture identifier and path
+/// @return true when valid, false when invalid
+bool	valid_identifier(t_header *hd, char *line)
 {
 	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
 		|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3))
 	{
-		return (extract_path(&parse->tx, line, 0));
+		return (extract_path(hd, line));
 	}
 	else if (!ft_strncmp(line, "F ", 2) || !ft_strncmp(line, "C ", 2))
 	{
-		return (extract_color(&parse->cl, line));
+		return (extract_color(hd, line));
 	}
 	return (printf_fd(2, M_ERRO M_INVID), false);
 }
 
-bool	extract_path(t_texture *tx, char *path, int fd)
+/// @brief gets path from PATH and sees if its an existing .xpm file
+/// @param tx header struct containig the textures
+/// @param path full line with texture identifier and path
+/// @return true on success, false on failure
+bool	extract_path(t_header *tx, char *path)
 {
-	int		i;
 	char	**type;
+	int		fd;
+	int		i;
 
 	type = assign_direction(path, tx);
 	if (*type)
@@ -54,7 +65,6 @@ bool	extract_path(t_texture *tx, char *path, int fd)
 	*type = ft_strndup(&path[i], len_until(&path[i], '\n'));
 	if (!*type)
 		return (printf_fd(2, M_MFL), false);
-	// ft_printf("path is: %s\n", *type);
 	if (ft_strncmp(".xpm", *type + ft_strlen(*type) - 4, 4))
 		return (printf_fd(2, M_ERRO M_NOXPM), false);
 	fd = open(*type, O_RDONLY);
@@ -63,7 +73,11 @@ bool	extract_path(t_texture *tx, char *path, int fd)
 	return (safe_close(fd), true);
 }
 
-char	**assign_direction(char *dir, t_texture *tx)
+/// @brief according to DIR sees which texture this is
+/// @param dir can be either "NO ", "SO ", "WE " or "EA "
+/// @param tx header struct containig possible textures
+/// @return pointer to where that texture should be stored
+char	**assign_direction(char *dir, t_header *tx)
 {
 	if (!ft_strncmp(dir, "NO ", 3))
 		return (&tx->no);

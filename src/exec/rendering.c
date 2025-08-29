@@ -26,10 +26,7 @@ void	draw_map(t_game *g)
 	{
 		camera_x = 2.0 * x / (double)WIDTH - 1.0;
 		if (collider_dda(p, camera_x, g, &dda) == 0)
-		{
-			dda.perp_dist = dda.dist;
 			draw_section(g, &dda, x, &p);
-		}
 		++x;
 	}
 }

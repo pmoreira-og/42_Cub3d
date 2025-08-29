@@ -21,9 +21,9 @@ static t_img_data	*get_wall_text(t_game *g, t_dda *dda)
 static void	init_wall(t_player *p, t_dda *dda, t_wall *w)
 {
 	if (dda->side == 0)
-		w->wall_x = p->pos_y + dda->dist * dda->ray_dir_y;
+		w->wall_x = p->pos_y + dda->perp_dist * dda->ray_dir_y;
 	else
-		w->wall_x = p->pos_x + dda->dist * dda->ray_dir_x;
+		w->wall_x = p->pos_x + dda->perp_dist * dda->ray_dir_x;
 	w->wall_x -= floor(w->wall_x);
 	w->tex_x = (int)(w->wall_x * w->texture->width);
 	if (dda->side == 0 && dda->ray_dir_x > 0)

@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 10:31:49 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/08/19 16:48:27 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/08/29 16:22:13 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+// #define MALLOC_FAIL_PROBABILITY 55
+// static inline void *random_fail_malloc(size_t size) {
+//     if ((rand() % MALLOC_FAIL_PROBABILITY) == 0)
+//         return (NULL);
+//     return (malloc(size));
+// }
+// #define malloc(x) random_fail_malloc(x)
 
 // STRUCTS
 

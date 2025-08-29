@@ -13,8 +13,8 @@ void	init_struct(t_dda *dda, t_player *p, double cameraX)
 		dda->dy = 1e30;
 	else
 		dda->dy = ft_abs(1.0 / dda->ray_dir_y);
-	dda->map_x = (int) p->pos_x;
-	dda->map_y = (int) p->pos_y;
+	dda->map_x = (int)p->pos_x;
+	dda->map_y = (int)p->pos_y;
 	dda->hit = 0;
 }
 
@@ -64,10 +64,10 @@ void	has_collided(t_dda *dda, t_game *game, t_player *p)
 	{
 		dda->hit = true;
 		if (dda->side == 0)
-			dda->dist = (dda->map_x - p->pos_x + (1 - dda->step_x) / 2.0)
+			dda->perp_dist = (dda->map_x - p->pos_x + (1 - dda->step_x) / 2.0)
 				/ dda->ray_dir_x;
 		else
-			dda->dist = (dda->map_y - p->pos_y + (1 - dda->step_y) / 2.0)
+			dda->perp_dist = (dda->map_y - p->pos_y + (1 - dda->step_y) / 2.0)
 				/ dda->ray_dir_y;
 	}
 }
@@ -77,8 +77,8 @@ void	save_hit_pos(t_dda *dda, t_player *p)
 	double	hx;
 	double	hy;
 
-	hx = p->pos_x + dda->dist * dda->ray_dir_x;
-	hy = p->pos_y + dda->dist * dda->ray_dir_y;
+	hx = p->pos_x + dda->perp_dist * dda->ray_dir_x;
+	hy = p->pos_y + dda->perp_dist * dda->ray_dir_y;
 	dda->hit_point.x = hx;
 	dda->hit_point.y = hy;
 }
