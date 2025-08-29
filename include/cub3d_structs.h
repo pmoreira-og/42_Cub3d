@@ -3,6 +3,8 @@
 
 // -‵,┊  main library
 #include "cub3d.h"
+#include <stdbool.h>
+#include <unistd.h>
 
 // -->┊( STRUCTS )┊.´-★☆★
 
@@ -129,7 +131,7 @@ typedef struct s_game
 	t_player	player;
 	int			floor_color;
 	int			ceiling_color;
-	bool		debug;
 	t_img_data	walls[4];
-	t_parse		info;
+	char		*paths[4];
+	bool		debug;
 }				t_game;

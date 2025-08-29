@@ -2,19 +2,17 @@
 
 // -->┊( LIBS )┊.´-★☆★
 
-#include "minilibx_linux/mlx.h"
-#include "libft/libft.h"
-#include "cub3d_structs.h"
 #include "cub3d_defines.h"
+#include "cub3d_structs.h"
+#include "libft/libft.h"
+#include "minilibx_linux/mlx.h"
+#include <limits.h>
+#include <math.h>
 #include <pthread.h>
-#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#include <unistd.h>
-#include <math.h>
-#include <limits.h>
 
 // -->┊( FUNCTION PROTOTYPES )┊.´-★☆★
 
@@ -90,7 +88,7 @@ void		move_handler(t_game *g);
 
 // -- get_map
 
-bool		get_map(t_game	*game, char *input);
+bool		get_map(t_game *game, char *input);
 void		init_parse_struct(t_parse *parse, char *input);
 void		safe_close(int fd);
 int			len_until(char *str, char c);
@@ -118,8 +116,9 @@ bool		assign_color_code(char *code, int *type);
 // -- extract_map
 
 bool		extract_map(t_parse *parse);
-bool		invalid_chars(char **map, size_t *heigth, size_t *width, t_type *player);
-bool		assign_player_pos(t_type *player, char type);
+bool		invalid_chars(char **map, size_t *heigth, size_t *width,
+				t_type *player);
+bool		assign_player_pos(char dir, t_type *player);
 char		**make_padded_map(t_parse *parse);
 
 // -- wall_check
@@ -127,17 +126,13 @@ char		**make_padded_map(t_parse *parse);
 bool		check_surrounding_walls(t_parse *parse);
 int			space_flood_fill(int y, int x, t_parse *parse);
 
-// -- utils
-
-
-
 // -- map_to_game
 
 bool		map_to_game(t_parse *parse, t_game *game);
 void		get_exact_hei_wid(t_parse *parse);
 t_point		**make_point_map(t_parse *parse);
-t_type		get_point_type(int c);
-void		pass_info_to_map(t_parse *parse, t_game *game);
+t_type		assign_point_type(int c);
+bool		info_to_game(t_parse *parse, t_game *game);
 
 // -- start_mlx
 

@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:45:59 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/08/17 18:12:29 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/08/29 16:16:47 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ char	*ft_add_line_chunck(char *start, char *chunck)
 	if (!start)
 	{
 		start = malloc(1 * sizeof(char));
+		if (!start)
+			return (NULL);
 		start[0] = '\0';
 	}
 	line = malloc((ft_linelen(start) + ft_linelen(chunck) + 1) * sizeof(char));
 	if (!line)
-		return (NULL);
+		return (free(start), NULL);
 	i = -1;
 	while (start[++i])
 		line[i] = start[i];
