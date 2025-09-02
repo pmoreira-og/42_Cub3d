@@ -3,7 +3,7 @@
 /// @brief passes the all needed elements from PARSE to GAME
 /// @param parse struct with everything obtained in the parsing
 /// @param game struct that will be used to run the game
-/// @return
+/// @return true on success, false on failure
 bool	map_to_game(t_parse *parse, t_game *game)
 {
 	ft_bzero(game, sizeof(t_game));
@@ -11,8 +11,7 @@ bool	map_to_game(t_parse *parse, t_game *game)
 	game->matrix = make_point_map(parse);
 	if (!game->matrix)
 		return (printf_fd(2, M_ERRO M_MFL), false);
-	if (!info_to_game(parse, game))
-		return (printf_fd(2, M_ERRO M_MFL), false);
+	info_to_game(parse, game);
 	// print_map(game);
 	return (printf_fd(2, "survived map to game\n"), true);
 }
@@ -78,44 +77,19 @@ t_point	**make_point_map(t_parse *parse)
 	return (new);
 }
 
-/// @param c can be either '1', '0', 'N', 'S', 'E', 'W' or '2'
-/// @return the t_type corresponding to C
-t_type	assign_point_type(int c)
-{
-	if (c == '1')
-		return (WALL);
-	else if (c == '0')
-		return (FLOOR);
-	else if (c == 'N')
-		return (PLAYER_N);
-	else if (c == 'S')
-		return (PLAYER_S);
-	else if (c == 'E')
-		return (PLAYER_E);
-	else if (c == 'W')
-		return (PLAYER_W);
-	else
-		return (VOID);
-}
-
 /// @brief passes textures, colors, measures and player info from PARSE to GAME
-bool	info_to_game(t_parse *parse, t_game *game)
+void	info_to_game(t_parse *parse, t_game *game)
 {
 	t_point	player;
 
-	// ! PASS TEXTURES
-	game->paths[0] = ft_strdup(parse->hd.no);
-	if (!game->paths[0])
-		return (false);
-	game->paths[1] = ft_strdup(parse->hd.ea);
-	if (!game->paths[1])
-		return (false);
-	game->paths[2] = ft_strdup(parse->hd.so);
-	if (!game->paths[2])
-		return (false);
-	game->paths[3] = ft_strdup(parse->hd.we);
-	if (!game->paths[3])
-		return (false);
+	game->paths[0] = parse->hd.no;
+	parse->hd.no = NULL;
+	game->paths[1] = parse->hd.ea;
+	parse->hd.ea = NULL;
+	game->paths[2] = parse->hd.so;
+	parse->hd.so = NULL;
+	game->paths[3] = parse->hd.we;
+	parse->hd.we = NULL;
 	game->floor_color = parse->hd.floor;
 	game->ceiling_color = parse->hd.ceiling;
 	game->map_height = parse->heigth;
@@ -123,5 +97,22 @@ bool	info_to_game(t_parse *parse, t_game *game)
 	get_scale(game);
 	find_player(game, &player);
 	set_player_dir(game, &player);
-	return (true);
+}
+
+/// @brief initialized all windows and images needed for rendering
+/// @param game struct that will be used to run the game
+/// @return true on success, false on failure
+bool	setup_mlx(t_game *game)
+{
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		return (merror("game.mlx"), false);
+	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, TITLE);
+	if (!game->win)
+		return (merror("game.win"), false);
+	if (!load_walls(game))
+		return (printf_fd(2, M_ERRO M_INVXPM), false);
+	if (!get_img(game, WIDTH, HEIGHT))
+		return (merror("game.bg"), false);
+	return (printf_fd(2, "survived mlx setup\n"), true);
 }

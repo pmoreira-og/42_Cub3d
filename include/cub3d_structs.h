@@ -20,6 +20,14 @@ typedef enum e_type
 	PLAYER_W
 }				t_type;
 
+/// @brief Types of scenes that can be rendered
+typedef enum e_scene
+{
+	MENU,
+	GAME,
+	MAP
+}				t_scene;
+
 /// @brief Structure that has the point information.
 typedef struct s_point
 {
@@ -114,18 +122,18 @@ typedef struct s_wall
 /// @param direction angle (in rad) where the player is looking.
 typedef struct s_player
 {
-	double			pos_x;
-	double			pos_y;
-	double			dir_x;
-	double			dir_y;
-	double			plane_x;
-	double			plane_y;
-	double			plane_mag;
-	double			direction;
-	int				move_x;
-	int				move_y;
-	int				rotate;
-}					t_player;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+	double		plane_mag;
+	double		direction;
+	int			move_x;
+	int			move_y;
+	int			rotate;
+}				t_player;
 
 typedef struct s_minimap
 {
@@ -134,7 +142,7 @@ typedef struct s_minimap
 	int			width;
 	int			height;
 	t_player	p;
-}					t_minimap;
+}				t_minimap;
 
 typedef struct s_game
 {
@@ -146,10 +154,11 @@ typedef struct s_game
 	double		scale;
 	t_img_data	bg;
 	t_player	player;
-	t_minimap		mini;
+	t_minimap	mini;
 	int			floor_color;
 	int			ceiling_color;
 	t_img_data	walls[4];
 	char		*paths[4];
+	t_scene		scene;
 	bool		debug;
 }				t_game;
