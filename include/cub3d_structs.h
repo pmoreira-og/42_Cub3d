@@ -106,6 +106,10 @@ typedef struct s_wall
 	int			start;
 	int			end;
 	int			height;
+	double		light;
+	double		dist_intensity;
+	double		ang_intensity;
+	double		dot;
 }				t_wall;
 
 /// @brief Struct to save player info.
@@ -128,6 +132,12 @@ typedef struct s_player
 	int				m_right;
 	int				rot_right;
 	int				rot_left;
+	double			flash_fov;
+	double			flash_k1;
+	double			flash_k2;
+	double			cos_flash;
+	double			ambient;
+	bool			flash_on;
 }					t_player;
 
 typedef struct s_minimap
@@ -149,7 +159,8 @@ typedef struct s_game
 	double		scale;
 	t_img_data	bg;
 	t_player	player;
-	t_minimap		mini;
+	t_minimap	mini;
+	int			speed;
 	int			floor_color;
 	int			ceiling_color;
 	t_img_data	walls[4];

@@ -1,25 +1,5 @@
 #include "../../include/cub3d.h"
 
-void	dist_factor(int *color, t_dda *dda)
-{
-	double	count;
-	// double	inc;
-
-	// if (dda->perp_dist < 2)
-	// 	return ;
-	count = dda->perp_dist;
-	// if (dda->step_x > dda->step_y)
-	// 	inc = dda->step_y;
-	// else
-	// 	inc = dda->step_x;
-	while (count > 0)
-	{
-		*color = (*color >> 1) & 0x7F7F7F;
-
-		count -= 1 ;
-	}
-}
-
 #define LEVELS 6  // número de níveis de luz (ajusta)
 
 static const uint8_t bayer4[4][4] = {
@@ -81,7 +61,6 @@ void apply_dithering(t_img_data *img)
             float final_lum = level / (float)(LEVELS - 1);
 
             // Reaplica luminosidade aos canais (grayscale shading multiplicativo)
-			// final_lum = 1;
 		    r = (int)(r * final_lum);
             g = (int)(g * final_lum);
             b = (int)(b * final_lum);
@@ -92,21 +71,35 @@ void apply_dithering(t_img_data *img)
     }
 }
 
-// void	window_factor(int *color)
-// {
-
-// }
-
-int	apply_light(int base, t_dda *dda)
+double	get_light(int y)
 {
-	// double	count;
+	double	light;
+	double	step;
 
-	// count = -1;
-	(void) dda;
-	// while (++count < 3)
-	// 	base = (base >> 1) & 0x7F7F7F;
-	// dist_factor(&base, dda);
-	return (base);
+	light = 1;
+	step = (2.0 / HEIGHT);
+	if (y >= (HEIGHT / 2))
+		y = HEIGHT - y;
+	light -= y * step;
+	if (light < 0.05)
+		light = 0.05;
+	// if ( light < 0.5)
+	// 	light *= 0.15;
+	// else
+	// 	light = 1 - y * step;
+	return (light);
+}
+
+int	apply_light(int color, double light)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = (((color >> 16 & 0xFF)) * light);
+	g = (((color >> 8 & 0xFF)) * light);
+	b = (((color & 0xFF)) * light);
+	return (get_color(r, g, b));
 }
 
 int	get_color(int r, int g, int b)
