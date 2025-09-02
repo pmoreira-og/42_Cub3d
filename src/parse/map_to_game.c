@@ -114,5 +114,13 @@ bool	setup_mlx(t_game *game)
 		return (printf_fd(2, M_ERRO M_INVXPM), false);
 	if (!get_img(game, WIDTH, HEIGHT))
 		return (merror("game.bg"), false);
+	game->bg.width = WIDTH;
+	game->bg.height = HEIGHT;
+	game->player.flash_fov = deg2rad(FLASH_FOV);
+	game->player.cos_flash = cos(game->player.flash_fov / 2);
+	game->player.ambient = 0.15;
+	game->player.flash_k1 = 0.2;
+	game->player.flash_k2 = 0.1;
+	game->speed = 1;
 	return (printf_fd(2, "survived mlx setup\n"), true);
 }
