@@ -69,8 +69,8 @@ void	get_moving(t_game *g, double angle)
 
 	d[0] = cos(angle);
 	d[1] = -sin(angle);
-	move_player(g, 1, d[0] * MOVESPEED);
-	move_player(g, 0, d[1] * MOVESPEED);
+	move_player(g, 1, d[0] * MOVESPEED * g->speed);
+	move_player(g, 0, d[1] * MOVESPEED * g->speed);
 }
 
 void	move_handler(t_game *g)

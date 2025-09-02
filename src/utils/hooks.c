@@ -17,6 +17,8 @@ int	key_press_manager(int keycode, t_game *data)
 {
 	if (keycode == ESC)
 		close_win_mouse(data);
+	if (keycode == SHIFT)
+		data->speed = 2;
 	if (keycode == VK_LEFT)
 		data->player.rot_left = 1;
 	if (keycode == VK_RIGHT)
@@ -36,6 +38,8 @@ int	key_release_manager(int keycode, t_game *data)
 {
 	if (keycode == ESC)
 		close_win_mouse(data);
+	if (keycode == SHIFT)
+		data->speed = 1;
 	if (keycode == KEY_W && data->player.m_forward)
 		data->player.m_forward = 0;
 	if (keycode == KEY_S && data->player.m_back)

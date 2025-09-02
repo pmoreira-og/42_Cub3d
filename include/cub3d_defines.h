@@ -23,6 +23,7 @@
 # define VK_DOWN 65364
 # define VK_LEFT 65361
 # define VK_RIGHT 65363
+# define SHIFT 65505
 # define ESC 65307
 # define KEY_1 49
 # define KEY_2 50
@@ -34,6 +35,7 @@
 # define KEY_Y 121
 # define PI 3.14159265358979323846
 # define FOV 66
+# define FLASH_FOV 60
 # define PLAYER_RADIUS_TILES 0.1
 # ifndef MOVESPEED
 #  define MOVESPEED 1
