@@ -153,5 +153,6 @@
 # define M_PPOS "repeated player position\n"
 # define M_MPPOS "missing player position\n"
 # define M_WALLS "missing surrounding walls\n"
+# define M_INVXPM "couldn't use given xpm texture\n"
 
 #endif

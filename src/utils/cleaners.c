@@ -41,18 +41,12 @@ void	clean_mlx(t_game *data)
 
 void	armageddon(t_game *data)
 {
-	// if (data->map)
-	// 	clean_matrix(data->map);
 	if (data->mlx)
 		clean_mlx(data);
 	if (data->matrix)
 		free_matrix((void **)data->matrix);
-	if (data->paths[0])
-		free (data->paths[0]);
-	if (data->paths[1])
-		free (data->paths[1]);
-	if (data->paths[2])
-		free (data->paths[2]);
-	if (data->paths[3])
-		free (data->paths[3]);
+	free (data->paths[0]);
+	free (data->paths[1]);
+	free (data->paths[2]);
+	free (data->paths[3]);
 }

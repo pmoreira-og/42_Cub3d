@@ -1,18 +1,23 @@
 #include "../../include/cub3d.h"
 
-t_type	get_player_dir(int c)
+/// @param c can be either '1', '0', 'N', 'S', 'E', 'W' or '2'
+/// @return the t_type corresponding to C
+t_type	assign_point_type(int c)
 {
-	if (!c)
-		return (VOID);
-	if (ft_strchr("E", c))
-		return (PLAYER_E);
-	if (ft_strchr("W", c))
-		return (PLAYER_W);
-	if (ft_strchr("S", c))
-		return (PLAYER_S);
-	if (ft_strchr("N", c))
+	if (c == '1')
+		return (WALL);
+	else if (c == '0')
+		return (FLOOR);
+	else if (c == 'N')
 		return (PLAYER_N);
-	return (VOID);
+	else if (c == 'S')
+		return (PLAYER_S);
+	else if (c == 'E')
+		return (PLAYER_E);
+	else if (c == 'W')
+		return (PLAYER_W);
+	else
+		return (VOID);
 }
 
 bool	valid_move(t_point *check)
@@ -29,7 +34,7 @@ bool	valid_move(t_point *check)
 void	merror(char *msg)
 {
 	if (msg)
-		printf_fd(2, "Malloc:%s\n", msg);
+		printf_fd(2, "Malloc: %s\n", msg);
 }
 
 bool	has_moved(t_game *g)

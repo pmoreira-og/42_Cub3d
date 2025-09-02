@@ -20,6 +20,14 @@ typedef enum e_type
 	PLAYER_W
 }				t_type;
 
+/// @brief Types of scenes that can be rendered
+typedef enum e_scene
+{
+	MENU,
+	GAME,
+	MAP
+}				t_scene;
+
 /// @brief Structure that has the point information.
 typedef struct s_point
 {
@@ -147,7 +155,7 @@ typedef struct s_minimap
 	int			width;
 	int			height;
 	t_player	p;
-}					t_minimap;
+}				t_minimap;
 
 typedef struct s_game
 {
@@ -165,5 +173,6 @@ typedef struct s_game
 	int			ceiling_color;
 	t_img_data	walls[4];
 	char		*paths[4];
+	t_scene		scene;
 	bool		debug;
 }				t_game;

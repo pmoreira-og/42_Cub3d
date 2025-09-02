@@ -31,7 +31,7 @@ SRC_EXEC	=	aux.c dda.c getters.c dda_aux.c player_move.c rendering.c sprites.c\
 
 SRC_PARSE	=	get_map.c setup_extract.c extract_header.c \
 				extract_color.c extract_map.c wall_check.c \
-				map_to_game.c start_mlx.c
+				map_to_game.c
 
 SRC_UTILS	= aux.c constructors.c hooks.c cleaners.c printers.c
 
