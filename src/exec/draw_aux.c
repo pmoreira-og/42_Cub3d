@@ -59,8 +59,8 @@ static void	draw_wall(t_game *g, t_dda *dda, int x, t_wall *wall)
 {
 	int	y;
 
-	put_pixel(&g->bg, x, wall->start, 0);
-	y = wall->start + 1;
+	(void) dda;
+	y = wall->start;
 	while (y <= wall->end)
 	{
 		wall->tex_y = (int)wall->tex_pos;
@@ -68,8 +68,9 @@ static void	draw_wall(t_game *g, t_dda *dda, int x, t_wall *wall)
 			wall->tex_y = wall->texture->height - 1;
 		wall->tex_pos += wall->step;
 		wall->color = get_pixel(wall->texture, wall->tex_x, wall->tex_y);
-		if (dda->side == 1)
-			wall->color = (wall->color >> 1) & 0x7F7F7F;
+		// if (dda->side == 1)
+		// wall->color = (wall->color >> 1) & 0x7f7f7f;
+		wall->color = apply_light(wall->color, dda);
 		put_pixel(&g->bg, x, y, wall->color);
 		y++;
 	}
@@ -84,10 +85,11 @@ void	draw_section(t_game *g, t_dda *dda, int x, t_player *p)
 	y = -1;
 	get_wall_step(g, &wall, dda);
 	init_wall(p, dda, &wall);
-	while (++y < wall.start)
-		put_pixel(&g->bg, x, y, g->ceiling_color);
+	while (++y < wall.start - 1)
+		put_pixel(&g->bg, x, y, apply_light(g->ceiling_color, dda));
+	put_pixel(&g->bg, x, y, 0);
 	draw_wall(g, dda, x, &wall);
 	y = wall.end;
 	while (++y < HEIGHT)
-		put_pixel(&g->bg, x, y, g->floor_color);
+		put_pixel(&g->bg, x, y, apply_light(g->floor_color, dda));
 }

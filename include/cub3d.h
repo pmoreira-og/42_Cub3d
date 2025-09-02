@@ -31,6 +31,11 @@ bool		load_walls(t_game *g);
 
 int			render_map(t_game *game);
 
+//*	Lighting
+int			apply_light(int base, t_dda *dda);
+int			get_color(int r, int g, int b);
+void		apply_dithering(t_img_data *img);
+
 //*	Minimap
 void		draw_rays(t_game *g, t_player *p);
 void		draw_grid(t_game *g, t_player *p);

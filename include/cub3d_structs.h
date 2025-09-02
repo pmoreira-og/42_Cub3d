@@ -122,9 +122,12 @@ typedef struct s_player
 	double			plane_y;
 	double			plane_mag;
 	double			direction;
-	int				move_x;
-	int				move_y;
-	int				rotate;
+	int				m_forward;
+	int				m_back;
+	int				m_left;
+	int				m_right;
+	int				rot_right;
+	int				rot_left;
 }					t_player;
 
 typedef struct s_minimap

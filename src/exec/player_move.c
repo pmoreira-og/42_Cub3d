@@ -75,14 +75,17 @@ void	get_moving(t_game *g, double angle)
 
 void	move_handler(t_game *g)
 {
-	if (g->player.move_x == -1)
+	if (g->player.rot_left && !g->player.rot_right)
+		g->player.direction += deg2rad(ROTSPEED);
+	if (g->player.rot_right && !g->player.rot_left)
+		g->player.direction -= deg2rad(ROTSPEED);
+	if (g->player.m_left && !g->player.m_right)
 		get_moving(g, g->player.direction + deg2rad(90));
-	if (g->player.move_x == 1)
+	if (g->player.m_right && !g->player.m_left)
 		get_moving(g, g->player.direction - deg2rad(90));
-	if (g->player.move_y == 1)
+	if (g->player.m_forward && !g->player.m_back)
 		get_moving(g, g->player.direction);
-	if (g->player.move_y == -1)
+	if (g->player.m_back && !g->player.m_forward)
 		get_moving(g, g->player.direction + deg2rad(180));
-	if (g->player.rotate != 0)
-		g->player.direction += deg2rad(g->player.rotate * ROTSPEED);
+	
 }

@@ -1,7 +1,7 @@
 NO ./textures/north.xpm
 SO ./textures/duck.xpm
 WE ./textures/logo_cub3d.xpm
-EA ./textures/easter_egg.xpm
+EA ./textures/cobblestone.xpm
 C 88,212,255
 F 0,150,0
  
