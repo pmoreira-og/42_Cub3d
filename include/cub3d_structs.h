@@ -122,18 +122,21 @@ typedef struct s_wall
 /// @param direction angle (in rad) where the player is looking.
 typedef struct s_player
 {
-	double		pos_x;
-	double		pos_y;
-	double		dir_x;
-	double		dir_y;
-	double		plane_x;
-	double		plane_y;
-	double		plane_mag;
-	double		direction;
-	int			move_x;
-	int			move_y;
-	int			rotate;
-}				t_player;
+	double			pos_x;
+	double			pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
+	double			plane_mag;
+	double			direction;
+	int				m_forward;
+	int				m_back;
+	int				m_left;
+	int				m_right;
+	int				rot_right;
+	int				rot_left;
+}					t_player;
 
 typedef struct s_minimap
 {
