@@ -36,7 +36,7 @@ int		render_map(t_game *game);
 
 int			apply_light(int color, double light);
 int			get_color(int r, int g, int b);
-double		get_light(int y);
+double		get_light(int y, t_player *p);
 
 //*	Shake
 
@@ -47,7 +47,7 @@ void		init_bob_struct(t_game *game);
 int			apply_light(int color, double light);
 int			get_color(int r, int g, int b);
 void		apply_dithering(t_img_data *img);
-double		get_light(int y);
+double		get_light(int y, t_player *p);
 
 //*	Minimap
 void	draw_rays(t_game *g, t_player *p);

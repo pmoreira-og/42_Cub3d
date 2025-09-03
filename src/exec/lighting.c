@@ -1,15 +1,16 @@
 #include "../../include/cub3d.h"
 
-double	get_light(int y)
+double	get_light(int y, t_player *p)
 {
 	double	light;
 	double	step;
 
 	light = 1;
 	step = (2.0 / HEIGHT);
-	if (y >= (HEIGHT / 2))
-		y = HEIGHT - y;
-	light -= y * step;
+	(void) p;
+	if ((y) >= (HEIGHT / 2))
+		y = HEIGHT - (y);
+	light -= (y + p->vertical_view) * step;
 	if (light < 0.05)
 		light = 0.05;
 	return (light);

@@ -52,7 +52,7 @@ int	render_map(t_game *game)
 	apply_bob_effect(&game->player, game);
 	player_update_dir_plane(&game->player);
 	draw_map(game);
-	// render_minimap(game);
+	render_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->bg.img, 0, 0);
 	return (1);
 }

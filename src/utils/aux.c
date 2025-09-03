@@ -42,13 +42,15 @@ bool	has_moved(t_game *g)
 	static double	x;
 	static double	y;
 	static double	dir;
+	static int		vertical;
 
-	if (x != g->player.pos_x || y != g->player.pos_y
-		|| dir != g->player.direction)
+	if (x != g->player.pos_x || y != g->player.pos_y \
+|| dir != g->player.direction || vertical != g->player.vertical_view)
 	{
 		x = g->player.pos_x;
 		y = g->player.pos_y;
 		dir = g->player.direction;
+		vertical = g->player.vertical_view;
 		return (true);
 	}
 	return (false);

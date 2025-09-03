@@ -31,6 +31,10 @@ int	key_press_manager(int keycode, t_game *data)
 		data->player.m_left = 1;
 	if (keycode == KEY_D)
 		data->player.m_right = 1;
+	if (keycode == SPACE && data->player.vertical_view < HEIGHT / 2)
+		data->player.vertical_view += HEIGHT / 10;
+	if (keycode == VK_DOWN && -data->player.vertical_view < HEIGHT / 2)
+		data->player.vertical_view -= 5;
 	return (0);
 }
 
@@ -52,5 +56,9 @@ int	key_release_manager(int keycode, t_game *data)
 		data->player.rot_left = 0;
 	if (keycode == VK_RIGHT && data->player.rot_right)
 		data->player.rot_right = 0;
+	// if (keycode == VK_DOWN)
+	// 	data->player.vertical_view -= 1;
+	if (keycode == SPACE)
+		data->player.vertical_view = 0;
 	return (0);
 }
