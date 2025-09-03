@@ -1,8 +1,5 @@
 #include "../../include/cub3d.h"
 
-//? dir - fov/2 + x * step DIGITAL APPROACH
-//? dir + fov/2 - (x + 0.5 ) * step MATH APPROACH
-
 void	player_update_dir_plane(t_player *p)
 {
 	p->dir_x = cos(p->direction);
@@ -52,10 +49,10 @@ int	render_map(t_game *game)
 	if (!has_moved(game))
 		return (1);
 	game->player.direction = normalize_rad(game->player.direction);
+	apply_bob_effect(&game->player, game);
 	player_update_dir_plane(&game->player);
 	draw_map(game);
 	// render_minimap(game);
-	// apply_dithering(&game->bg);
 	mlx_put_image_to_window(game->mlx, game->win, game->bg.img, 0, 0);
 	return (1);
 }

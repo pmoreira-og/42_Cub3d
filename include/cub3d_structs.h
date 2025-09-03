@@ -120,6 +120,17 @@ typedef struct s_wall
 	double		dot;
 }				t_wall;
 
+/// @brief Struct with variables need to bob effect.
+typedef struct s_bob
+{
+	double	phase;
+	double	curr_amp;
+	double	cam_pitch;
+	double	prev_x;
+	double	prev_y;
+}				t_bob;
+
+
 /// @brief Struct to save player info.
 /// @param pos_x Position of the player on the map in X axis.
 /// @param pos_y Position of the player on the map in Y axis.
@@ -146,6 +157,7 @@ typedef struct s_player
 	double			cos_flash;
 	double			ambient;
 	bool			flash_on;
+	t_bob			bob;
 }					t_player;
 
 typedef struct s_minimap
@@ -168,11 +180,11 @@ typedef struct s_game
 	t_img_data	bg;
 	t_player	player;
 	t_minimap	mini;
-	int			speed;
 	int			floor_color;
 	int			ceiling_color;
 	t_img_data	walls[4];
 	char		*paths[4];
 	t_scene		scene;
 	bool		debug;
+	bool		sprint;
 }				t_game;

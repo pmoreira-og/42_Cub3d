@@ -27,7 +27,7 @@ SRC_MAIN	=	main.c
 SRC_MAIN_EXTRA	= main_parse.c
 
 SRC_EXEC	=	aux.c dda.c getters.c dda_aux.c player_move.c rendering.c sprites.c\
-				draw_aux.c minimap.c lighting.c
+				draw_aux.c minimap.c lighting.c shake.c
 
 SRC_PARSE	=	get_map.c setup_extract.c extract_header.c \
 				extract_color.c extract_map.c wall_check.c \

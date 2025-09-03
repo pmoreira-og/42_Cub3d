@@ -121,6 +121,6 @@ bool	setup_mlx(t_game *game)
 	game->player.ambient = 0.15;
 	game->player.flash_k1 = 0.2;
 	game->player.flash_k2 = 0.1;
-	game->speed = 1;
+	game->sprint = false;
 	return (printf_fd(2, "survived mlx setup\n"), true);
 }

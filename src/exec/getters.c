@@ -1,4 +1,3 @@
-
 #include "../../include/cub3d.h"
 
 bool	is_player(t_point *ptr)

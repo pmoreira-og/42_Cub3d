@@ -63,14 +63,23 @@ void	move_player(t_game *g, int x_axis, double value)
 	}
 }
 
+//  && !g->player.m_back && !g->player.m_left && !g->player.m_right
 void	get_moving(t_game *g, double angle)
 {
 	double	d[2];
+	double	new_speed;
 
 	d[0] = cos(angle);
 	d[1] = -sin(angle);
-	move_player(g, 1, d[0] * MOVESPEED * g->speed);
-	move_player(g, 0, d[1] * MOVESPEED * g->speed);
+	if (g->sprint && g->player.m_forward)
+		new_speed = MOVESPEED * 2;
+	else
+		new_speed = MOVESPEED;
+	if ((g->player.m_forward || g->player.m_back) \
+&& (g->player.m_left || g->player.m_right))
+		new_speed *= 0.75;
+	move_player(g, 1, d[0] * new_speed);
+	move_player(g, 0, d[1] * new_speed);
 }
 
 void	move_handler(t_game *g)
@@ -87,5 +96,4 @@ void	move_handler(t_game *g)
 		get_moving(g, g->player.direction);
 	if (g->player.m_back && !g->player.m_forward)
 		get_moving(g, g->player.direction + deg2rad(180));
-	
 }

@@ -43,6 +43,9 @@
 # ifndef ROTSPEED
 #  define ROTSPEED 1
 # endif
+# define SMOOTH 0.25
+# define TARGET_AMP 7.0
+# define CYCLE_LENGTH 1.05
 
 //-‵,┊ colors
 

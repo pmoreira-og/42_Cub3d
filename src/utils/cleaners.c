@@ -12,6 +12,7 @@ void	ft_freed(void **ptr, int size)
 void	clean_matrix(char **matrix)
 {
 	int	i;
+
 	if (!matrix)
 		return ;
 	i = -1;

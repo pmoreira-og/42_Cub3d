@@ -17,6 +17,7 @@
 // -->┊( FUNCTION PROTOTYPES )┊.´-★☆★
 
 //*	Exec - aux
+
 double	deg2rad(double angle);
 void	set_player_dir(t_game *game, t_point *src);
 void	get_scale(t_game *game);
@@ -32,10 +33,15 @@ bool	load_walls(t_game *g);
 int		render_map(t_game *game);
 
 //*	Lighting
+
 int			apply_light(int color, double light);
 int			get_color(int r, int g, int b);
-void		apply_dithering(t_img_data *img);
 double		get_light(int y);
+
+//*	Shake
+
+void		apply_bob_effect(t_player *p, t_game *g);
+void		init_bob_struct(t_game *game);
 
 //*	Lighting
 int			apply_light(int color, double light);
