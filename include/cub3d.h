@@ -20,9 +20,10 @@
 
 double	deg2rad(double angle);
 void	set_player_dir(t_game *game, t_point *src);
-void	get_scale(t_game *game);
 void	put_pixel(t_img_data *data, int x, int y, int color);
 double	normalize_rad(double rad);
+void	handle_game_hooks(int keycode, t_game *g);
+
 
 //*	Sprites
 bool	get_sprite_data(t_game *g, t_img_data *ptr, char *path);
@@ -37,7 +38,7 @@ int		render_map(t_game *game);
 
 int			apply_light(int color, double light);
 int			get_color(int r, int g, int b);
-double		get_light(int y);
+double		get_light(int y, t_player *p);
 
 //*	Shake
 
@@ -48,7 +49,7 @@ void		init_bob_struct(t_game *game);
 int			apply_light(int color, double light);
 int			get_color(int r, int g, int b);
 void		apply_dithering(t_img_data *img);
-double		get_light(int y);
+double		get_light(int y, t_player *p);
 
 //*	Minimap
 void	draw_rays(t_game *g, t_player *p);

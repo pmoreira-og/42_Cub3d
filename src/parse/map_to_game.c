@@ -26,7 +26,7 @@ void	get_exact_hei_wid(t_parse *parse)
 	while (!ft_strchr(parse->padded[i], '1'))
 		i++;
 	parse->map_st = &parse->padded[i];
-	i = parse->heigth - i - 1;
+	i = parse->heigth - i;
 	while (!ft_strchr(parse->map_st[i], '1'))
 		i--;
 	parse->heigth = i + 1;
@@ -94,7 +94,6 @@ void	info_to_game(t_parse *parse, t_game *game)
 	game->ceiling_color = parse->hd.ceiling;
 	game->map_height = parse->heigth;
 	game->map_width = parse->width;
-	get_scale(game);
 	find_player(game, &player);
 	set_player_dir(game, &player);
 }
@@ -118,7 +117,7 @@ bool	setup_mlx(t_game *game)
 	game->bg.height = HEIGHT;
 	game->player.flash_fov = deg2rad(FLASH_FOV);
 	game->player.cos_flash = cos(game->player.flash_fov / 2);
-	game->player.ambient = 0.15;
+	game->player.ambient = 0.05;
 	game->player.flash_k1 = 0.2;
 	game->player.flash_k2 = 0.1;
 	game->sprint = false;

@@ -151,12 +151,13 @@ typedef struct s_player
 	double			plane_y;
 	double			plane_mag;
 	double			direction;
-	int				m_forward;
-	int				m_back;
-	int				m_left;
-	int				m_right;
-	int				rot_right;
-	int				rot_left;
+	bool			m_forward;
+	bool			m_back;
+	bool			m_left;
+	bool			m_right;
+	bool			rot_right;
+	bool			rot_left;
+	int				vertical_view;
 	double			flash_fov;
 	double			flash_k1;
 	double			flash_k2;
@@ -182,7 +183,6 @@ typedef struct s_game
 	t_point		**matrix;
 	size_t		map_height;
 	size_t		map_width;
-	double		scale;
 	t_img_data	bg;
 	t_img_data	menu;
 	t_img_data	hand;
@@ -194,5 +194,7 @@ typedef struct s_game
 	char		*paths[4];
 	t_scene		scene;
 	bool		debug;
+	double		move_speed;
+	double		rot_speed;
 	bool		sprint;
 }				t_game;

@@ -54,6 +54,8 @@ static void	get_wall_step(t_game *g, t_wall *wall, t_dda *dda, t_player *p)
 	wall->end = wall->height / 2 + HEIGHT / 2;
 	wall->end -= (int)p->bob.cam_pitch;
 	wall->start -= (int)p->bob.cam_pitch;
+	wall->end += p->vertical_view;
+	wall->start += p->vertical_view;
 	if (wall->end >= HEIGHT)
 		wall->end = HEIGHT - 1;
 	wall->texture = get_wall_text(g, dda);
@@ -102,11 +104,11 @@ void	draw_section(t_game *g, t_dda *dda, int x, t_player *p)
 	get_wall_step(g, &wall, dda, p);
 	init_wall(p, dda, &wall);
 	while (++y < wall.start - 1)
-		put_pixel(&g->bg, x, y, apply_light(g->ceiling_color, get_light(y)));
+		put_pixel(&g->bg, x, y, apply_light(g->ceiling_color, get_light(y, p)));
 	put_pixel(&g->bg, x, y, 0);
 	draw_wall(g, x, &wall);
 	put_pixel(&g->bg, x, wall.end + 1, 0);
 	y = wall.end + 1;
 	while (++y < HEIGHT)
-		put_pixel(&g->bg, x, y, apply_light(g->floor_color, get_light(y)));
+		put_pixel(&g->bg, x, y, apply_light(g->floor_color, get_light(y, p)));
 }
