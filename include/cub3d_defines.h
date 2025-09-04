@@ -7,7 +7,8 @@
 
 // -->┊( DEFINES )┊.´-★☆★
 
-# define TITLE "Absolute Cinema3D"
+# define TITLE "Night at the Aquarium"
+# define MAIN_MENU "./assets/main_menu"
 # define LOGO "./textures/logo_cub3d.xpm"
 # define EASTER "./textures/easter_egg.xpm"
 # define DUCK "./textures/duck.xpm"
@@ -24,6 +25,8 @@
 # define VK_LEFT 65361
 # define VK_RIGHT 65363
 # define SHIFT 65505
+# define BACKSPACE 65288
+# define ENTER 65293
 # define ESC 65307
 # define KEY_1 49
 # define KEY_2 50
@@ -33,6 +36,7 @@
 # define SRC_DOWN 5
 # define KEY_T 116
 # define KEY_Y 121
+# define TRANSPARENT 0xFF000000
 # define PI 3.14159265358979323846
 # define FOV 66
 # define FLASH_FOV 60
@@ -156,6 +160,6 @@
 # define M_PPOS "repeated player position\n"
 # define M_MPPOS "missing player position\n"
 # define M_WALLS "missing surrounding walls\n"
-# define M_INVXPM "couldn't use given xpm texture\n"
+# define M_INVXPM "couldn't load an xpm texture\n"
 
 #endif

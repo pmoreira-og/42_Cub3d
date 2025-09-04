@@ -21,5 +21,30 @@ bool	load_walls(t_game *g)
 		return (false);
 	if (!get_sprite_data(g, &g->walls[3], g->paths[3]))
 		return (false);
+	if (!get_sprite_data(g, &g->menu, MAIN_MENU ".xpm"))
+		return (false);
+	// doing this so i can have more than one main menu frame
+	// for animation
+	if (!get_sprite_data(g, &g->hand, "./assets/lantern.xpm"))
+		return (false);
 	return (true);
+}
+
+void	sprite_to_bg(t_game *game, t_img_data *sprite, t_cord sprt, t_cord win)
+{
+	unsigned int	color;
+	int				wid;
+	int				hei;
+
+	hei = -1;
+	while (++hei < sprt.y)
+	{
+		wid = -1;
+		while (++wid < sprt.x)
+		{
+			color = get_pixel(sprite, wid, hei);
+			if (color != TRANSPARENT)
+				put_pixel(&game->bg, win.x + wid, win.y + hei, color);
+		}
+	}
 }

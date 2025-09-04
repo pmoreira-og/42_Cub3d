@@ -27,6 +27,7 @@ double	normalize_rad(double rad);
 //*	Sprites
 bool	get_sprite_data(t_game *g, t_img_data *ptr, char *path);
 bool	load_walls(t_game *g);
+void	sprite_to_bg(t_game *game, t_img_data *sprite, t_cord sprt, t_cord win);
 
 //*	Rendering
 
@@ -76,6 +77,7 @@ bool	has_moved(t_game *g);
 //*	Hooks
 void	manager(t_game *game);
 int		close_win_mouse(t_game *data);
+int		menu_key_press(int keycode, t_game *data);
 int		key_press_manager(int keycode, t_game *data);
 int		key_release_manager(int keycode, t_game *data);
 

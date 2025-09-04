@@ -17,20 +17,30 @@ int	key_press_manager(int keycode, t_game *data)
 {
 	if (keycode == ESC)
 		close_win_mouse(data);
-	if (keycode == SHIFT)
-		data->sprint = true;
-	if (keycode == VK_LEFT)
-		data->player.rot_left = 1;
-	if (keycode == VK_RIGHT)
-		data->player.rot_right = 1;
-	if (keycode == KEY_W)
-		data->player.m_forward = 1;
-	if (keycode == KEY_S)
-		data->player.m_back = 1;
-	if (keycode == KEY_A)
-		data->player.m_left = 1;
-	if (keycode == KEY_D)
-		data->player.m_right = 1;
+	if (data->scene == GAME)
+	{
+		if (keycode == BACKSPACE) // fake pause menu
+			data->scene = MENU;
+		if (keycode == SHIFT)
+			data->sprint = true;
+		if (keycode == VK_LEFT)
+			data->player.rot_left = 1;
+		if (keycode == VK_RIGHT)
+			data->player.rot_right = 1;
+		if (keycode == KEY_W)
+			data->player.m_forward = 1;
+		if (keycode == KEY_S)
+			data->player.m_back = 1;
+		if (keycode == KEY_A)
+			data->player.m_left = 1;
+		if (keycode == KEY_D)
+			data->player.m_right = 1;
+	}
+	else if (data->scene == MENU && keycode == ENTER)
+	{
+		data->scene = GAME;
+		mlx_put_image_to_window(data->mlx, data->win, data->bg.img, 0, 0);
+	}
 	return (0);
 }
 
@@ -38,6 +48,7 @@ int	key_release_manager(int keycode, t_game *data)
 {
 	if (keycode == ESC)
 		close_win_mouse(data);
+	// printf("release: %d\n", keycode);
 	if (keycode == SHIFT)
 		data->sprint = false;
 	if (keycode == KEY_W && data->player.m_forward)
