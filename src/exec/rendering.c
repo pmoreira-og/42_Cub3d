@@ -28,7 +28,8 @@ void	draw_map(t_game *g)
 
 void	render_minimap(t_game *game)
 {
-	fill_border(game);
+	colorblock_to_bg(game, 0, (t_cord){game->mini.width, game->mini.height}, (t_cord){game->mini.offset, game->mini.offset});
+	// fill_border(game);
 	// draw_grid(game, &p);
 	// draw_player(game, &p);
 	// draw_rays(game, &p);
@@ -51,7 +52,7 @@ int	render_map(t_game *game)
 		apply_bob_effect(&game->player, game);
 		player_update_dir_plane(&game->player);
 		draw_map(game);
-		// render_minimap(game);
+		render_minimap(game);
 		sprite_to_bg(game, &game->hand, (t_cord){560, 560}, (t_cord){800, 520});
 		mlx_put_image_to_window(game->mlx, game->win, game->bg.img, 0, 0);
 	}

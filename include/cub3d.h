@@ -24,7 +24,6 @@ void	put_pixel(t_img_data *data, int x, int y, int color);
 double	normalize_rad(double rad);
 void	handle_game_hooks(int keycode, t_game *g);
 
-
 //*	Sprites
 bool	get_sprite_data(t_game *g, t_img_data *ptr, char *path);
 bool	load_walls(t_game *g);
@@ -36,20 +35,20 @@ int		render_map(t_game *game);
 
 //*	Lighting
 
-int			apply_light(int color, double light);
-int			get_color(int r, int g, int b);
-double		get_light(int y, t_player *p);
+int		apply_light(int color, double light);
+int		get_color(int r, int g, int b);
+double	get_light(int y, t_player *p);
 
 //*	Shake
 
-void		apply_bob_effect(t_player *p, t_game *g);
-void		init_bob_struct(t_game *game);
+void	apply_bob_effect(t_player *p, t_game *g);
+void	init_bob_struct(t_game *game);
 
 //*	Lighting
-int			apply_light(int color, double light);
-int			get_color(int r, int g, int b);
-void		apply_dithering(t_img_data *img);
-double		get_light(int y, t_player *p);
+int		apply_light(int color, double light);
+int		get_color(int r, int g, int b);
+void	apply_dithering(t_img_data *img);
+double	get_light(int y, t_player *p);
 
 //*	Minimap
 void	draw_rays(t_game *g, t_player *p);
@@ -57,6 +56,7 @@ void	draw_grid(t_game *g, t_player *p);
 void	fill_border(t_game *g);
 void	draw_player(t_game *g, t_player *p);
 void	init_minimap(t_game *g);
+void	colorblock_to_bg(t_game *game, int color, t_cord area, t_cord win);
 
 //*	Exec -	Draw Aux
 void	draw_section(t_game *g, t_dda *dda, int x, t_player *p);

@@ -2,14 +2,14 @@
 
 void	init_minimap(t_game *g)
 {
-	g->mini.offset = 10;
-	g->mini.width = WIDTH * 0.2;
-	g->mini.height = HEIGHT * 0.2;
+	g->mini.offset = 25;
+	g->mini.width = WIDTH * 0.22;
+	g->mini.height = HEIGHT * 0.22;
 	g->mini.tile = ft_min((g->mini.width / g->map_width),
 			(g->mini.height / g->map_height));
 }
 
-void	fill_border(t_game *g)
+/* void	fill_border(t_game *g)
 {
 	int	x;
 	int	y;
@@ -31,6 +31,23 @@ void	fill_border(t_game *g)
 
 			// if ((new_x < 3 || new_x > g->mini.width)
 			// 	|| (new_y < 3 || new_y > g->mini.height))
+		}
+	}
+} */
+
+void	colorblock_to_bg(t_game *game, int color, t_cord area, t_cord win)
+{
+	int	wid;
+	int	hei;
+
+	hei = -1;
+	while (++hei < area.y)
+	{
+		wid = -1;
+		while (++wid < area.x)
+		{
+			if (hei < 3 || hei > area.y - 4 || wid < 3 || wid > area.x - 4)
+				put_pixel(&game->bg, win.x + wid, win.y + hei, color);
 		}
 	}
 }
