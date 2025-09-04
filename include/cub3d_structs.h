@@ -177,7 +177,6 @@ typedef struct s_game
 	t_point		**matrix;
 	size_t		map_height;
 	size_t		map_width;
-	double		scale;
 	t_img_data	bg;
 	t_player	player;
 	t_minimap	mini;
@@ -187,5 +186,7 @@ typedef struct s_game
 	char		*paths[4];
 	t_scene		scene;
 	bool		debug;
+	double		move_speed;
+	double		rot_speed;
 	bool		sprint;
 }				t_game;

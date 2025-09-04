@@ -2,8 +2,18 @@
 
 void	init_bob_struct(t_game *g)
 {
-	g->player.bob.prev_x = g->player.pos_x / g->scale;
-	g->player.bob.prev_y = g->player.pos_y / g->scale;
+	g->player.bob.prev_x = g->player.pos_x;
+	g->player.bob.prev_y = g->player.pos_y;
+	if (WIDTH >= 1440 && HEIGHT >= 1080)
+	{
+		g->move_speed = MOVESPEED;
+		g->rot_speed = ROTSPEED;
+	}
+	else
+	{
+		g->move_speed = floor((double) WIDTH * 4 / HEIGHT);
+		g->rot_speed = floor((double) WIDTH * 4 / HEIGHT);
+	}
 }
 
 static double	get_dist(t_player *p)

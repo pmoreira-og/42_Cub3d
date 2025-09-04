@@ -20,7 +20,6 @@
 
 double	deg2rad(double angle);
 void	set_player_dir(t_game *game, t_point *src);
-void	get_scale(t_game *game);
 void	put_pixel(t_img_data *data, int x, int y, int color);
 double	normalize_rad(double rad);
 

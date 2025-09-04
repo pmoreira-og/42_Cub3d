@@ -8,7 +8,8 @@ static int	tile_blocked(t_game *g, int tx, int ty)
 	return (!valid_move(&g->matrix[ty][tx]));
 }
 
-/// @brief Check if a pixel square collides with the game map
+/// @brief Check if a pixel square collides with the game map 0(TOP LEFT) 
+/// 1 (TOP RIGHT) 2 (BOTTOM LEFT) 3 (BOTTOM RIGHT).
 /// @param g The game state
 /// @param px The x position of the pixel square
 /// @param py The y position of the pixel square
@@ -18,16 +19,12 @@ static int	check_block(t_game *g, double px, double py, double radius_pix)
 {
 	int	tx[4];
 	int	ty[4];
-	// Canto superior esquerdo
-	tx[0] = (int)((px - radius_pix) / g->scale);
-	ty[0] = (int)((py - radius_pix) / g->scale);
-	// Canto superior direito
-	tx[1] = (int)((px + radius_pix) / g->scale);
+	tx[0] = (int)((px - radius_pix));
+	ty[0] = (int)((py - radius_pix));
+	tx[1] = (int)((px + radius_pix));
 	ty[1] = ty[0];
-	// Canto inferior esquerdo
 	tx[2] = tx[0];
-	ty[2] = (int)((py + radius_pix) / g->scale);
-	// Canto inferior direito
+	ty[2] = (int)((py + radius_pix));
 	tx[3] = tx[1];
 	ty[3] = ty[2];
 	return (tile_blocked(g, tx[0], ty[0])
@@ -45,7 +42,7 @@ void	move_player(t_game *g, int x_axis, double value)
 
 	new_x = g->player.pos_x;
 	new_y = g->player.pos_y;
-	radius_pix = PLAYER_RADIUS_TILES * g->scale;
+	radius_pix = PLAYER_RADIUS_TILES;
 	if (x_axis)
 		new_x += value;
 	else
@@ -63,7 +60,6 @@ void	move_player(t_game *g, int x_axis, double value)
 	}
 }
 
-//  && !g->player.m_back && !g->player.m_left && !g->player.m_right
 void	get_moving(t_game *g, double angle)
 {
 	double	d[2];
@@ -72,9 +68,9 @@ void	get_moving(t_game *g, double angle)
 	d[0] = cos(angle);
 	d[1] = -sin(angle);
 	if (g->sprint && g->player.m_forward)
-		new_speed = MOVESPEED * 2;
+		new_speed = g->move_speed * 2;
 	else
-		new_speed = MOVESPEED;
+		new_speed = g->move_speed;
 	if ((g->player.m_forward || g->player.m_back) \
 && (g->player.m_left || g->player.m_right))
 		new_speed *= 0.75;
@@ -85,9 +81,9 @@ void	get_moving(t_game *g, double angle)
 void	move_handler(t_game *g)
 {
 	if (g->player.rot_left && !g->player.rot_right)
-		g->player.direction += deg2rad(ROTSPEED);
+		g->player.direction += deg2rad(g->rot_speed);
 	if (g->player.rot_right && !g->player.rot_left)
-		g->player.direction -= deg2rad(ROTSPEED);
+		g->player.direction -= deg2rad(g->rot_speed);
 	if (g->player.m_left && !g->player.m_right)
 		get_moving(g, g->player.direction + deg2rad(90));
 	if (g->player.m_right && !g->player.m_left)

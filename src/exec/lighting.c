@@ -5,14 +5,17 @@ double	get_light(int y, t_player *p)
 	double	light;
 	double	step;
 
-	light = 1;
+	light = 1.0;
 	step = (2.0 / HEIGHT);
-	(void) p;
-	if ((y) >= (HEIGHT / 2))
-		y = HEIGHT - (y);
-	light -= (y + p->vertical_view) * step;
+	if (y > ((HEIGHT / 2)  + (p->vertical_view)))
+		y = (HEIGHT + (p->vertical_view)) - y;
+	else
+		y -= p->vertical_view;
+	light -= y * step;
 	if (light < 0.05)
 		light = 0.05;
+	if (light > 1)
+		light = 1;
 	return (light);
 }
 
@@ -22,9 +25,9 @@ int	apply_light(int color, double light)
 	int	g;
 	int	b;
 
-	r = (((color >> 16 & 0xFF)) * light);
-	g = (((color >> 8 & 0xFF)) * light);
-	b = (((color & 0xFF)) * light);
+	r = (int) (((color >> 16 & 0xFF)) * light);
+	g = (int) (((color >> 8 & 0xFF)) * light);
+	b = (int) (((color & 0xFF)) * light);
 	return (get_color(r, g, b));
 }
 

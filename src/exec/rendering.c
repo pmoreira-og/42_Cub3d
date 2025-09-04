@@ -10,20 +10,16 @@ void	player_update_dir_plane(t_player *p)
 
 void	draw_map(t_game *g)
 {
-	t_player	p;
 	t_dda		dda;
 	int			x;
 	double		camera_x;
 
-	p = g->player;
-	p.pos_x /= g->scale;
-	p.pos_y /= g->scale;
 	x = 0;
 	while (x < WIDTH)
 	{
 		camera_x = 2.0 * x / (double)WIDTH - 1.0;
-		if (collider_dda(p, camera_x, g, &dda) == 0)
-			draw_section(g, &dda, x, &p);
+		if (collider_dda(g->player, camera_x, g, &dda) == 0)
+			draw_section(g, &dda, x, &g->player);
 		++x;
 	}
 }
@@ -32,11 +28,6 @@ void	draw_map(t_game *g)
 
 void	render_minimap(t_game *game)
 {
-	t_player	p;
-
-	p = game->player;
-	p.pos_x /= game->scale;
-	p.pos_y /= game->scale;
 	fill_border(game);
 	// draw_grid(game, &p);
 	// draw_player(game, &p);
