@@ -19,6 +19,7 @@ static int	check_block(t_game *g, double px, double py, double radius_pix)
 {
 	int	tx[4];
 	int	ty[4];
+
 	tx[0] = (int)((px - radius_pix));
 	ty[0] = (int)((py - radius_pix));
 	tx[1] = (int)((px + radius_pix));

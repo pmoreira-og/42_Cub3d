@@ -44,16 +44,14 @@
 # define FOV 66
 # define FLASH_FOV 60
 # define PLAYER_RADIUS_TILES 0.1
-# ifndef MOVESPEED
-#  define MOVESPEED 1
-# endif
-# ifndef ROTSPEED
-#  define ROTSPEED 1
-# endif
+# define MOVESPEED 0.05
+# define ROTSPEED 2
 # define SMOOTH 0.25
 # define TARGET_AMP 7.0
 # define CYCLE_LENGTH 1.05
-
+# ifndef HIDE
+#  define HIDE 0
+# endif
 //-‵,┊ colors
 
 # define DEF "\e[0m"

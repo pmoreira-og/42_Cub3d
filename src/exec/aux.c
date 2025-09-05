@@ -33,7 +33,7 @@ void	handle_game_hooks(int keycode, t_game *g)
 		g->player.m_right = 1;
 	if (keycode == SPACE && g->player.vertical_view < HEIGHT / 2)
 		g->player.vertical_view += HEIGHT / 10;
-	if (keycode == VK_DOWN && -g->player.vertical_view < (int)(HEIGHT / 5))
+	if (keycode == VK_DOWN && (-g->player.vertical_view < (int)(HEIGHT / 5)))
 		g->player.vertical_view -= 10;
 	if (keycode == VK_UP && g->player.vertical_view < (int)(HEIGHT / 5))
 		g->player.vertical_view += 10;

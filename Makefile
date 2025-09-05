@@ -6,9 +6,8 @@ MLX		=	./include/minilibx_linux/libmlx.a
 
 # -->┊( COMMANDS AND FLAGS )┊.´-★☆★
 CC			=	cc
-SPEED		=	0.05
-ROT_SPD		=	2
-CFLAGS		=	-Wall -Wextra -Werror -g -DMOVESPEED=$(SPEED) -DROTSPEED=$(ROT_SPD)
+HIDE		=	0
+CFLAGS		=	-Wall -Wextra -Werror -g -DHIDE=$(HIDE)
 MLXFLAGS	=	-L ./include/minilibx_linux -lmlx_Linux -lX11 -lXext -lm
 VAL			=	valgrind --leak-check=full --show-leak-kinds=all \
 				--track-origins=yes --track-fds=yes -s
@@ -27,7 +26,7 @@ SRC_MAIN	=	main.c
 SRC_MAIN_EXTRA	= main_parse.c
 
 SRC_EXEC	=	aux.c dda.c getters.c dda_aux.c player_move.c rendering.c sprites.c\
-				draw_aux.c minimap.c lighting.c shake.c
+				draw_aux.c minimap.c lighting.c shake.c mouse.c
 
 SRC_PARSE	=	get_map.c setup_extract.c extract_header.c \
 				extract_color.c extract_map.c wall_check.c \
@@ -83,6 +82,10 @@ exe: fclean
 	make all
 	./$(NAME) maps/map_1.cub
 
+hide: fclean
+	make all HIDE=1
+	./$(NAME) maps/map_1.cub
+
 d: all
 	./$(NAME) maps/map_1.cub -d
 
@@ -90,7 +93,7 @@ extra_map1: extra
 	$(VAL) ./$(NAME) maps/map_1.cub
 
 val: fclean
-	make all SPEED=2 ROT_SPD=1
+	make all
 	$(VAL) ./$(NAME) maps/map_1.cub
 
 # -->┊( STANDARD RULES )┊.´-★☆★
@@ -108,7 +111,7 @@ fclean: clean
 re:	fclean all
 	$(M_RE)
 
-.PHONY: all clean fclean re exe val extra
+.PHONY: all clean fclean re exe val extra hide
 
 
 # -->┊( COSMETICS )┊.´-★☆★

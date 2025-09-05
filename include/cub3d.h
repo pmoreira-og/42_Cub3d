@@ -45,6 +45,10 @@ double		get_light(int y, t_player *p);
 void		apply_bob_effect(t_player *p, t_game *g);
 void		init_bob_struct(t_game *game);
 
+//*	Mouse
+
+int			mouse_handler(int x, int y, t_game *g);
+
 //*	Lighting
 int			apply_light(int color, double light);
 int			get_color(int r, int g, int b);

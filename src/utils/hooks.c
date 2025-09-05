@@ -5,6 +5,7 @@ void	manager(t_game *game)
 	mlx_hook(game->win, 17, 0, close_win_mouse, game);
 	mlx_hook(game->win, 2, 1L << 0, key_press_manager, game);
 	mlx_hook(game->win, 3, 1L << 1, key_release_manager, game);
+	mlx_hook(game->win, 6, 1L << 6, mouse_handler, game);
 }
 
 int	close_win_mouse(t_game *data)
@@ -22,6 +23,8 @@ int	key_press_manager(int keycode, t_game *data)
 	else if (data->scene == MENU && keycode == ENTER)
 	{
 		data->scene = GAME;
+		data->player.rot_left = 0;
+		data->player.rot_right = 0;
 		mlx_put_image_to_window(data->mlx, data->win, data->bg.img, 0, 0);
 	}
 	return (0);
@@ -31,7 +34,6 @@ int	key_release_manager(int keycode, t_game *data)
 {
 	if (keycode == ESC)
 		close_win_mouse(data);
-	// printf("release: %d\n", keycode);
 	if (keycode == SHIFT)
 		data->sprint = false;
 	if (keycode == KEY_W && data->player.m_forward)
