@@ -30,8 +30,8 @@ typedef enum e_scene
 
 typedef struct s_cord
 {
-	int		x;
-	int		y;
+	double		x;
+	double		y;
 }			t_cord;
 
 /// @brief Structure that has the point information.
@@ -185,7 +185,7 @@ typedef struct s_game
 	size_t		map_width;
 	t_img_data	bg;
 	t_img_data	menu;
-	t_img_data	hand;
+	t_img_data	hand[2];
 	t_player	player;
 	t_minimap	mini;
 	int			floor_color;

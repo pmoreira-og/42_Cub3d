@@ -9,6 +9,23 @@ void	init_minimap(t_game *g)
 			(g->mini.height / g->map_height));
 }
 
+void	render_minimap(t_game *game)
+{
+	colorblock_to_bg(game, 808080, (t_cord){game->mini.width, game->mini.height}, \
+	(t_cord){game->mini.offset, game->mini.offset});
+	
+	int center_x =  game->mini.width / 2 + game->mini.offset;
+	int center_y =  game->mini.height / 2 + game->mini.offset;
+	t_cord left = collider_angle(game->player.direction + deg2rad(33), 80, game, center_x, center_y);
+	t_cord right = collider_angle(game->player.direction - deg2rad(33), 80, game, center_x, center_y);
+	draw_line(game, left, right);
+	//collider_angle(game->player.direction + deg2rad(33), 500, game, (t_cord){center_x, center_y});
+	// fill_border(game);
+	// draw_grid(game, &p);
+	// draw_player(game, &p);
+	// draw_rays(game, &p);
+}
+
 /* void	fill_border(t_game *g)
 {
 	int	x;
@@ -47,6 +64,8 @@ void	colorblock_to_bg(t_game *game, int color, t_cord area, t_cord win)
 		while (++wid < area.x)
 		{
 			if (hei < 3 || hei > area.y - 4 || wid < 3 || wid > area.x - 4)
+				put_pixel(&game->bg, win.x + wid, win.y + hei, 0);
+			else
 				put_pixel(&game->bg, win.x + wid, win.y + hei, color);
 		}
 	}

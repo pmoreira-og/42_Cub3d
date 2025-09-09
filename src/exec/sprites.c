@@ -25,7 +25,9 @@ bool	load_walls(t_game *g)
 		return (false);
 	// doing this so i can have more than one main menu frame
 	// for animation
-	if (!get_sprite_data(g, &g->hand, "./assets/lantern.xpm"))
+	if (!get_sprite_data(g, &g->hand[0], "./assets/lantern.xpm"))
+		return (false);
+	if (!get_sprite_data(g, &g->hand[1], "./assets/lantern_off.xpm"))
 		return (false);
 	return (true);
 }

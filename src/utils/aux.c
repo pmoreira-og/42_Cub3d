@@ -43,14 +43,16 @@ bool	has_moved(t_game *g)
 	static double	y;
 	static double	dir;
 	static int		vertical;
+	static bool		light;
 
 	if (x != g->player.pos_x || y != g->player.pos_y \
-|| dir != g->player.direction || vertical != g->player.vertical_view)
+|| dir != g->player.direction || vertical != g->player.vertical_view || light != g->player.flash_on)
 	{
 		x = g->player.pos_x;
 		y = g->player.pos_y;
 		dir = g->player.direction;
 		vertical = g->player.vertical_view;
+		light = g->player.flash_on;
 		return (true);
 	}
 	return (false);

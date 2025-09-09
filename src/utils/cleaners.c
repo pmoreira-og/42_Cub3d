@@ -35,8 +35,10 @@ void	clean_mlx(t_game *data)
 		mlx_destroy_image(data->mlx, data->walls[3].img);
 	if (data->menu.img)
 		mlx_destroy_image(data->mlx, data->menu.img);
-	if (data->hand.img)
-		mlx_destroy_image(data->mlx, data->hand.img);
+	if (data->hand[0].img)
+		mlx_destroy_image(data->mlx, data->hand[0].img);
+	if (data->hand[1].img)
+		mlx_destroy_image(data->mlx, data->hand[1].img);
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
 	if (data->mlx)

@@ -57,6 +57,11 @@ void	fill_border(t_game *g);
 void	draw_player(t_game *g, t_player *p);
 void	init_minimap(t_game *g);
 void	colorblock_to_bg(t_game *game, int color, t_cord area, t_cord win);
+void	render_minimap(t_game *game);
+t_cord    collider_angle(double angle, double max_dist,
+    t_game *game, double cord_x, double cord_y);
+bool    check_collision(double x, double y, t_game *g);
+void    draw_line(t_game *g, t_cord start, t_cord end);
 
 //*	Exec -	Draw Aux
 void	draw_section(t_game *g, t_dda *dda, int x, t_player *p);
@@ -81,6 +86,7 @@ int		close_win_mouse(t_game *data);
 int		menu_key_press(int keycode, t_game *data);
 int		key_press_manager(int keycode, t_game *data);
 int		key_release_manager(int keycode, t_game *data);
+int		light_switch(int keycode, t_game *g);
 
 //*	Getters
 void	find_player(t_game *game, t_point *save);

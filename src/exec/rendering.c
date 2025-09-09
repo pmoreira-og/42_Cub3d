@@ -24,17 +24,6 @@ void	draw_map(t_game *g)
 	}
 }
 
-//! ADAPT TO NEW WAY
-
-void	render_minimap(t_game *game)
-{
-	colorblock_to_bg(game, 0, (t_cord){game->mini.width, game->mini.height}, (t_cord){game->mini.offset, game->mini.offset});
-	// fill_border(game);
-	// draw_grid(game, &p);
-	// draw_player(game, &p);
-	// draw_rays(game, &p);
-}
-
 int	render_map(t_game *game)
 {
 	if (game->scene == MENU)
@@ -53,7 +42,10 @@ int	render_map(t_game *game)
 		player_update_dir_plane(&game->player);
 		draw_map(game);
 		render_minimap(game);
-		sprite_to_bg(game, &game->hand, (t_cord){560, 560}, (t_cord){800, 520});
+		if (game->player.flash_on)
+			sprite_to_bg(game, &game->hand[0], (t_cord){560, 560}, (t_cord){800, 520});
+		else
+			sprite_to_bg(game, &game->hand[1], (t_cord){560, 560}, (t_cord){800, 520});
 		mlx_put_image_to_window(game->mlx, game->win, game->bg.img, 0, 0);
 	}
 	return (1);

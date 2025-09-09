@@ -52,6 +52,7 @@ void	set_player_dir(t_game *game, t_point *src)
 		game->player.direction = deg2rad(270);
 	if (src->type == PLAYER_N)
 		game->player.direction = deg2rad(90);
+	game->player.flash_on = true;
 	init_minimap(game);
 	init_bob_struct(game);
 }
