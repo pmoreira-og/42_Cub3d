@@ -17,8 +17,8 @@ bool	is_player(t_point *ptr)
 
 void	find_player(t_game *game, t_point *save)
 {
-	size_t	y;
-	size_t	x;
+	int	y;
+	int	x;
 
 	y = 0;
 	while (y < game->map_height)

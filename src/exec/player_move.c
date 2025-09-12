@@ -3,7 +3,7 @@
 static int	tile_blocked(t_game *g, int tx, int ty)
 {
 	if (tx < 0 || ty < 0
-		|| ty >= (int) g->map_height || tx >= (int) g->map_width)
+		|| ty >= g->map_height || tx >= g->map_width)
 		return (1);
 	return (!valid_move(&g->matrix[ty][tx]));
 }

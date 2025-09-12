@@ -51,17 +51,16 @@ void	apply_dithering(t_img_data *img);
 double	get_light(int y, t_player *p);
 
 //*	Minimap
-void	draw_rays(t_game *g, t_player *p);
-void	draw_grid(t_game *g, t_player *p);
-void	fill_border(t_game *g);
-void	draw_player(t_game *g, t_player *p);
 void	init_minimap(t_game *g);
-void	colorblock_to_bg(t_game *game, int color, t_cord area, t_cord win);
-void	render_minimap(t_game *game);
-t_cord    collider_angle(double angle, double max_dist,
-    t_game *game, double cord_x, double cord_y);
-bool    check_collision(double x, double y, t_game *g);
-void    draw_line(t_game *g, t_cord start, t_cord end);
+void	colorblock_to_bg(t_img_data *bg, int color, t_cord area, t_cord win);
+void	render_minimap(t_minimap mini);
+t_cord	collider_angle(t_img_data *bg, t_cord cord, double angle,
+			double max_dist);
+bool	draw_line(t_img_data *bg, t_cord start, t_cord end);
+bool	minimap_collider(t_img_data *bg, t_cord pos);
+void	draw_circle(t_img_data *bg, t_cord cord, t_cord range, double radius);
+void	colorframe_to_bg(t_img_data *bg, int color, t_cord area, t_cord win);
+void	draw_minimap_tiles(t_minimap mini, t_cord map_cord, t_cord win_cord);
 
 //*	Exec -	Draw Aux
 void	draw_section(t_game *g, t_dda *dda, int x, t_player *p);
@@ -147,7 +146,7 @@ bool	assign_color_code(char *code, int *type);
 // -- extract_map
 
 bool	extract_map(t_parse *parse);
-bool	invalid_chars(char **map, size_t *heigth, size_t *width,
+bool	invalid_chars(char **map, int *heigth, int *width,
 			t_type *player);
 bool	assign_player_pos(char dir, t_type *player);
 char	**make_padded_map(t_parse *parse);

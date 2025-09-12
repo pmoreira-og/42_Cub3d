@@ -15,8 +15,8 @@ double	collider_dda(t_player p, double cameraX, t_game *g, t_dda *dda)
 	while (!dda->hit)
 	{
 		next_step(dda);
-		if (dda->map_x < 0 || dda->map_x >= (int)g->map_width || dda->map_y < 0
-			|| dda->map_y >= (int)g->map_height)
+		if (dda->map_x < 0 || dda->map_x >= g->map_width || dda->map_y < 0
+			|| dda->map_y >= g->map_height)
 			return (-1.0);
 		has_collided(dda, g, &p);
 	}
@@ -28,53 +28,86 @@ double	collider_dda(t_player p, double cameraX, t_game *g, t_dda *dda)
 	return (0);
 }
 
-/// @brief Raycasting collision checker based on trigonometric circle angles.
-/// @param angle Trigonometric circle based angle in rads.
-/// @param max_dist Max distance of the line to check collision.
-/// @param game Main struct.
-/// @return 
-t_cord    collider_angle(double angle, double max_dist,
-    t_game *game, double cord_x, double cord_y)
+t_cord	collider_angle(t_img_data *bg, t_cord cord, double angle,
+		double max_dist)
 {
-    double    inc[2];
-    int        i;
+	t_cord	inc;
+	bool	colidded;
+	int		i;
 
-    inc[0] = cos(angle);
-    inc[1] = -sin(angle);
+	inc.x = cos(angle);
+	inc.y = -sin(angle);
+	colidded = false;
 	i = -1;
-    while (++i <= (int)max_dist)
-    {
-		if (get_pixel(&game->bg, cord_x, cord_y) == 0) 
-        	return ((t_cord){-1,-1});
-		put_pixel(&game->bg, cord_x, cord_y, 0x00FF00);
-        cord_x += inc[0];
-        cord_y += inc[1];
-    }
-
-    return ((t_cord){floor(cord_x), floor(cord_y)});
+	while (++i <= (int)max_dist)
+	{
+		if (minimap_collider(bg, cord))
+			colidded = true;
+		if (!colidded)
+			put_pixel(bg, cord.x, cord.y, 0x00FF00);
+		cord.x += inc.x;
+		cord.y += inc.y;
+	}
+	return (cord);
 }
 
-void    draw_line(t_game *g, t_cord start, t_cord end)
+bool	draw_line(t_img_data *bg, t_cord start, t_cord end)
 {
-    double    d[2];
-    double    steps;
-    int       i;
+	t_cord	inc;
+	double	steps;
+	int		i;
 
-    d[0] = end.x - start.x;
-    d[1] = end.y - start.y;
-    if (ft_abs(d[0]) >= ft_abs(d[1]))
-        steps = ft_abs(d[0]);
-    else
-        steps = ft_abs(d[1]);
-    d[0] /= steps;
-    d[1] /= steps;
-    i = -1;
-    while (++i <= steps)
-    {
-		if (get_pixel(&g->bg, start.x, start.y) == 0) 
-        	return ;
-        put_pixel(&g->bg, start.x, start.y, 0x00FF00);
-        start.x += d[0];
-        start.y += d[1];
-    }
+	inc.x = end.x - start.x;
+	inc.y = end.y - start.y;
+	if (ft_abs(inc.x) >= ft_abs(inc.y))
+		steps = ft_abs(inc.x);
+	else
+		steps = ft_abs(inc.y);
+	inc.x /= steps;
+	inc.y /= steps;
+	i = -1;
+	while (++i <= steps)
+	{
+		if (minimap_collider(bg, start))
+			return (false);
+		put_pixel(bg, start.x, start.y, 0x00FF00);
+		start.x += inc.x;
+		start.y += inc.y;
+	}
+	return (true);
+}
+
+bool	minimap_collider(t_img_data *bg, t_cord pos)
+{
+	int	color;
+
+	// did this so i can add more "collision colors"
+	color = get_pixel(bg, pos.x, pos.y);
+	if (color == 0)
+		return (true);
+	else
+		return (false);
+}
+
+void	draw_circle(t_img_data *bg, t_cord cord, t_cord range, double radius)
+{
+	bool	clock_wise;
+	t_cord	inc;
+
+	if (range.x < range.y)
+		clock_wise = true;
+	else
+		clock_wise = false;
+	while ((clock_wise && range.x < range.y) || (!clock_wise
+			&& range.x > range.y))
+	{
+		inc.x = cos(range.x) * radius;
+		inc.y = -sin(range.x) * radius;
+		if (!minimap_collider(bg, (t_cord){cord.x + inc.x, cord.y + inc.y}))
+			put_pixel(bg, cord.x + inc.x, cord.y + inc.y, 0x00FF00);
+		if (clock_wise)
+			range.x += 0.017;
+		else
+			range.x -= 0.017;
+	}
 }

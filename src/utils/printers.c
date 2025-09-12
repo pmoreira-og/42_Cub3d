@@ -2,8 +2,8 @@
 
 void	print_map(t_game *data)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
 	if (!data->matrix)
 		return ;

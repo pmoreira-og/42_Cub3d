@@ -53,26 +53,24 @@ void	get_exact_hei_wid(t_parse *parse)
 t_point	**make_point_map(t_parse *parse)
 {
 	t_point	**new;
-	size_t	y;
-	size_t	x;
+	int	y;
+	int	x;
 
 	new = (t_point **)matrix_allocer(sizeof(t_point *), sizeof(t_point),
 			parse->heigth, parse->width);
 	if (!new)
 		return (NULL);
-	y = 0;
-	while (y < parse->heigth)
+	y = -1;
+	while (++y < parse->heigth)
 	{
-		x = 0;
-		while (x < parse->width)
+		x = -1;
+		while (++x < parse->width)
 		{
 			new[y][x].x = x;
 			new[y][x].y = y;
 			new[y][x].type = assign_point_type(parse->map_st[y][x
 					+ parse->margin_l + 1]);
-			x++;
 		}
-		y++;
 	}
 	return (new);
 }

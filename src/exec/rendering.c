@@ -41,7 +41,7 @@ int	render_map(t_game *game)
 		apply_bob_effect(&game->player, game);
 		player_update_dir_plane(&game->player);
 		draw_map(game);
-		render_minimap(game);
+		render_minimap(game->mini);
 		if (game->player.flash_on)
 			sprite_to_bg(game, &game->hand[0], (t_cord){560, 560}, (t_cord){800, 520});
 		else

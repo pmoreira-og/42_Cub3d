@@ -23,9 +23,9 @@ bool	extract_map(t_parse *parse)
 /// @param width max width will be stored here
 /// @param player the direction of the player is stored here
 /// @return true when invalid, false when valid
-bool	invalid_chars(char **map, size_t *heigth, size_t *width, t_type *player)
+bool	invalid_chars(char **map, int *heigth, int *width, t_type *player)
 {
-	size_t	i;
+	int	i;
 
 	while (map[*heigth])
 	{
