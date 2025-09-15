@@ -166,19 +166,43 @@ typedef struct s_player
 	t_bob		bob;
 }				t_player;
 
+/// @brief Struct for drawing a circle
+/// @param cord center cordinates
+/// @param angle_from where to start the circle (rad)
+/// @param angle_to where to stop the circle (rad)
+/// @param radius
+/// @param color
+typedef struct s_circle
+{
+	t_cord		cord;
+	double		angle_from;
+	double		angle_to;
+	double		radius;
+	int			color;
+}				t_circle;
+
+/// @brief Struct to render the minimap
+/// @param show on and off toggle
+/// @param bg image to render on
+/// @param p needed for pos and dir
+/// @param m map matrix
+/// @param m_h map heigth
+/// @param m_w map width
+/// @param scale can be either 1 or 3
+/// @param offset gap to the left/top of the map
+/// @param center of player in the minimap
 typedef struct s_minimap
 {
+	bool		show;
 	t_img_data	*bg;
 	t_player	*p;
-	t_scene		*sc;
 	t_point		***m;
-	int 		m_h;
-	int 		m_w;
-	int			offset;
-	int			width;
-	int			height;
-	t_cord		center;
+	int			m_h;
+	int			m_w;
 	int			scale;
+	int			offset;
+	t_cord		size;
+	t_cord		center;
 }				t_minimap;
 
 typedef struct s_game

@@ -3,29 +3,14 @@
 void	manager(t_game *game)
 {
 	mlx_hook(game->win, 17, 0, close_win_mouse, game);
-	//mlx_hook(game->win, 2, 1L << 1, light_switch, game);
 	mlx_hook(game->win, 2, 1L << 0, key_press_manager, game);
 	mlx_hook(game->win, 3, 1L << 1, key_release_manager, game);
-	//mlx_hook(game->win, 3, 0L, light_switch, game);
 }
 
 int	close_win_mouse(t_game *data)
 {
 	armageddon(data);
-	exit (0);
-}
-int	light_switch(int keycode, t_game *g)
-{
-	//printf("here\n");
-	if (keycode == 'f')
-	{
-		//printf("here\n");
-		if (g->player.flash_on)
-			g->player.flash_on = false;
-		else
-			g->player.flash_on = true;
-	}
-	return (0);
+	exit(0);
 }
 
 int	key_press_manager(int keycode, t_game *data)
@@ -66,5 +51,11 @@ int	key_release_manager(int keycode, t_game *g)
 		g->player.vertical_view -= HEIGHT / 10;
 	if (keycode == 'f')
 		g->player.flash_on = !g->player.flash_on;
+	if (keycode == 'm')
+		g->mini.show = !g->mini.show;
+	if (g->mini.show && keycode == 'k' && g->mini.scale == 1)
+		g->mini.scale = 3;
+	else if (g->mini.show && keycode == 'k')
+		g->mini.scale = 1;
 	return (0);
 }

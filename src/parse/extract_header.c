@@ -25,7 +25,7 @@ bool	extract_header(t_parse *parse)
 	if (parse->lc - i < 3)
 		return (printf_fd(2, M_ERRO M_MAPSZ M_HEAD), false);
 	parse->map_st = &parse->literal[i];
-	return (printf_fd(2, "survived header\n"), true);
+	return (true);
 }
 
 /// @brief sees if LINE starts with "NO ", "SO ", "WE ", "EA ", "F " or "C "

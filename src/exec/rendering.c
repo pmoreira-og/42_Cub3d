@@ -35,17 +35,18 @@ int	render_map(t_game *game)
 	else if (game->scene == GAME)
 	{
 		move_handler(game);
-		if (!has_moved(game))
+		if (!has_moved(game) && !has_changed(game))
 			return (1);
 		game->player.direction = normalize_rad(game->player.direction);
 		apply_bob_effect(&game->player, game);
 		player_update_dir_plane(&game->player);
 		draw_map(game);
-		render_minimap(game->mini);
+		if (game->mini.show)
+			render_minimap(game->mini);
 		if (game->player.flash_on)
-			sprite_to_bg(game, &game->hand[0], (t_cord){560, 560}, (t_cord){800, 520});
+			sprite_to_bg(&game->bg, &game->hand[0], (t_cord){560, 560}, (t_cord){800, 520});
 		else
-			sprite_to_bg(game, &game->hand[1], (t_cord){560, 560}, (t_cord){800, 520});
+			sprite_to_bg(&game->bg, &game->hand[1], (t_cord){560, 560}, (t_cord){800, 520});
 		mlx_put_image_to_window(game->mlx, game->win, game->bg.img, 0, 0);
 	}
 	return (1);

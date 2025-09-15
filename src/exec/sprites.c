@@ -32,7 +32,7 @@ bool	load_walls(t_game *g)
 	return (true);
 }
 
-void	sprite_to_bg(t_game *game, t_img_data *sprite, t_cord sprt, t_cord win)
+void	sprite_to_bg(t_img_data *bg, t_img_data *sprite, t_cord sprt, t_cord win)
 {
 	unsigned int	color;
 	int				wid;
@@ -46,7 +46,7 @@ void	sprite_to_bg(t_game *game, t_img_data *sprite, t_cord sprt, t_cord win)
 		{
 			color = get_pixel(sprite, wid, hei);
 			if (color != TRANSPARENT)
-				put_pixel(&game->bg, win.x + wid, win.y + hei, color);
+				put_pixel(bg, win.x + wid, win.y + hei, color);
 		}
 	}
 }

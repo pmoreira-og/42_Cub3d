@@ -26,12 +26,12 @@ SRC_MAIN	=	main.c
 
 SRC_MAIN_EXTRA	= main_parse.c
 
-SRC_EXEC	=	aux.c dda.c getters.c dda_aux.c player_move.c rendering.c sprites.c\
-				draw_aux.c minimap.c lighting.c shake.c
+SRC_EXEC	=	aux.c dda.c getters.c dda_aux.c player_move.c rendering.c sprites.c \
+				draw_aux.c minimap.c lighting.c shake.c draw.c
 
 SRC_PARSE	=	get_map.c setup_extract.c extract_header.c \
 				extract_color.c extract_map.c wall_check.c \
-				map_to_game.c
+				map_to_game.c setup_mlx.c
 
 SRC_UTILS	= aux.c constructors.c hooks.c cleaners.c printers.c
 

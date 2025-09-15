@@ -20,7 +20,7 @@ bool	get_map(t_game *game, char *input)
 	if (!map_to_game(&parse, game))
 		return (cleanup_parse(&parse), armageddon(game), false);
 	cleanup_parse(&parse);
-	return (printf_fd(2, "survived PARSE\n"), true);
+	return (true);
 }
 
 /// @brief give default values for the parse struct
