@@ -30,9 +30,9 @@ typedef enum e_scene
 
 typedef struct s_cord
 {
-	int		x;
-	int		y;
-}			t_cord;
+	double		x;
+	double		y;
+}				t_cord;
 
 /// @brief Structure that has the point information.
 typedef struct s_point
@@ -71,8 +71,8 @@ typedef struct s_parse
 	int			fd;
 	int			lc;
 	t_header	hd;
-	size_t		heigth;
-	size_t		width;
+	int			heigth;
+	int			width;
 	int			margin_l;
 	int			margin_r;
 	char		**literal;
@@ -129,13 +129,12 @@ typedef struct s_wall
 /// @brief Struct with variables need to bob effect.
 typedef struct s_bob
 {
-	double	phase;
-	double	curr_amp;
-	double	cam_pitch;
-	double	prev_x;
-	double	prev_y;
+	double		phase;
+	double		curr_amp;
+	double		cam_pitch;
+	double		prev_x;
+	double		prev_y;
 }				t_bob;
-
 
 /// @brief Struct to save player info.
 /// @param pos_x Position of the player on the map in X axis.
@@ -143,37 +142,67 @@ typedef struct s_bob
 /// @param direction angle (in rad) where the player is looking.
 typedef struct s_player
 {
-	double			pos_x;
-	double			pos_y;
-	double			dir_x;
-	double			dir_y;
-	double			plane_x;
-	double			plane_y;
-	double			plane_mag;
-	double			direction;
-	bool			m_forward;
-	bool			m_back;
-	bool			m_left;
-	bool			m_right;
-	bool			rot_right;
-	bool			rot_left;
-	int				vertical_view;
-	double			flash_fov;
-	double			flash_k1;
-	double			flash_k2;
-	double			cos_flash;
-	double			ambient;
-	bool			flash_on;
-	t_bob			bob;
-}					t_player;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+	double		plane_mag;
+	double		direction;
+	bool		m_forward;
+	bool		m_back;
+	bool		m_left;
+	bool		m_right;
+	bool		rot_right;
+	bool		rot_left;
+	int			vertical_view;
+	double		flash_fov;
+	double		flash_k1;
+	double		flash_k2;
+	double		cos_flash;
+	double		ambient;
+	bool		flash_on;
+	t_bob		bob;
+}				t_player;
 
+/// @brief Struct for drawing a circle
+/// @param cord center cordinates
+/// @param angle_from where to start the circle (rad)
+/// @param angle_to where to stop the circle (rad)
+/// @param radius
+/// @param color
+typedef struct s_circle
+{
+	t_cord		cord;
+	double		angle_from;
+	double		angle_to;
+	double		radius;
+	int			color;
+}				t_circle;
+
+/// @brief Struct to render the minimap
+/// @param show on and off toggle
+/// @param bg image to render on
+/// @param p needed for pos and dir
+/// @param m map matrix
+/// @param m_h map heigth
+/// @param m_w map width
+/// @param scale can be either 1 or 3
+/// @param offset gap to the left/top of the map
+/// @param center of player in the minimap
 typedef struct s_minimap
 {
+	bool		show;
+	t_img_data	*bg;
+	t_player	*p;
+	t_point		***m;
+	int			m_h;
+	int			m_w;
+	int			scale;
 	int			offset;
-	int			tile;
-	int			width;
-	int			height;
-	t_player	p;
+	t_cord		size;
+	t_cord		center;
 }				t_minimap;
 
 typedef struct s_game
@@ -181,11 +210,11 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	t_point		**matrix;
-	size_t		map_height;
-	size_t		map_width;
+	int			map_height;
+	int			map_width;
 	t_img_data	bg;
 	t_img_data	menu;
-	t_img_data	hand;
+	t_img_data	hand[2];
 	t_player	player;
 	t_minimap	mini;
 	int			floor_color;

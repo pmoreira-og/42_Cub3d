@@ -5,7 +5,10 @@ double	get_light(int y, t_player *p)
 	double	light;
 	double	step;
 
-	light = 1.0;
+	if (p->flash_on)
+		light = 0.95;
+	else
+		light = 0.7;
 	step = (2.0 / HEIGHT);
 	if (y > ((HEIGHT / 2) + (p->vertical_view)))
 		y = (HEIGHT + (p->vertical_view)) - y;

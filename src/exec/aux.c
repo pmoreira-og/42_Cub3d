@@ -39,23 +39,6 @@ void	handle_game_hooks(int keycode, t_game *g)
 		g->player.vertical_view += 10;
 }
 
-void	set_player_dir(t_game *game, t_point *src)
-{
-	game->player.pos_x = src->x + 0.5;
-	game->player.pos_y = src->y + 0.5;
-	game->player.plane_mag = tan(deg2rad((double) FOV) / 2.0);
-	if (src->type == PLAYER_E)
-		game->player.direction = deg2rad(0);
-	if (src->type == PLAYER_W)
-		game->player.direction = deg2rad(180);
-	if (src->type == PLAYER_S)
-		game->player.direction = deg2rad(270);
-	if (src->type == PLAYER_N)
-		game->player.direction = deg2rad(90);
-	init_minimap(game);
-	init_bob_struct(game);
-}
-
 double	normalize_rad(double rad)
 {
 	double	inc;

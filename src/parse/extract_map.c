@@ -13,7 +13,7 @@ bool	extract_map(t_parse *parse)
 	if (!check_surrounding_walls(parse))
 		return (printf_fd(2, M_ERRO M_WALLS), false);
 	safe_close(parse->fd);
-	return (printf_fd(2, "survived map\n"), true);
+	return (true);
 }
 
 /// @brief checks if the map contains any invalid chars or
@@ -23,9 +23,9 @@ bool	extract_map(t_parse *parse)
 /// @param width max width will be stored here
 /// @param player the direction of the player is stored here
 /// @return true when invalid, false when valid
-bool	invalid_chars(char **map, size_t *heigth, size_t *width, t_type *player)
+bool	invalid_chars(char **map, int *heigth, int *width, t_type *player)
 {
-	size_t	i;
+	int	i;
 
 	while (map[*heigth])
 	{
@@ -37,7 +37,7 @@ bool	invalid_chars(char **map, size_t *heigth, size_t *width, t_type *player)
 			if (!ft_strchr("01NSEW ", map[*heigth][i]))
 				return (printf_fd(2, M_ERRO M_MAPCH), true);
 			if (ft_strchr("NSEW", map[*heigth][i])
-				&& !assign_player_pos(map[*heigth][i], player))
+				&& !assign_point_type(map[*heigth][i], player))
 				return (printf_fd(2, M_ERRO M_PPOS), true);
 			i++;
 		}
@@ -50,22 +50,27 @@ bool	invalid_chars(char **map, size_t *heigth, size_t *width, t_type *player)
 	return (false);
 }
 
-/// @brief according to DIR sees which texture this is
-/// @param dir can be either 'N', 'S', 'E' or 'W'
-/// @param player where to store the direction of the player
-/// @return true if the player hasnt been assigned yet, false if its repeated
-bool	assign_player_pos(char dir, t_type *player)
+/// @param c can be either '1', '0', 'N', 'S', 'E', 'W' or '2'
+/// @param point where to store the type of the point
+/// @return true if the point hasnt been assigned yet, false if its repeated
+bool	assign_point_type(char c, t_type *point)
 {
-	if (*player)
+	if (*point)
 		return (false);
-	if (dir == 'N')
-		*player = PLAYER_N;
-	else if (dir == 'S')
-		*player = PLAYER_S;
-	else if (dir == 'E')
-		*player = PLAYER_E;
-	else if (dir == 'W')
-		*player = PLAYER_W;
+	if (c == '1')
+		*point = WALL;
+	else if (c == '0')
+		*point = FLOOR;
+	else if (c == 'N')
+		*point = PLAYER_N;
+	else if (c == 'S')
+		*point = PLAYER_S;
+	else if (c == 'E')
+		*point = PLAYER_E;
+	else if (c == 'W')
+		*point = PLAYER_W;
+	else
+		*point = VOID;
 	return (true);
 }
 
@@ -87,7 +92,5 @@ char	**make_padded_map(t_parse *parse)
 	while (new[++i + 2])
 		ft_memcpy(&new[i + 1][1], parse->map_st[i], len_until(parse->map_st[i],
 				'\n'));
-	// ft_printf("\nPADDED MAP:\n");
-	// matrix_print(new);
 	return (new);
 }

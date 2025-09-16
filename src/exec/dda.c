@@ -15,8 +15,8 @@ double	collider_dda(t_player p, double cameraX, t_game *g, t_dda *dda)
 	while (!dda->hit)
 	{
 		next_step(dda);
-		if (dda->map_x < 0 || dda->map_x >= (int)g->map_width || dda->map_y < 0
-			|| dda->map_y >= (int)g->map_height)
+		if (dda->map_x < 0 || dda->map_x >= g->map_width || dda->map_y < 0
+			|| dda->map_y >= g->map_height)
 			return (-1.0);
 		has_collided(dda, g, &p);
 	}

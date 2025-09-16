@@ -17,7 +17,7 @@ bool	setup_for_extraction(t_parse *parse)
 	parse->literal = file_literal_copy(parse->fd, parse->lc);
 	if (!parse->literal)
 		return (printf_fd(2, M_MFL), false);
-	return (printf_fd(2, "survived setup\n"), true);
+	return (true);
 }
 
 /// @return number of lines in the FD file

@@ -161,6 +161,10 @@
 # define M_PPOS "repeated player position\n"
 # define M_MPPOS "missing player position\n"
 # define M_WALLS "missing surrounding walls\n"
+# define M_MLXINITF "failure in MLX initialization\n"
+# define M_MLXWINDF "failure in MLX window creation\n"
 # define M_INVXPM "couldn't load an xpm texture\n"
+# define M_MLXIMGF "failure in MLX image creation\n"
+# define M_MLXADRF "failure in MLX image adress extraction\n"
 
 #endif
