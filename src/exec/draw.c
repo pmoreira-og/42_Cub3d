@@ -94,7 +94,7 @@ void	bucket_tool(t_img_data *bg, t_cord cord, int color, int only)
 {
 	int	pixel;
 
-	if (cord.x < 0 || cord.y < 0)
+	if (cord.x < 0 || cord.y < 0 || cord.x > WIDTH || cord.y > HEIGHT)
 		return ;
 	pixel = get_pixel(bg, (int)cord.x, (int)cord.y);
 	if (pixel == color || pixel != only)

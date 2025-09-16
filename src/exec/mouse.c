@@ -1,6 +1,12 @@
 #include "../../include/cub3d.h"
 
-void	hold_mouse(t_game *g)
+int	close_win_mouse(t_game *data)
+{
+	armageddon(data);
+	exit(0);
+}
+
+static void	hold_mouse(t_game *g)
 {
 	if (g->scene == GAME)
 	{
@@ -22,15 +28,15 @@ int	mouse_handler(int x, int y, t_game *g)
 	(void) y;
 	if (prev_x == x)
 	{
-		g->player.rot_right = 0;
-		g->player.rot_left = 0;
+		g->player.rot_right = false;
+		g->player.rot_left = false;
 		return (0);
 	}
 	hold_mouse(g);
 	if (prev_x < x)
-		g->player.rot_right = 1;
+		g->player.rot_right = true;
 	if (prev_x > x)
-		g->player.rot_left = 1;
+		g->player.rot_left = true;
 	prev_x = x;
 	return (0);
 }

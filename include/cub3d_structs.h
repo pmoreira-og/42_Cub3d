@@ -25,7 +25,7 @@ typedef enum e_scene
 {
 	MENU,
 	GAME,
-	MAP
+	PAUSE
 }				t_scene;
 
 typedef struct s_cord
@@ -92,15 +92,11 @@ typedef struct s_parse
 /// @param step_y Grid Direction on Y axis.
 typedef struct s_dda
 {
-	double		ray_dir_x;
-	double		ray_dir_y;
-	double		side_dist_x;
-	double		side_dist_y;
+	t_cord		ray_dir;
+	t_cord		side_dist;
 	double		perp_dist;
-	double		dx;
-	double		dy;
-	double		map_x;
-	double		map_y;
+	t_cord		d;
+	t_cord		map;
 	int			step_x;
 	int			step_y;
 	int			side;
@@ -111,8 +107,7 @@ typedef struct s_dda
 typedef struct s_wall
 {
 	double		wall_x;
-	double		tex_x;
-	double		tex_y;
+	t_cord		tex;
 	double		step;
 	double		tex_pos;
 	t_img_data	*texture;
@@ -123,7 +118,6 @@ typedef struct s_wall
 	double		light;
 	double		dist_intensity;
 	double		ang_intensity;
-	double		dot;
 }				t_wall;
 
 /// @brief Struct with variables need to bob effect.
@@ -132,8 +126,7 @@ typedef struct s_bob
 	double		phase;
 	double		curr_amp;
 	double		cam_pitch;
-	double		prev_x;
-	double		prev_y;
+	t_cord		prev;
 }				t_bob;
 
 /// @brief Struct to save player info.
@@ -142,12 +135,9 @@ typedef struct s_bob
 /// @param direction angle (in rad) where the player is looking.
 typedef struct s_player
 {
-	double		pos_x;
-	double		pos_y;
-	double		dir_x;
-	double		dir_y;
-	double		plane_x;
-	double		plane_y;
+	t_cord		pos;
+	t_cord		dir;
+	t_cord		plane;
 	double		plane_mag;
 	double		direction;
 	bool		m_forward;
@@ -158,10 +148,7 @@ typedef struct s_player
 	bool		rot_left;
 	int			vertical_view;
 	double		flash_fov;
-	double		flash_k1;
-	double		flash_k2;
 	double		cos_flash;
-	double		ambient;
 	bool		flash_on;
 	t_bob		bob;
 }				t_player;

@@ -88,8 +88,8 @@ void	init_player(t_game *game)
 	t_point	play;
 
 	find_player(game, &play);
-	game->player.pos_x = play.x + 0.5;
-	game->player.pos_y = play.y + 0.5;
+	game->player.pos.x = play.x + 0.5;
+	game->player.pos.y = play.y + 0.5;
 	game->player.plane_mag = tan(deg2rad((double)FOV) / 2.0);
 	if (play.type == PLAYER_N)
 		game->player.direction = deg2rad(90);

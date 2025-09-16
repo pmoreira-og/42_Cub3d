@@ -17,11 +17,11 @@ bool	has_moved(t_game *g)
 	static double	dir;
 	static int		vertical;
 
-	if (x != g->player.pos_x || y != g->player.pos_y
+	if (x != g->player.pos.x || y != g->player.pos.y
 		|| dir != g->player.direction || vertical != g->player.vertical_view)
 	{
-		x = g->player.pos_x;
-		y = g->player.pos_y;
+		x = g->player.pos.x;
+		y = g->player.pos.y;
 		dir = g->player.direction;
 		vertical = g->player.vertical_view;
 		return (true);
@@ -35,7 +35,8 @@ bool	has_changed(t_game *g)
 	static bool	minimap;
 	static int	minimap_scale;
 
-	if (light != g->player.flash_on || minimap != g->mini.show || minimap_scale != g->mini.scale)
+	if (light != g->player.flash_on || minimap != g->mini.show
+		|| minimap_scale != g->mini.scale)
 	{
 		light = g->player.flash_on;
 		minimap = g->mini.show;
@@ -43,9 +44,4 @@ bool	has_changed(t_game *g)
 		return (true);
 	}
 	return (false);
-}
-
-double	get_perp_dist(double hyp, double angle, double p_angle)
-{
-	return (hyp * cos(angle - p_angle));
 }

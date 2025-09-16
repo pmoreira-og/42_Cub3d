@@ -2,8 +2,8 @@
 
 void	init_bob_struct(t_game *g)
 {
-	g->player.bob.prev_x = g->player.pos_x;
-	g->player.bob.prev_y = g->player.pos_y;
+	g->player.bob.prev.x = g->player.pos.x;
+	g->player.bob.prev.y = g->player.pos.y;
 	if (WIDTH >= 1440 && HEIGHT >= 1080)
 	{
 		g->move_speed = MOVESPEED;
@@ -21,8 +21,8 @@ static double	get_dist(t_player *p)
 	double	dx;
 	double	dy;
 
-	dx = p->pos_x - p->bob.prev_x;
-	dy = p->pos_y - p->bob.prev_y;
+	dx = p->pos.x - p->bob.prev.x;
+	dy = p->pos.y - p->bob.prev.y;
 	return (sqrt(dx * dx + dy * dy));
 }
 
@@ -46,6 +46,6 @@ void	apply_bob_effect(t_player *p, t_game *g)
 	if (p->bob.phase > 2.0 * PI)
 		p->bob.phase -= 2.0 * PI;
 	p->bob.cam_pitch = sin(p->bob.phase) * p->bob.curr_amp;
-	p->bob.prev_x = p->pos_x;
-	p->bob.prev_y = p->pos_y;
+	p->bob.prev.x = p->pos.x;
+	p->bob.prev.y = p->pos.y;
 }

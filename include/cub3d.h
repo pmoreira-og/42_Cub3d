@@ -16,16 +16,18 @@
 
 // -->┊( FUNCTION PROTOTYPES )┊.´-★☆★
 
-//*	Exec - aux
+//*	Aux
 
 double	deg2rad(double angle);
-void	put_pixel(t_img_data *data, int x, int y, int color);
 double	normalize_rad(double rad);
-void	handle_game_hooks(int keycode, t_game *g);
+double	ft_abs(double nbr);
+bool	time_passed(int gap);
 
 //*	Sprites
+
 bool	get_sprite_data(t_game *g, t_img_data *ptr, char *path);
-bool	load_walls(t_game *g);
+void	put_pixel(t_img_data *data, int x, int y, int color);
+int		get_pixel(t_img_data *img, int x, int y);
 void	sprite_to_bg(t_img_data *bg, t_img_data *sprite, t_cord sprt,
 			t_cord win);
 
@@ -41,28 +43,28 @@ double	get_light(int y, t_player *p);
 
 //*	Shake
 
-void	apply_bob_effect(t_player *p, t_game *g);
 void	init_bob_struct(t_game *game);
+void	apply_bob_effect(t_player *p, t_game *g);
 
 //*	Mouse
 
-int			mouse_handler(int x, int y, t_game *g);
+int		close_win_mouse(t_game *data);
+int		mouse_handler(int x, int y, t_game *g);
 
 //*	Lighting
+
+double	get_light(int y, t_player *p);
 int		apply_light(int color, double light);
 int		get_color(int r, int g, int b);
-void	apply_dithering(t_img_data *img);
-double	get_light(int y, t_player *p);
 
 //*	Minimap
 
 void	init_minimap(t_game *g);
+void	update_minimap_vals(t_minimap *mini);
 void	render_minimap(t_minimap mini);
 void	draw_minimap_tiles(t_minimap mini, t_cord map_cord, t_cord win_cord);
 void	draw_minimap_row(t_minimap mini, t_cord map_cord, t_cord win_cord,
 			t_cord area);
-void	bucket_tool(t_img_data *bg, t_cord cord, int color, int only);
-void	update_minimap_vals(t_minimap *mini);
 
 //*	Draw
 
@@ -70,52 +72,50 @@ void	draw_colorblock(t_img_data *bg, int color, t_cord area, t_cord win);
 void	draw_colorframe(t_img_data *bg, int color, t_cord area, t_cord win);
 void	draw_angled_line(t_img_data *bg, t_cord cord, double angle, double len);
 void	draw_circle(t_img_data *bg, t_circle c);
+void	bucket_tool(t_img_data *bg, t_cord cord, int color, int only);
 
-//*	Exec -	Draw Aux
+//*	Draw Aux
+
 void	draw_section(t_game *g, t_dda *dda, int x, t_player *p);
 
-//*	Constructors
-
-void	print_map(t_game *data);
-void	print_matrix(t_game *data);
-
-//*	Utils - aux
-
-bool	valid_move(t_point *check);
-double	get_perp_dist(double hyp, double angle, double p_angle);
-bool	has_moved(t_game *g);
-bool	has_changed(t_game *g);
-
-//*	Hooks
-void	manager(t_game *game);
-int		close_win_mouse(t_game *data);
-int		menu_key_press(int keycode, t_game *data);
-int		key_press_manager(int keycode, t_game *data);
-int		key_release_manager(int keycode, t_game *data);
-
-//*	Getters
-double	ft_min(double n1, double n2);
-int		get_pixel(t_img_data *img, int x, int y);
-
-//*	Cleaners
-void	armageddon(t_game *data);
-
-//*	Printers
-char	*get_type_print(t_type type);
-
 //*	DDA
-double	collider_dda(t_player p, double cameraX, t_game *g, t_dda *dda);
-double	ft_abs(double nbr);
+
+bool	collider_dda(t_player p, double cameraX, t_game *g, t_dda *dda);
 
 //*	DDA Aux
+
 void	init_struct(t_dda *dda, t_player *p, double cameraX);
-void	has_collided(t_dda *dda, t_game *game, t_player *p);
 void	get_step(t_dda *dda, t_player *start);
 void	next_step(t_dda *dda);
+void	has_collided(t_dda *dda, t_game *game, t_player *p);
 void	save_hit_pos(t_dda *dda, t_player *p);
 
 //*	Player_move
+
 void	move_handler(t_game *g);
+
+//*	Checkers
+
+bool	valid_move(t_point *check);
+bool	has_moved(t_game *g);
+bool	has_changed(t_game *g);
+
+//*	Cleaners
+
+void	armageddon(t_game *data);
+
+//*	Hooks
+
+void	manager(t_game *game);
+int		key_press_manager(int keycode, t_game *data);
+void	handle_game_hooks(int keycode, t_game *g);
+int		key_release_manager(int keycode, t_game *data);
+void	overlay_hooks(int keycode, t_game *g);
+
+//*	Printers
+
+void	print_map(t_game *data);
+char	*get_type_print(t_type type);
 
 //-‵,┊ PARSE FTS
 
@@ -170,3 +170,4 @@ void	find_player(t_game *game, t_point *save);
 
 bool	setup_mlx(t_game *game);
 bool	get_img(t_game *game, int width, int height);
+bool	load_walls(t_game *g);

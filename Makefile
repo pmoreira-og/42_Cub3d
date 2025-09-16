@@ -23,30 +23,21 @@ DIR_UTILS		= utils
 # -->┊( SOURCE AND OBJS )┊.´-★☆★
 SRC_MAIN	=	main.c
 
-SRC_MAIN_EXTRA	= main_parse.c
-
-SRC_EXEC	=	aux.c dda.c getters.c dda_aux.c player_move.c rendering.c sprites.c \
+SRC_EXEC	=	aux.c dda.c dda_aux.c player_move.c rendering.c sprites.c \
 				draw_aux.c minimap.c lighting.c shake.c draw.c mouse.c
 
 SRC_PARSE	=	get_map.c setup_extract.c extract_header.c \
 				extract_color.c extract_map.c wall_check.c \
 				map_to_game.c setup_mlx.c
 
-SRC_UTILS	= aux.c constructors.c hooks.c cleaners.c printers.c
+SRC_UTILS	= checkers.c hooks.c cleaners.c printers.c
 
 SRCS	=	$(addprefix $(DIR_SRC)/, $(SRC_MAIN)) \
 			$(addprefix $(DIR_SRC)/, $(addprefix $(DIR_EXEC)/, $(SRC_EXEC))) \
 			$(addprefix $(DIR_SRC)/, $(addprefix $(DIR_PARSE)/, $(SRC_PARSE))) \
 			$(addprefix $(DIR_SRC)/, $(addprefix $(DIR_UTILS)/, $(SRC_UTILS)))
 
-SRCS_EXTRA = $(addprefix $(DIR_SRC)/, $(SRC_MAIN_EXTRA)) \
-			$(addprefix $(DIR_SRC)/, $(addprefix $(DIR_EXEC)/, $(SRC_EXEC))) \
-			$(addprefix $(DIR_SRC)/, $(addprefix $(DIR_PARSE)/, $(SRC_PARSE))) \
-			$(addprefix $(DIR_SRC)/, $(addprefix $(DIR_UTILS)/, $(SRC_UTILS)))
-
 OBJS	=	$(addprefix $(DIR_OBJ)/, $(SRCS:$(DIR_SRC)/%.c=%.o))
-
-OBJS_EXTRA	=	$(addprefix $(DIR_OBJ)/, $(SRCS_EXTRA:$(DIR_SRC)/%.c=%.o))
 
 
 # -->┊( COMPILATION RULES )┊.´-★☆★
@@ -57,7 +48,7 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	$(M_COM)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
 
-$(DIR_OBJ)/%.o: $(DIR_SRC)/%.c #| $(DIR_OBJ)
+$(DIR_OBJ)/%.o: $(DIR_SRC)/%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
@@ -72,11 +63,6 @@ $(MLX):
 	@make -C ./include/minilibx_linux -s
 	$(M_ARCMLX)
 
-extra: $(OBJS_EXTRA) $(LIBFT) $(MLX)
-	$(M_COMP_P)
-	@$(CC) $(CFLAGS) $(OBJS_EXTRA) $(LIBFT) $(MLX) $(MLXFLAGS) -o $(NAME)
-	$(M_DONE)
-
 # -->┊( EXECUTION RULES )┊.´-★☆★
 exe: fclean
 	make all
@@ -88,9 +74,6 @@ hide: fclean
 
 d: all
 	./$(NAME) maps/map_1.cub -d
-
-extra_map1: extra
-	$(VAL) ./$(NAME) maps/map_1.cub
 
 val: fclean
 	make all
@@ -111,7 +94,7 @@ fclean: clean
 re:	fclean all
 	$(M_RE)
 
-.PHONY: all clean fclean re exe val extra hide
+.PHONY: all clean fclean re exe val hide
 
 
 # -->┊( COSMETICS )┊.´-★☆★

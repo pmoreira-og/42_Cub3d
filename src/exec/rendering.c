@@ -1,14 +1,14 @@
 #include "../../include/cub3d.h"
 
-void	player_update_dir_plane(t_player *p)
+static void	player_update_dir_plane(t_player *p)
 {
-	p->dir_x = cos(p->direction);
-	p->dir_y = -sin(p->direction);
-	p->plane_x = -p->dir_y * p->plane_mag;
-	p->plane_y = p->dir_x * p->plane_mag;
+	p->dir.x = cos(p->direction);
+	p->dir.y = -sin(p->direction);
+	p->plane.x = -p->dir.y * p->plane_mag;
+	p->plane.y = p->dir.x * p->plane_mag;
 }
 
-void	draw_map(t_game *g)
+static void	draw_map(t_game *g)
 {
 	t_dda		dda;
 	int			x;
@@ -18,7 +18,7 @@ void	draw_map(t_game *g)
 	while (x < WIDTH)
 	{
 		camera_x = 2.0 * x / (double)WIDTH - 1.0;
-		if (collider_dda(g->player, camera_x, g, &dda) == 0)
+		if (collider_dda(g->player, camera_x, g, &dda))
 			draw_section(g, &dda, x, &g->player);
 		++x;
 	}

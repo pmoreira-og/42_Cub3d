@@ -1,42 +1,8 @@
 #include "../../include/cub3d.h"
 
-void	put_pixel(t_img_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->len + x * (data->bpp / 8));
-	*(unsigned int *)dst = color;
-}
-
 double	deg2rad(double angle)
 {
 	return (angle * (PI / 180));
-}
-
-void	handle_game_hooks(int keycode, t_game *g)
-{
-	if (keycode == BACKSPACE)
-		g->scene = MENU;
-	if (keycode == SHIFT)
-		g->sprint = true;
-	if (keycode == VK_LEFT)
-		g->player.rot_left = 1;
-	if (keycode == VK_RIGHT)
-		g->player.rot_right = 1;
-	if (keycode == KEY_W)
-		g->player.m_forward = 1;
-	if (keycode == KEY_S)
-		g->player.m_back = 1;
-	if (keycode == KEY_A)
-		g->player.m_left = 1;
-	if (keycode == KEY_D)
-		g->player.m_right = 1;
-	if (keycode == SPACE && g->player.vertical_view < HEIGHT / 2)
-		g->player.vertical_view += HEIGHT / 10;
-	if (keycode == VK_DOWN && (-g->player.vertical_view < (int)(HEIGHT / 5)))
-		g->player.vertical_view -= 10;
-	if (keycode == VK_UP && g->player.vertical_view < (int)(HEIGHT / 5))
-		g->player.vertical_view += 10;
 }
 
 double	normalize_rad(double rad)
@@ -50,4 +16,36 @@ double	normalize_rad(double rad)
 	while (rad >= 2 * PI || rad < 0)
 		rad += inc;
 	return (rad);
+}
+
+/// @brief Get absolute value of a double type number.
+double	ft_abs(double nbr)
+{
+	if (nbr < 0)
+		return (nbr * -1);
+	return (nbr);
+}
+
+static long	get_current_time(void)
+{
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL) == -1)
+		printf_fd(2, "gettimeofday() error\n");
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+bool	time_passed(int gap)
+{
+	static long	latest;
+	long		curr;
+
+	curr = get_current_time();
+	if (curr - latest > gap)
+	{
+		latest = curr;
+		return (true);
+	}
+	else
+		return (false);
 }

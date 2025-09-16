@@ -4,14 +4,14 @@ static t_img_data	*get_wall_text(t_game *g, t_dda *dda)
 {
 	if (dda->side == 0)
 	{
-		if (dda->ray_dir_x > 0)
+		if (dda->ray_dir.x > 0)
 			return (&g->walls[1]);
 		else
 			return (&g->walls[3]);
 	}
 	else
 	{
-		if (dda->ray_dir_y > 0)
+		if (dda->ray_dir.y > 0)
 			return (&g->walls[2]);
 		else
 			return (&g->walls[0]);
@@ -20,27 +20,29 @@ static t_img_data	*get_wall_text(t_game *g, t_dda *dda)
 
 static void	init_wall(t_player *p, t_dda *dda, t_wall *w)
 {
+	double dot;
+
 	if (dda->side == 0)
-		w->wall_x = p->pos_y + dda->perp_dist * dda->ray_dir_y;
+		w->wall_x = p->pos.y + dda->perp_dist * dda->ray_dir.y;
 	else
-		w->wall_x = p->pos_x + dda->perp_dist * dda->ray_dir_x;
+		w->wall_x = p->pos.x + dda->perp_dist * dda->ray_dir.x;
 	w->wall_x -= floor(w->wall_x);
-	w->tex_x = (int)(w->wall_x * w->texture->width);
-	if (dda->side == 0 && dda->ray_dir_x > 0)
-		w->tex_x = w->texture->width - w->tex_x - 1;
-	if (dda->side == 1 && dda->ray_dir_y < 0)
-		w->tex_x = w->texture->width - w->tex_x - 1;
-	w->dot = p->dir_x * dda->ray_dir_x + p->dir_y * dda->ray_dir_y;
-	if (w->dot >= p->cos_flash)
-		w->ang_intensity = (w->dot - p->cos_flash) / (1.0 - p->cos_flash);
+	w->tex.x = (int)(w->wall_x * w->texture->width);
+	if (dda->side == 0 && dda->ray_dir.x > 0)
+		w->tex.x = w->texture->width - w->tex.x - 1;
+	if (dda->side == 1 && dda->ray_dir.y < 0)
+		w->tex.x = w->texture->width - w->tex.x - 1;
+	dot = p->dir.x * dda->ray_dir.x + p->dir.y * dda->ray_dir.y;
+	if (dot >= p->cos_flash)
+		w->ang_intensity = (dot - p->cos_flash) / (1.0 - p->cos_flash);
 	else
 		w->ang_intensity = 0;
-	w->dist_intensity = 1.0 / (1.0 + p->flash_k1 * dda->perp_dist \
-+ p->flash_k2 * (pow(dda->perp_dist, 2)));
-	w->light = p->ambient + (0.7 + (p->flash_on * 0.25) - p->ambient) \
+	w->dist_intensity = 1.0 / (1.0 + 0.2 * dda->perp_dist \
++ 0.1 * (pow(dda->perp_dist, 2)));
+	w->light = 0.05 + (0.7 + (p->flash_on * 0.25) - 0.05) \
 * w->ang_intensity * w->dist_intensity;
-	if (w->light < p->ambient)
-		w->light = p->ambient;
+	if (w->light < 0.05)
+		w->light = 0.05;
 	if (w->light > 1)
 		w->light = 1;
 }
@@ -79,21 +81,15 @@ static void	draw_wall(t_game *g, int x, t_wall *wall)
 	y = wall->start;
 	while (y <= wall->end)
 	{
-		wall->tex_y = (int)wall->tex_pos;
-		if (wall->tex_y >= wall->texture->height)
-			wall->tex_y = wall->texture->height - 1;
+		wall->tex.y = (int)wall->tex_pos;
+		if (wall->tex.y >= wall->texture->height)
+			wall->tex.y = wall->texture->height - 1;
 		wall->tex_pos += wall->step;
-		wall->color = get_pixel(wall->texture, wall->tex_x, wall->tex_y);
+		wall->color = get_pixel(wall->texture, wall->tex.x, wall->tex.y);
 		put_pixel(&g->bg, x, y, apply_light(wall->color, wall->light));
 		y++;
 	}
 }
-
-/* 
-		put_pixel(&g->bg, x, y,g->floor_color >> 1 & 0x7f7f7f);
-		put_pixel(&g->bg, x, y, g->ceiling_color >> 1 & 0x7f7f7f);
-
- */
 
 void	draw_section(t_game *g, t_dda *dda, int x, t_player *p)
 {

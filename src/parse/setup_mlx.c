@@ -19,10 +19,28 @@ bool	setup_mlx(t_game *game)
 	game->bg.height = HEIGHT;
 	game->player.flash_fov = deg2rad(FLASH_FOV);
 	game->player.cos_flash = cos(game->player.flash_fov / 2);
-	game->player.ambient = 0.05;
-	game->player.flash_k1 = 0.2;
-	game->player.flash_k2 = 0.1;
 	game->sprint = false;
+	return (true);
+}
+
+bool	load_walls(t_game *g)
+{
+	if (!get_sprite_data(g, &g->walls[0], g->paths[0]))
+		return (false);
+	if (!get_sprite_data(g, &g->walls[1], g->paths[1]))
+		return (false);
+	if (!get_sprite_data(g, &g->walls[2], g->paths[2]))
+		return (false);
+	if (!get_sprite_data(g, &g->walls[3], g->paths[3]))
+		return (false);
+	if (!get_sprite_data(g, &g->menu, MAIN_MENU ".xpm"))
+		return (false);
+	// doing this so i can have more than one main menu frame
+	// for animation
+	if (!get_sprite_data(g, &g->hand[0], "./assets/lantern.xpm"))
+		return (false);
+	if (!get_sprite_data(g, &g->hand[1], "./assets/lantern_off.xpm"))
+		return (false);
 	return (true);
 }
 

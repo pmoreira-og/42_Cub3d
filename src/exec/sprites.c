@@ -11,25 +11,22 @@ bool	get_sprite_data(t_game *g, t_img_data *ptr, char *path)
 	return (true);
 }
 
-bool	load_walls(t_game *g)
+void	put_pixel(t_img_data *data, int x, int y, int color)
 {
-	if (!get_sprite_data(g, &g->walls[0], g->paths[0]))
-		return (false);
-	if (!get_sprite_data(g, &g->walls[1], g->paths[1]))
-		return (false);
-	if (!get_sprite_data(g, &g->walls[2], g->paths[2]))
-		return (false);
-	if (!get_sprite_data(g, &g->walls[3], g->paths[3]))
-		return (false);
-	if (!get_sprite_data(g, &g->menu, MAIN_MENU ".xpm"))
-		return (false);
-	// doing this so i can have more than one main menu frame
-	// for animation
-	if (!get_sprite_data(g, &g->hand[0], "./assets/lantern.xpm"))
-		return (false);
-	if (!get_sprite_data(g, &g->hand[1], "./assets/lantern_off.xpm"))
-		return (false);
-	return (true);
+	char	*dst;
+
+	dst = data->addr + (y * data->len + x * (data->bpp / 8));
+	*(unsigned int *)dst = color;
+}
+
+int	get_pixel(t_img_data *img, int x, int y)
+{
+	char	*dst;
+
+	if (x < 0 || y < 0 || x > img->width || y > img->height)
+		return (0);
+	dst = img->addr + (y * img->len + x * (img->bpp / 8));
+	return (*(unsigned int *)dst);
 }
 
 void	sprite_to_bg(t_img_data *bg, t_img_data *sprite, t_cord sprt, t_cord win)

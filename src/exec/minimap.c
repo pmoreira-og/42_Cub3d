@@ -34,10 +34,10 @@ void	render_minimap(t_minimap mini)
 		mini.offset});
 	draw_colorframe(mini.bg, 0x363930, (t_cord){mini.size.x + 6, mini.size.y
 		+ 6}, (t_cord){mini.offset - 3, mini.offset - 3});
-	draw_minimap_tiles(mini, (t_cord){mini.p->pos_x - 4 * mini.scale,
-		mini.p->pos_y - 3 * mini.scale}, (t_cord){mini.center.x - 50
-		* (mini.p->pos_x - floor(mini.p->pos_x) + 4 * mini.scale), mini.center.y
-		- 50 * (mini.p->pos_y - floor(mini.p->pos_y) + 3 * mini.scale)});
+	draw_minimap_tiles(mini, (t_cord){mini.p->pos.x - 4 * mini.scale,
+		mini.p->pos.y - 3 * mini.scale}, (t_cord){mini.center.x - 50
+		* (mini.p->pos.x - floor(mini.p->pos.x) + 4 * mini.scale), mini.center.y
+		- 50 * (mini.p->pos.y - floor(mini.p->pos.y) + 3 * mini.scale)});
 	draw_angled_line(mini.bg, mini.center, mini.p->direction + deg2rad(33), 80);
 	draw_angled_line(mini.bg, mini.center, mini.p->direction - deg2rad(33), 80);
 	draw_circle(mini.bg, (t_circle){mini.center, mini.p->direction
