@@ -48,8 +48,8 @@ bool	valid_color_format(char *code)
 	{
 		j = -1;
 		num_len = len_until(&code[i], ',');
-		if (num_len < 1 || num_len > 3 || (field < 2 && code[i
-				+ num_len] != ',') || (field == 2 && code[i + num_len]))
+		if (num_len < 1 || num_len > 3 || (field < 2 \
+&& code[i + num_len] != ',') || (field == 2 && code[i + num_len]))
 			return (false);
 		while (++j < num_len)
 			if (!ft_isdigit(code[i + j]))

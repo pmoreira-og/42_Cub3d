@@ -29,6 +29,7 @@
 # define SPACE 32
 # define SHIFT 65505
 # define BACKSPACE 65288
+# define VK_CTRL 65507
 # define ENTER 65293
 # define ESC 65307
 # define KEY_1 49

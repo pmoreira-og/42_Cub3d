@@ -20,7 +20,7 @@ static t_img_data	*get_wall_text(t_game *g, t_dda *dda)
 
 static void	init_wall(t_player *p, t_dda *dda, t_wall *w)
 {
-	double dot;
+	double	dot;
 
 	if (dda->side == 0)
 		w->wall_x = p->pos.y + dda->perp_dist * dda->ray_dir.y;

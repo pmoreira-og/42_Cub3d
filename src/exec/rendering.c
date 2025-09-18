@@ -24,6 +24,16 @@ static void	draw_map(t_game *g)
 	}
 }
 
+static void	draw_flashlight(t_game *game)
+{
+	if (game->player.flash_on)
+		sprite_to_bg(&game->bg, &game->hand[0], \
+(t_cord){560, 560}, (t_cord){800, 520});
+	else
+		sprite_to_bg(&game->bg, &game->hand[1], \
+(t_cord){560, 560}, (t_cord){800, 520});
+}
+
 int	render_map(t_game *game)
 {
 	if (game->scene == MENU)
@@ -43,10 +53,7 @@ int	render_map(t_game *game)
 		draw_map(game);
 		if (game->mini.show)
 			render_minimap(game->mini);
-		if (game->player.flash_on)
-			sprite_to_bg(&game->bg, &game->hand[0], (t_cord){560, 560}, (t_cord){800, 520});
-		else
-			sprite_to_bg(&game->bg, &game->hand[1], (t_cord){560, 560}, (t_cord){800, 520});
+		draw_flashlight(game);
 		mlx_put_image_to_window(game->mlx, game->win, game->bg.img, 0, 0);
 	}
 	return (1);

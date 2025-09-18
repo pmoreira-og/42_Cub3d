@@ -19,7 +19,6 @@ bool	setup_mlx(t_game *game)
 	game->bg.height = HEIGHT;
 	game->player.flash_fov = deg2rad(FLASH_FOV);
 	game->player.cos_flash = cos(game->player.flash_fov / 2);
-	game->sprint = false;
 	return (true);
 }
 

@@ -23,20 +23,23 @@ static void	hold_mouse(t_game *g)
 
 int	mouse_handler(int x, int y, t_game *g)
 {
-	static int	prev_x;
+	static bool	ignore_frame;
+	int			dx;
+	double		sensitivity;
 
 	(void) y;
-	if (prev_x == x)
+	if (ignore_frame)
 	{
-		g->player.rot_right = false;
-		g->player.rot_left = false;
+		ignore_frame = false;
 		return (0);
 	}
-	hold_mouse(g);
-	if (prev_x < x)
-		g->player.rot_right = true;
-	if (prev_x > x)
-		g->player.rot_left = true;
-	prev_x = x;
+	dx = x - (WIDTH / 2);
+	sensitivity = 0.001;
+	if (dx != 0)
+	{
+		g->player.direction -= dx * sensitivity;
+		ignore_frame = true;
+		hold_mouse(g);
+	}
 	return (0);
 }

@@ -29,7 +29,8 @@ int	get_pixel(t_img_data *img, int x, int y)
 	return (*(unsigned int *)dst);
 }
 
-void	sprite_to_bg(t_img_data *bg, t_img_data *sprite, t_cord sprt, t_cord win)
+void	sprite_to_bg(t_img_data *bg, t_img_data *sprite, \
+t_cord sprt, t_cord win)
 {
 	unsigned int	color;
 	int				wid;

@@ -129,6 +129,18 @@ typedef struct s_bob
 	t_cord		prev;
 }				t_bob;
 
+typedef struct s_action
+{
+	bool		m_forward;
+	bool		m_back;
+	bool		m_left;
+	bool		m_right;
+	bool		rot_right;
+	bool		rot_left;
+	bool		sneaking;
+	bool		sprint;
+}				t_action;
+
 /// @brief Struct to save player info.
 /// @param pos_x Position of the player on the map in X axis.
 /// @param pos_y Position of the player on the map in Y axis.
@@ -140,12 +152,7 @@ typedef struct s_player
 	t_cord		plane;
 	double		plane_mag;
 	double		direction;
-	bool		m_forward;
-	bool		m_back;
-	bool		m_left;
-	bool		m_right;
-	bool		rot_right;
-	bool		rot_left;
+	t_action	act;
 	int			vertical_view;
 	double		flash_fov;
 	double		cos_flash;
@@ -212,5 +219,4 @@ typedef struct s_game
 	bool		debug;
 	double		move_speed;
 	double		rot_speed;
-	bool		sprint;
 }				t_game;

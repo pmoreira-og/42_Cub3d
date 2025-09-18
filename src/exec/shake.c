@@ -32,7 +32,8 @@ void	apply_bob_effect(t_player *p, t_game *g)
 	double	phase_step;
 
 	dist = get_dist(p);
-	if (g->sprint && !p->m_left && !p->m_right && p->m_forward)
+	if (g->player.act.sprint && !p->act.m_left \
+&& !p->act.m_right && p->act.m_forward)
 	{
 		p->bob.curr_amp += ((TARGET_AMP * 2) - p->bob.curr_amp) * SMOOTH;
 		phase_step = dist * (2.0 * PI / (CYCLE_LENGTH * 1.33));
