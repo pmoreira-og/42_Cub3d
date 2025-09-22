@@ -8,26 +8,28 @@ void	armageddon(t_game *data)
 		clean_mlx(data);
 	if (data->matrix)
 		free_matrix((void **)data->matrix);
-	free (data->paths[0]);
-	free (data->paths[1]);
-	free (data->paths[2]);
-	free (data->paths[3]);
+	free(data->paths[0]);
+	free(data->paths[1]);
+	free(data->paths[2]);
+	free(data->paths[3]);
 }
 
 static void	clean_mlx(t_game *data)
 {
+	int	i;
+
 	if (data->bg.img)
 		mlx_destroy_image(data->mlx, data->bg.img);
-	if (data->walls[0].img)
-		mlx_destroy_image(data->mlx, data->walls[0].img);
-	if (data->walls[1].img)
-		mlx_destroy_image(data->mlx, data->walls[1].img);
-	if (data->walls[2].img)
-		mlx_destroy_image(data->mlx, data->walls[2].img);
-	if (data->walls[3].img)
-		mlx_destroy_image(data->mlx, data->walls[3].img);
-	if (data->menu.img)
-		mlx_destroy_image(data->mlx, data->menu.img);
+	i = -1;
+	while (++i < 4)
+		if (data->walls[i].img)
+			mlx_destroy_image(data->mlx, data->walls[i].img);
+	i = -1;
+	while (++i < 4)
+		if (data->menu[i].img)
+			mlx_destroy_image(data->mlx, data->menu[i].img);
+	if (data->pause.img)
+		mlx_destroy_image(data->mlx, data->pause.img);
 	if (data->hand[0].img)
 		mlx_destroy_image(data->mlx, data->hand[0].img);
 	if (data->hand[1].img)

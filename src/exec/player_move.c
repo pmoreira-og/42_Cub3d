@@ -54,15 +54,15 @@ static void	get_moving(t_game *g, double angle)
 
 	d[0] = cos(angle);
 	d[1] = -sin(angle);
-	if (g->player.act.sprint && !g->player.act.sneaking \
-&& g->player.act.m_forward)
+	if (g->player.act.sprint && !g->player.act.sneaking
+		&& g->player.act.m_forward)
 		new_speed = g->move_speed * 2;
 	else
 		new_speed = g->move_speed;
 	if (g->player.act.sneaking && !g->player.act.sprint)
 		new_speed *= 0.5;
-	if ((g->player.act.m_forward || g->player.act.m_back) \
-&& (g->player.act.m_left || g->player.act.m_right))
+	if ((g->player.act.m_forward || g->player.act.m_back)
+		&& (g->player.act.m_left || g->player.act.m_right))
 		new_speed *= 0.75;
 	move_player(g, 1, d[0] * new_speed);
 	move_player(g, 0, d[1] * new_speed);

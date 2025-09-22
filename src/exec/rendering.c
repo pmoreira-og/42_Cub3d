@@ -10,9 +10,9 @@ static void	player_update_dir_plane(t_player *p)
 
 static void	draw_map(t_game *g)
 {
-	t_dda		dda;
-	int			x;
-	double		camera_x;
+	t_dda	dda;
+	int		x;
+	double	camera_x;
 
 	x = 0;
 	while (x < WIDTH)
@@ -27,21 +27,34 @@ static void	draw_map(t_game *g)
 static void	draw_flashlight(t_game *game)
 {
 	if (game->player.flash_on)
-		sprite_to_bg(&game->bg, &game->hand[0], \
-(t_cord){560, 560}, (t_cord){800, 520});
+		sprite_to_bg(&game->bg, &game->hand[0], (t_cord){560, 560},
+			(t_cord){800, 520});
 	else
-		sprite_to_bg(&game->bg, &game->hand[1], \
-(t_cord){560, 560}, (t_cord){800, 520});
+		sprite_to_bg(&game->bg, &game->hand[1], (t_cord){560, 560},
+			(t_cord){800, 520});
+}
+
+void	render_menu(t_game *game)
+{
+	static bool	clockwise;
+	static int	i;
+
+	if (time_passed(500))
+	{
+		if (i == 3 || i == 0)
+			clockwise = !clockwise;
+		if (clockwise)
+			i++;
+		else
+			i--;
+		mlx_put_image_to_window(game->mlx, game->win, game->menu[i].img, 0, 0);
+	}
 }
 
 int	render_map(t_game *game)
 {
 	if (game->scene == MENU)
-	{
-		// this will be an animation using fps
-		// to run between the animation frames
-		mlx_put_image_to_window(game->mlx, game->win, game->menu.img, 0, 0);
-	}
+		render_menu(game);
 	else if (game->scene == GAME)
 	{
 		move_handler(game);

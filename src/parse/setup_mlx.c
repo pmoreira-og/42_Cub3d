@@ -11,7 +11,7 @@ bool	setup_mlx(t_game *game)
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, TITLE);
 	if (!game->win)
 		return (printf_fd(2, M_MLXWINDF), false);
-	if (!load_walls(game))
+	if (!load_assets(game))
 		return (printf_fd(2, M_ERRO M_INVXPM), false);
 	if (!get_img(game, WIDTH, HEIGHT))
 		return (false);
@@ -22,7 +22,7 @@ bool	setup_mlx(t_game *game)
 	return (true);
 }
 
-bool	load_walls(t_game *g)
+bool	load_assets(t_game *g)
 {
 	if (!get_sprite_data(g, &g->walls[0], g->paths[0]))
 		return (false);
@@ -32,10 +32,16 @@ bool	load_walls(t_game *g)
 		return (false);
 	if (!get_sprite_data(g, &g->walls[3], g->paths[3]))
 		return (false);
-	if (!get_sprite_data(g, &g->menu, MAIN_MENU ".xpm"))
+	if (!get_sprite_data(g, &g->menu[0], MAIN_MENU "1.xpm"))
 		return (false);
-	// doing this so i can have more than one main menu frame
-	// for animation
+	if (!get_sprite_data(g, &g->menu[1], MAIN_MENU "2.xpm"))
+		return (false);
+	if (!get_sprite_data(g, &g->menu[2], MAIN_MENU "3.xpm"))
+		return (false);
+	if (!get_sprite_data(g, &g->menu[3], MAIN_MENU "4.xpm"))
+		return (false);
+	if (!get_sprite_data(g, &g->pause, "./assets/controls_sheet.xpm"))
+		return (false);
 	if (!get_sprite_data(g, &g->hand[0], "./assets/lantern.xpm"))
 		return (false);
 	if (!get_sprite_data(g, &g->hand[1], "./assets/lantern_off.xpm"))

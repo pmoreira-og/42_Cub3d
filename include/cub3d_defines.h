@@ -8,7 +8,7 @@
 // -->┊( DEFINES )┊.´-★☆★
 
 # define TITLE "Night at the Aquarium"
-# define MAIN_MENU "./assets/main_menu"
+# define MAIN_MENU "./assets/main_menu_"
 # define LOGO "./textures/logo_cub3d.xpm"
 # define EASTER "./textures/easter_egg.xpm"
 # define DUCK "./textures/duck.xpm"

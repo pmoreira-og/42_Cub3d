@@ -207,7 +207,8 @@ typedef struct s_game
 	int			map_height;
 	int			map_width;
 	t_img_data	bg;
-	t_img_data	menu;
+	t_img_data	pause;
+	t_img_data	menu[4];
 	t_img_data	hand[2];
 	t_player	player;
 	t_minimap	mini;

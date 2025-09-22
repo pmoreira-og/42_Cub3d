@@ -28,6 +28,8 @@ int	mouse_handler(int x, int y, t_game *g)
 	double		sensitivity;
 
 	(void) y;
+	if (g->scene != GAME)
+		return (1);
 	if (ignore_frame)
 	{
 		ignore_frame = false;

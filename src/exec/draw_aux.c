@@ -37,10 +37,10 @@ static void	init_wall(t_player *p, t_dda *dda, t_wall *w)
 		w->ang_intensity = (dot - p->cos_flash) / (1.0 - p->cos_flash);
 	else
 		w->ang_intensity = 0;
-	w->dist_intensity = 1.0 / (1.0 + 0.2 * dda->perp_dist \
-+ 0.1 * (pow(dda->perp_dist, 2)));
-	w->light = 0.05 + (0.7 + (p->flash_on * 0.25) - 0.05) \
-* w->ang_intensity * w->dist_intensity;
+	w->dist_intensity = 1.0 / (1.0 + 0.2 * dda->perp_dist + 0.1
+			* (pow(dda->perp_dist, 2)));
+	w->light = 0.05 + (0.7 + (p->flash_on * 0.25) - 0.05) * w->ang_intensity
+		* w->dist_intensity;
 	if (w->light < 0.05)
 		w->light = 0.05;
 	if (w->light > 1)

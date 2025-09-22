@@ -170,4 +170,4 @@ void	find_player(t_game *game, t_point *save);
 
 bool	setup_mlx(t_game *game);
 bool	get_img(t_game *game, int width, int height);
-bool	load_walls(t_game *g);
+bool	load_assets(t_game *g);

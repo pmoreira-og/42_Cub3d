@@ -1,5 +1,7 @@
 #include "../../include/cub3d.h"
 
+static void	handle_menu_hooks(int keycode, int *prev, t_game *g);
+
 void	manager(t_game *game)
 {
 	mlx_hook(game->win, 17, 0, close_win_mouse, game);
@@ -10,24 +12,29 @@ void	manager(t_game *game)
 
 int	key_press_manager(int keycode, t_game *data)
 {
+	static int	prev;
+
 	if (keycode == ESC)
 		close_win_mouse(data);
 	if (data->scene == GAME)
-		handle_game_hooks(keycode, data);
-	else if (data->scene == MENU && keycode == ENTER)
 	{
-		data->scene = GAME;
-		data->player.act.rot_left = false;
-		data->player.act.rot_right = false;
-		mlx_put_image_to_window(data->mlx, data->win, data->bg.img, 0, 0);
+		if (keycode == BACKSPACE)
+		{
+			prev = data->scene;
+			data->scene = PAUSE;
+			mlx_put_image_to_window(data->mlx, data->win, data->pause.img, 0,
+				0);
+			return (0);
+		}
+		handle_game_hooks(keycode, data);
 	}
+	else
+		handle_menu_hooks(keycode, &prev, data);
 	return (0);
 }
 
 void	handle_game_hooks(int keycode, t_game *g)
 {
-	if (keycode == BACKSPACE)
-		g->scene = MENU;
 	if (keycode == SHIFT && !g->player.act.sneaking)
 		g->player.act.sprint = true;
 	if (keycode == VK_LEFT)
@@ -53,9 +60,38 @@ void	handle_game_hooks(int keycode, t_game *g)
 		g->player.vertical_view += 10;
 }
 
-int	key_release_manager(int keycode, t_game *g)
+static void	handle_menu_hooks(int keycode, int *prev, t_game *g)
 {
 	if (g->scene == MENU)
+	{
+		if (keycode == ENTER)
+		{
+			g->scene = GAME;
+			g->player.act.rot_left = false;
+			g->player.act.rot_right = false;
+		}
+		else if (keycode == BACKSPACE)
+		{
+			*prev = g->scene;
+			g->scene = PAUSE;
+			mlx_put_image_to_window(g->mlx, g->win, g->pause.img, 0, 0);
+		}
+	}
+	else if (g->scene == PAUSE && keycode == BACKSPACE)
+	{
+		g->scene = *prev;
+		if (*prev == GAME)
+		{
+			g->player.act.rot_left = false;
+			g->player.act.rot_right = false;
+			mlx_put_image_to_window(g->mlx, g->win, g->bg.img, 0, 0);
+		}
+	}
+}
+
+int	key_release_manager(int keycode, t_game *g)
+{
+	if (g->scene == MENU || g->scene == PAUSE)
 		return (0);
 	if (keycode == ESC)
 		close_win_mouse(g);
@@ -86,11 +122,11 @@ void	overlay_hooks(int keycode, t_game *g)
 {
 	if (keycode == 'f' && time_passed(400))
 		g->player.flash_on = !g->player.flash_on;
-	if (keycode == 'm' && time_passed(400))
+	else if (keycode == 'h' && time_passed(400))
 		g->mini.show = !g->mini.show;
-	if (g->mini.show && keycode == 'k' && g->mini.scale == 1 \
-&& time_passed(100))
+	else if (g->mini.show && keycode == 'm' && g->mini.scale == 1
+		&& time_passed(100))
 		g->mini.scale = 3;
-	else if (g->mini.show && keycode == 'k' && time_passed(300))
+	else if (g->mini.show && keycode == 'm' && time_passed(300))
 		g->mini.scale = 1;
 }
