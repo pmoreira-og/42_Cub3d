@@ -33,6 +33,7 @@ void	sprite_to_bg(t_img_data *bg, t_img_data *sprite, t_cord sprt,
 
 //*	Rendering
 
+void	manager(t_game *game);
 int		render_map(t_game *game);
 
 //*	Lighting
@@ -50,6 +51,7 @@ void	apply_bob_effect(t_player *p, t_game *g);
 
 int		close_win_mouse(t_game *data);
 int		mouse_handler(int x, int y, t_game *g);
+void	hide_mouse(t_game *g);
 
 //*	Lighting
 
@@ -81,6 +83,7 @@ void	draw_section(t_game *g, t_dda *dda, int x, t_player *p);
 //*	DDA
 
 bool	collider_dda(t_player p, double cameraX, t_game *g, t_dda *dda);
+void	player_update_dir_plane(t_player *p);
 
 //*	DDA Aux
 
@@ -106,7 +109,6 @@ void	armageddon(t_game *data);
 
 //*	Hooks
 
-void	manager(t_game *game);
 int		key_press_manager(int keycode, t_game *data);
 void	handle_game_hooks(int keycode, t_game *g);
 int		key_release_manager(int keycode, t_game *data);

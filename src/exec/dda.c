@@ -1,5 +1,13 @@
 #include "../../include/cub3d.h"
 
+void	player_update_dir_plane(t_player *p)
+{
+	p->dir.x = cos(p->direction);
+	p->dir.y = -sin(p->direction);
+	p->plane.x = -p->dir.y * p->plane_mag;
+	p->plane.y = p->dir.x * p->plane_mag;
+}
+
 bool	collider_dda(t_player p, double cameraX, t_game *g, t_dda *dda)
 {
 	init_struct(dda, &p, cameraX);

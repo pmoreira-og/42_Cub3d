@@ -7,7 +7,7 @@ MLX		=	./include/minilibx_linux/libmlx.a
 # -->┊( COMMANDS AND FLAGS )┊.´-★☆★
 CC			=	cc
 HIDE		=	0
-CFLAGS		=	-Wall -Wextra -Werror -g -DHIDE=$(HIDE)
+CFLAGS		=	-Wall -Wextra -Werror -g -DHIDE=$(HIDE) #-O3
 MLXFLAGS	=	-L ./include/minilibx_linux -lmlx_Linux -lX11 -lXext -lm
 VAL			=	valgrind --leak-check=full --show-leak-kinds=all \
 				--track-origins=yes --track-fds=yes -s

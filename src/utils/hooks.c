@@ -2,14 +2,6 @@
 
 static void	handle_menu_hooks(int keycode, int *prev, t_game *g);
 
-void	manager(t_game *game)
-{
-	mlx_hook(game->win, 17, 0, close_win_mouse, game);
-	mlx_hook(game->win, 2, 1L << 0, key_press_manager, game);
-	mlx_hook(game->win, 3, 1L << 1, key_release_manager, game);
-	mlx_hook(game->win, 6, 1L << 6, mouse_handler, game);
-}
-
 int	key_press_manager(int keycode, t_game *data)
 {
 	static int	prev;
@@ -65,11 +57,7 @@ static void	handle_menu_hooks(int keycode, int *prev, t_game *g)
 	if (g->scene == MENU)
 	{
 		if (keycode == ENTER)
-		{
 			g->scene = GAME;
-			g->player.act.rot_left = false;
-			g->player.act.rot_right = false;
-		}
 		else if (keycode == BACKSPACE)
 		{
 			*prev = g->scene;
@@ -82,8 +70,7 @@ static void	handle_menu_hooks(int keycode, int *prev, t_game *g)
 		g->scene = *prev;
 		if (*prev == GAME)
 		{
-			g->player.act.rot_left = false;
-			g->player.act.rot_right = false;
+			ft_bzero(&g->player.act, sizeof(t_action));
 			mlx_put_image_to_window(g->mlx, g->win, g->bg.img, 0, 0);
 		}
 	}

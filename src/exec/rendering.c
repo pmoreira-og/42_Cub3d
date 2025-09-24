@@ -1,11 +1,11 @@
 #include "../../include/cub3d.h"
 
-static void	player_update_dir_plane(t_player *p)
+void	manager(t_game *game)
 {
-	p->dir.x = cos(p->direction);
-	p->dir.y = -sin(p->direction);
-	p->plane.x = -p->dir.y * p->plane_mag;
-	p->plane.y = p->dir.x * p->plane_mag;
+	mlx_hook(game->win, 17, 0, close_win_mouse, game);
+	mlx_hook(game->win, 2, 1L << 0, key_press_manager, game);
+	mlx_hook(game->win, 3, 1L << 1, key_release_manager, game);
+	mlx_hook(game->win, 6, 1L << 6, mouse_handler, game);
 }
 
 static void	draw_map(t_game *g)
@@ -53,6 +53,7 @@ void	render_menu(t_game *game)
 
 int	render_map(t_game *game)
 {
+	hide_mouse(game);
 	if (game->scene == MENU)
 		render_menu(game);
 	else if (game->scene == GAME)
@@ -64,9 +65,9 @@ int	render_map(t_game *game)
 		apply_bob_effect(&game->player, game);
 		player_update_dir_plane(&game->player);
 		draw_map(game);
+		draw_flashlight(game);
 		if (game->mini.show)
 			render_minimap(game->mini);
-		draw_flashlight(game);
 		mlx_put_image_to_window(game->mlx, game->win, game->bg.img, 0, 0);
 	}
 	return (1);

@@ -6,13 +6,12 @@ int	close_win_mouse(t_game *data)
 	exit(0);
 }
 
-static void	hold_mouse(t_game *g)
+void	hide_mouse(t_game *g)
 {
 	if (g->scene == GAME)
 	{
 		if (HIDE)
 			mlx_mouse_hide(g->mlx, g->win);
-		mlx_mouse_move(g->mlx, g->win, WIDTH / 2, HEIGHT / 2);
 	}
 	else
 	{
@@ -28,6 +27,7 @@ int	mouse_handler(int x, int y, t_game *g)
 	double		sensitivity;
 
 	(void) y;
+	// hide_mouse(g);
 	if (g->scene != GAME)
 		return (1);
 	if (ignore_frame)
@@ -41,7 +41,7 @@ int	mouse_handler(int x, int y, t_game *g)
 	{
 		g->player.direction -= dx * sensitivity;
 		ignore_frame = true;
-		hold_mouse(g);
+		mlx_mouse_move(g->mlx, g->win, WIDTH / 2, HEIGHT / 2);
 	}
 	return (0);
 }
