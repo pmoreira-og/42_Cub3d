@@ -20,14 +20,24 @@ void	hide_mouse(t_game *g)
 	}
 }
 
+/// @brief Safeguard function to y axis toggle with mouse.
+/// @param value player vertical view var
+/// @param dy mouse movement
+static bool	check_valid_vertical(int value, int dy)
+{
+	if (dy < 0 && value < (int)(HEIGHT / 5))
+		return (true);
+	if (dy > 0 && (-value < (int)(HEIGHT / 5)))
+		return (true);
+	return (false);
+}
+
 int	mouse_handler(int x, int y, t_game *g)
 {
 	static bool	ignore_frame;
 	int			dx;
-	double		sensitivity;
+	int			dy;
 
-	(void) y;
-	// hide_mouse(g);
 	if (g->scene != GAME)
 		return (1);
 	if (ignore_frame)
@@ -36,10 +46,12 @@ int	mouse_handler(int x, int y, t_game *g)
 		return (0);
 	}
 	dx = x - (WIDTH / 2);
-	sensitivity = 0.001;
-	if (dx != 0)
+	dy = y - (HEIGHT / 2);
+	if (dx != 0 || dy != 0)
 	{
-		g->player.direction -= dx * sensitivity;
+		g->player.direction -= dx * 0.001;
+		if (check_valid_vertical(g->player.vertical_view, dy))
+			g->player.vertical_view -= dy;
 		ignore_frame = true;
 		mlx_mouse_move(g->mlx, g->win, WIDTH / 2, HEIGHT / 2);
 	}
