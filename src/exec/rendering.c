@@ -27,11 +27,11 @@ static void	draw_map(t_game *g)
 static void	draw_flashlight(t_game *game)
 {
 	if (game->player.flash_on)
-		sprite_to_bg(&game->bg, &game->hand[0], (t_cord){560, 560},
-			(t_cord){800, 520});
+		sprite_to_bg(&game->bg, &game->hand[0], (t_cord){440, 440},
+			(t_cord){WIDTH - 440, HEIGHT - 440});
 	else
-		sprite_to_bg(&game->bg, &game->hand[1], (t_cord){560, 560},
-			(t_cord){800, 520});
+		sprite_to_bg(&game->bg, &game->hand[1], (t_cord){440, 440},
+			(t_cord){WIDTH - 440, HEIGHT - 440});
 }
 
 void	render_menu(t_game *game)

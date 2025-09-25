@@ -42,9 +42,9 @@ bool	load_assets(t_game *g)
 		return (false);
 	if (!get_sprite_data(g, &g->pause, "./assets/controls_sheet.xpm"))
 		return (false);
-	if (!get_sprite_data(g, &g->hand[0], "./assets/lantern.xpm"))
+	if (!get_sprite_data(g, &g->hand[0], LANTERN "on.xpm"))
 		return (false);
-	if (!get_sprite_data(g, &g->hand[1], "./assets/lantern_off.xpm"))
+	if (!get_sprite_data(g, &g->hand[1], LANTERN "off.xpm"))
 		return (false);
 	return (true);
 }
