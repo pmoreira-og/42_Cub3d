@@ -1,5 +1,7 @@
 #include "../../include/cub3d.h"
 
+static int	space_flood_fill(int y, int x, t_parse *parse);
+
 /// @brief finds spaces and replaces them with '2' to check
 /// if any floor or player isn't surrounded by '1's 
 /// @return true on success, false on failure
@@ -25,7 +27,7 @@ bool	check_surrounding_walls(t_parse *parse)
 
 /// @brief flood fill on spaces to check for walls
 /// @return amount of errors (exposed floor or player) 
-int	space_flood_fill(int y, int x, t_parse *parse)
+static int	space_flood_fill(int y, int x, t_parse *parse)
 {
 	int	errors;
 

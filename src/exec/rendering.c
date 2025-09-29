@@ -24,14 +24,13 @@ static void	draw_map(t_game *g)
 	}
 }
 
-static void	draw_flashlight(t_game *game)
+static void	draw_flashlight(t_game *g)
 {
-	if (game->player.flash_on)
-		sprite_to_bg(&game->bg, &game->hand[0], (t_cord){440, 440},
-			(t_cord){WIDTH - 440, HEIGHT - 440});
-	else
-		sprite_to_bg(&game->bg, &game->hand[1], (t_cord){440, 440},
-			(t_cord){WIDTH - 440, HEIGHT - 440});
+	sprite_to_bg(&g->bg, &g->hand[g->player.flash_on], (t_cord){440, 440},
+		(t_cord){WIDTH - 440, HEIGHT - 440});
+	if (g->mini.show)
+		sprite_to_bg(&g->bg, &g->flash[g->player.flash_on], (t_cord){189, 51},
+			(t_cord){g->mini.offset, HEIGHT - 100});
 }
 
 void	render_menu(t_game *game)

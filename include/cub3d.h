@@ -62,11 +62,7 @@ int		get_color(int r, int g, int b);
 //*	Minimap
 
 void	init_minimap(t_game *g);
-void	update_minimap_vals(t_minimap *mini);
 void	render_minimap(t_minimap mini);
-void	draw_minimap_tiles(t_minimap mini, t_cord map_cord, t_cord win_cord);
-void	draw_minimap_row(t_minimap mini, t_cord map_cord, t_cord win_cord,
-			t_cord area);
 
 //*	Draw
 
@@ -114,62 +110,28 @@ void	handle_game_hooks(int keycode, t_game *g);
 int		key_release_manager(int keycode, t_game *data);
 void	overlay_hooks(int keycode, t_game *g);
 
-//*	Printers
-
-void	print_map(t_game *data);
-char	*get_type_print(t_type type);
-
 //-‵,┊ PARSE FTS
 
-// -- get_map
+// -- setup for parsing
 
 bool	get_map(t_game *game, char *input);
-void	init_parse_struct(t_parse *parse, char *input);
 void	safe_close(int fd);
 int		len_until(char *str, char c);
-void	cleanup_parse(t_parse *parse);
 
-// -- setup_extract
+// -- header parsing
 
 bool	setup_for_extraction(t_parse *parse);
-int		get_file_line_count(int fd);
-char	**file_literal_copy(int fd, int lc);
-
-// -- extract_header
-
 bool	extract_header(t_parse *parse);
-bool	valid_identifier(t_header *hd, char *line);
-bool	extract_path(t_header *tx, char *path);
-char	**assign_direction(char *dir, t_header *tx);
-
-// -- extract_color
-
 bool	extract_color(t_header *cl, char *code);
-bool	valid_color_format(char *code);
-bool	assign_color_code(char *code, int *type);
 
-// -- extract_map
+// -- map parsing and checks
 
 bool	extract_map(t_parse *parse);
-bool	invalid_chars(char **map, int *heigth, int *width, t_type *player);
 bool	assign_point_type(char c, t_type *point);
-char	**make_padded_map(t_parse *parse);
-
-// -- wall_check
-
 bool	check_surrounding_walls(t_parse *parse);
-int		space_flood_fill(int y, int x, t_parse *parse);
 
-// -- map_to_game
+// -- parse to exec transfer
 
 bool	map_to_game(t_parse *parse, t_game *game);
-void	get_exact_hei_wid(t_parse *parse);
-t_point	**make_point_map(t_parse *parse);
-void	init_player(t_game *game);
-void	find_player(t_game *game, t_point *save);
-
-// -- setup_mlx
-
 bool	setup_mlx(t_game *game);
-bool	get_img(t_game *game, int width, int height);
-bool	load_assets(t_game *g);
+void	print_map(t_game *data);

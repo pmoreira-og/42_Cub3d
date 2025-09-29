@@ -1,5 +1,8 @@
 #include "../../include/cub3d.h"
 
+static bool	invalid_chars(char **map, int *heigth, int *width, t_type *player);
+static char	**make_padded_map(t_parse *parse);
+
 /// @brief extracts and validates the map
 /// @return true on success, false on failure
 bool	extract_map(t_parse *parse)
@@ -23,7 +26,7 @@ bool	extract_map(t_parse *parse)
 /// @param width max width will be stored here
 /// @param player the direction of the player is stored here
 /// @return true when invalid, false when valid
-bool	invalid_chars(char **map, int *heigth, int *width, t_type *player)
+static bool	invalid_chars(char **map, int *heigth, int *width, t_type *player)
 {
 	int	i;
 
@@ -76,7 +79,7 @@ bool	assign_point_type(char c, t_type *point)
 
 /// @brief makes a version of map but with a border of spaces all around
 /// @return the padded map
-char	**make_padded_map(t_parse *parse)
+static char	**make_padded_map(t_parse *parse)
 {
 	char	**new;
 	int		i;

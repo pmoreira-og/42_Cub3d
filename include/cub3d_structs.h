@@ -197,6 +197,7 @@ typedef struct s_minimap
 	int			offset;
 	t_cord		size;
 	t_cord		center;
+	t_img_data	frame;
 }				t_minimap;
 
 typedef struct s_game
@@ -209,6 +210,7 @@ typedef struct s_game
 	t_img_data	bg;
 	t_img_data	pause;
 	t_img_data	menu[4];
+	t_img_data	flash[2];
 	t_img_data	hand[2];
 	t_player	player;
 	t_minimap	mini;

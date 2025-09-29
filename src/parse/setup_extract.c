@@ -1,5 +1,8 @@
 #include "../../include/cub3d.h"
 
+static int	get_file_line_count(int fd);
+static char	**file_literal_copy(int fd, int lc);
+
 /// @brief setup and getting raw content from input file
 /// @param parse struct with everything needed for the parse
 /// @return true on success, false on failure
@@ -21,7 +24,7 @@ bool	setup_for_extraction(t_parse *parse)
 }
 
 /// @return number of lines in the FD file
-int	get_file_line_count(int fd)
+static int	get_file_line_count(int fd)
 {
 	int		lc;
 	char	*file_line;
@@ -43,7 +46,7 @@ int	get_file_line_count(int fd)
 /// @param fd file to copy from
 /// @param lc number of lines in the FD file
 /// @return
-char	**file_literal_copy(int fd, int lc)
+static char	**file_literal_copy(int fd, int lc)
 {
 	char	**copy;
 	char	*line;

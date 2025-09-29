@@ -1,5 +1,10 @@
 #include "../../include/cub3d.h"
 
+static void	get_exact_hei_wid(t_parse *parse);
+static t_point	**make_point_map(t_parse *parse);
+static void	init_player(t_game *game);
+static void	find_player(t_game *game, t_point *save);
+
 /// @brief passes the all needed elements from PARSE to GAME
 /// @param parse struct with everything obtained in the parsing
 /// @param game struct that will be used to run the game
@@ -29,7 +34,7 @@ bool	map_to_game(t_parse *parse, t_game *game)
 }
 
 /// @brief cuts empty spaces from the heigth and width of the map
-void	get_exact_hei_wid(t_parse *parse)
+static void	get_exact_hei_wid(t_parse *parse)
 {
 	int	i;
 	int	margin;
@@ -58,7 +63,7 @@ void	get_exact_hei_wid(t_parse *parse)
 
 /// @brief convertes the char **map to a t_point **map
 /// @return a map with cordinates and element types
-t_point	**make_point_map(t_parse *parse)
+static t_point	**make_point_map(t_parse *parse)
 {
 	t_point	**new;
 	int		y;
@@ -83,7 +88,7 @@ t_point	**make_point_map(t_parse *parse)
 	return (new);
 }
 
-void	init_player(t_game *game)
+static void	init_player(t_game *game)
 {
 	t_point	play;
 
@@ -103,7 +108,7 @@ void	init_player(t_game *game)
 	init_bob_struct(game);
 }
 
-void	find_player(t_game *game, t_point *save)
+static void	find_player(t_game *game, t_point *save)
 {
 	int	y;
 	int	x;

@@ -1,5 +1,7 @@
 #include "../../include/cub3d.h"
 
+static char	*get_type_print(t_type type);
+
 void	print_map(t_game *data)
 {
 	int	i;
@@ -25,7 +27,7 @@ void	print_map(t_game *data)
 	ft_printf("\n");
 }
 
-char	*get_type_print(t_type type)
+static char	*get_type_print(t_type type)
 {
 	if (type == WALL)
 		return (MAG "WALL" DEF);

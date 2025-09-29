@@ -1,5 +1,8 @@
 #include "../../include/cub3d.h"
 
+static bool	valid_color_format(char *code);
+static bool	assign_color_code(char *code, int *type);
+
 /// @brief gets color code from CODE and sees if its a valid color
 /// @param cl header struct containig the colors
 /// @param code full line with color identifier and code
@@ -35,7 +38,7 @@ bool	extract_color(t_header *cl, char *code)
 
 /// @brief sees if CODE is in the [0-255],[0-255],[0-255] format
 /// @return true when valid, false when invalid
-bool	valid_color_format(char *code)
+static bool	valid_color_format(char *code)
 {
 	int	i;
 	int	j;
@@ -63,7 +66,7 @@ bool	valid_color_format(char *code)
 /// @param code RGB string
 /// @param type pointer to the floor or ceiling color
 /// @return true on success, false on failure
-bool	assign_color_code(char *code, int *type)
+static bool	assign_color_code(char *code, int *type)
 {
 	char	color[4];
 	int		num_len;
