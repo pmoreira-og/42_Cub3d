@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_to_game.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/29 18:12:18 by rduro-pe          #+#    #+#             */
+/*   Updated: 2025/09/29 18:12:42 by rduro-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
-static void	get_exact_hei_wid(t_parse *parse);
+static void		get_exact_hei_wid(t_parse *parse);
 static t_point	**make_point_map(t_parse *parse);
-static void	init_player(t_game *game);
-static void	find_player(t_game *game, t_point *save);
+static void		init_player(t_game *game);
+static void		find_player(t_game *game, t_point *save);
 
 /// @brief passes the all needed elements from PARSE to GAME
 /// @param parse struct with everything obtained in the parsing

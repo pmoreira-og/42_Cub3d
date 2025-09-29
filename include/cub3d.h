@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/29 18:22:59 by rduro-pe          #+#    #+#             */
+/*   Updated: 2025/09/29 18:26:00 by rduro-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 
 // -->┊( LIBS )┊.´-★☆★
@@ -36,12 +48,6 @@ void	sprite_to_bg(t_img_data *bg, t_img_data *sprite, t_cord sprt,
 void	manager(t_game *game);
 int		render_map(t_game *game);
 
-//*	Lighting
-
-int		apply_light(int color, double light);
-int		get_color(int r, int g, int b);
-double	get_light(int y, t_player *p);
-
 //*	Shake
 
 void	init_bob_struct(t_game *game);
@@ -57,7 +63,6 @@ void	hide_mouse(t_game *g);
 
 double	get_light(int y, t_player *p);
 int		apply_light(int color, double light);
-int		get_color(int r, int g, int b);
 
 //*	Minimap
 
@@ -101,14 +106,12 @@ bool	has_changed(t_game *g);
 
 //*	Cleaners
 
-void	armageddon(t_game *data);
+void	cleanup_all(t_game *data);
 
 //*	Hooks
 
 int		key_press_manager(int keycode, t_game *data);
-void	handle_game_hooks(int keycode, t_game *g);
 int		key_release_manager(int keycode, t_game *data);
-void	overlay_hooks(int keycode, t_game *g);
 
 //-‵,┊ PARSE FTS
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rendering.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/29 18:26:25 by rduro-pe          #+#    #+#             */
+/*   Updated: 2025/09/29 18:31:15 by rduro-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 void	manager(t_game *game)
@@ -33,7 +45,7 @@ static void	draw_flashlight(t_game *g)
 			(t_cord){g->mini.offset, HEIGHT - 100});
 }
 
-void	render_menu(t_game *game)
+static void	render_menu(t_game *game)
 {
 	static bool	clockwise;
 	static int	i;

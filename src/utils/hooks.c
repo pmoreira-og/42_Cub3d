@@ -1,6 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hooks.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/29 18:15:01 by rduro-pe          #+#    #+#             */
+/*   Updated: 2025/09/29 18:21:46 by rduro-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
+static void	handle_game_hooks(int keycode, t_game *g);
 static void	handle_menu_hooks(int keycode, int *prev, t_game *g);
+static void	overlay_hooks(int keycode, t_game *g);
 
 int	key_press_manager(int keycode, t_game *data)
 {
@@ -25,7 +39,7 @@ int	key_press_manager(int keycode, t_game *data)
 	return (0);
 }
 
-void	handle_game_hooks(int keycode, t_game *g)
+static void	handle_game_hooks(int keycode, t_game *g)
 {
 	if (keycode == SHIFT && !g->player.act.sneaking)
 		g->player.act.sprint = true;
@@ -105,7 +119,7 @@ int	key_release_manager(int keycode, t_game *g)
 	return (0);
 }
 
-void	overlay_hooks(int keycode, t_game *g)
+static void	overlay_hooks(int keycode, t_game *g)
 {
 	if (keycode == 'f' && time_passed(400))
 		g->player.flash_on = !g->player.flash_on;

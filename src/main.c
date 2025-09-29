@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/29 18:22:24 by rduro-pe          #+#    #+#             */
+/*   Updated: 2025/09/29 18:22:25 by rduro-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 int	main(int ac, char **av)
@@ -9,7 +21,7 @@ int	main(int ac, char **av)
 	if (!get_map(&game, av[1]))
 		return (1);
 	if (!setup_mlx(&game))
-		return (armageddon(&game), 1);
+		return (cleanup_all(&game), 1);
 	if (ac == 3)
 		game.debug = 1;
 	if (game.debug)

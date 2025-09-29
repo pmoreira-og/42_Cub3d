@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shake.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/29 18:26:28 by rduro-pe          #+#    #+#             */
+/*   Updated: 2025/09/29 18:26:42 by rduro-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 void	init_bob_struct(t_game *g)
@@ -24,8 +36,8 @@ void	apply_bob_effect(t_player *p, t_game *g)
 	double	phase_step;
 
 	dist = get_dist(p);
-	if (g->player.act.sprint && !p->act.m_left \
-&& !p->act.m_right && p->act.m_forward)
+	if (g->player.act.sprint && !p->act.m_left && !p->act.m_right
+		&& p->act.m_forward)
 	{
 		p->bob.curr_amp += ((TARGET_AMP * 2) - p->bob.curr_amp) * SMOOTH;
 		phase_step = dist * (2.0 * PI / (CYCLE_LENGTH * 1.33));

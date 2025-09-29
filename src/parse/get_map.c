@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/29 18:11:31 by rduro-pe          #+#    #+#             */
+/*   Updated: 2025/09/29 18:16:23 by rduro-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 static void	init_parse_struct(t_parse *parse, char *input);
@@ -21,7 +33,7 @@ bool	get_map(t_game *game, char *input)
 	if (!extract_map(&parse))
 		return (cleanup_parse(&parse), false);
 	if (!map_to_game(&parse, game))
-		return (cleanup_parse(&parse), armageddon(game), false);
+		return (cleanup_parse(&parse), cleanup_all(game), false);
 	cleanup_parse(&parse);
 	return (true);
 }

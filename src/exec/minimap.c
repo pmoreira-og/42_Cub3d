@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/29 18:26:15 by rduro-pe          #+#    #+#             */
+/*   Updated: 2025/09/29 18:26:57 by rduro-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 
 static void	update_minimap_vals(t_minimap *mini);
-static void	draw_minimap_tiles(t_minimap mini, t_cord map_cord, t_cord win_cord);
+static void	draw_minimap_tiles(t_minimap mini, t_cord map_cord,
+				t_cord win_cord);
 static void	draw_minimap_row(t_minimap mini, t_cord map_cord, t_cord win_cord,
-		t_cord area);
+				t_cord area);
 
 void	init_minimap(t_game *g)
 {

@@ -1,4 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lighting.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/29 18:24:17 by rduro-pe          #+#    #+#             */
+/*   Updated: 2025/09/29 18:25:42 by rduro-pe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
+
+static int	get_color(int r, int g, int b);
 
 double	get_light(int y, t_player *p)
 {
@@ -34,7 +48,7 @@ int	apply_light(int color, double light)
 	return (get_color(r, g, b));
 }
 
-int	get_color(int r, int g, int b)
+static int	get_color(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
 }
