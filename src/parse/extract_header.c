@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:11:25 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/09/29 18:11:26 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/09/29 18:51:10 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ static bool	extract_path(t_header *tx, char *path)
 	*type = ft_strndup(&path[i], len_until(&path[i], '\n'));
 	if (!*type)
 		return (printf_fd(2, M_MFL), false);
+	if (ft_strlen(*type) < 4)
+		return (printf_fd(2, M_ERRO M_NOXPM), false);
 	if (ft_strncmp(".xpm", *type + ft_strlen(*type) - 4, 4))
 		return (printf_fd(2, M_ERRO M_NOXPM), false);
 	fd = open(*type, O_RDONLY);
