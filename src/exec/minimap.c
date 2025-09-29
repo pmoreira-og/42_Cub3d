@@ -1,5 +1,10 @@
 #include "../../include/cub3d.h"
 
+static void	update_minimap_vals(t_minimap *mini);
+static void	draw_minimap_tiles(t_minimap mini, t_cord map_cord, t_cord win_cord);
+static void	draw_minimap_row(t_minimap mini, t_cord map_cord, t_cord win_cord,
+		t_cord area);
+
 void	init_minimap(t_game *g)
 {
 	g->mini.show = true;
@@ -14,7 +19,7 @@ void	init_minimap(t_game *g)
 
 /// @brief sets the minimap values according to scale
 /// @param mini struct with all needed values for the minimap
-void	update_minimap_vals(t_minimap *mini)
+static void	update_minimap_vals(t_minimap *mini)
 {
 	mini->offset = 28 * mini->scale;
 	mini->size.x = (WIDTH * 0.22) * mini->scale;
@@ -50,13 +55,15 @@ void	render_minimap(t_minimap mini)
 		- dir_os.y}, 0xFBFE36, 0x223030);
 	bucket_tool(mini.bg, (t_cord){mini.center.x + dir_os.x, mini.center.y
 		+ dir_os.y}, 0xFBFE36, 0x363930);
+	sprite_to_bg(mini.bg, &mini.frame, (t_cord){410, 318}, (t_cord){mini.offset
+		+ mini.size.x - 320, mini.offset + mini.size.y - 250});
 }
 
 /// @brief draws all floor and wall map tiles within a radius of the player
 /// @param mini struct with all needed values for the minimap
 /// @param map_cord cordinates in the map from where to start
 /// @param win_cord cordinates in the window where to start drawing
-void	draw_minimap_tiles(t_minimap mini, t_cord map_cord, t_cord win_cord)
+static void	draw_minimap_tiles(t_minimap mini, t_cord map_cord, t_cord win_cord)
 {
 	t_cord	area;
 
@@ -80,7 +87,7 @@ void	draw_minimap_tiles(t_minimap mini, t_cord map_cord, t_cord win_cord)
 }
 
 /// @brief draws map row indicated by MAP_CORD
-void	draw_minimap_row(t_minimap mini, t_cord map_cord, t_cord win_cord,
+static void	draw_minimap_row(t_minimap mini, t_cord map_cord, t_cord win_cord,
 		t_cord area)
 {
 	while (map_cord.x < mini.m_w && win_cord.x <= mini.offset + mini.size.x)

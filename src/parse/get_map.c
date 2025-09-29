@@ -1,5 +1,8 @@
 #include "../../include/cub3d.h"
 
+static void	init_parse_struct(t_parse *parse, char *input);
+static void	cleanup_parse(t_parse *parse);
+
 /// @brief gets map and all related info from the INPUT file
 /// @param game game structure where to store the info
 /// @param input used inputed path to file
@@ -24,7 +27,7 @@ bool	get_map(t_game *game, char *input)
 }
 
 /// @brief give default values for the parse struct
-void	init_parse_struct(t_parse *parse, char *input)
+static void	init_parse_struct(t_parse *parse, char *input)
 {
 	ft_bzero(parse, sizeof(t_parse));
 	parse->path = input;
@@ -54,7 +57,7 @@ int	len_until(char *str, char c)
 }
 
 /// @brief frees eveyrthing from the parse struct
-void	cleanup_parse(t_parse *parse)
+static void	cleanup_parse(t_parse *parse)
 {
 	free(parse->hd.no);
 	free(parse->hd.so);

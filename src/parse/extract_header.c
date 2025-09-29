@@ -1,5 +1,9 @@
 #include "../../include/cub3d.h"
 
+static bool	valid_identifier(t_header *hd, char *line);
+static bool	extract_path(t_header *tx, char *path);
+static char	**assign_direction(char *dir, t_header *tx);
+
 /// @brief extracts the 6 needed ids and sees if their content is valid
 /// @return true on success, false on failure
 bool	extract_header(t_parse *parse)
@@ -32,7 +36,7 @@ bool	extract_header(t_parse *parse)
 /// @param hd header struct where to store the info after the id
 /// @param line containing the texture identifier and path
 /// @return true when valid, false when invalid
-bool	valid_identifier(t_header *hd, char *line)
+static bool	valid_identifier(t_header *hd, char *line)
 {
 	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
 		|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3))
@@ -50,7 +54,7 @@ bool	valid_identifier(t_header *hd, char *line)
 /// @param tx header struct containig the textures
 /// @param path full line with texture identifier and path
 /// @return true on success, false on failure
-bool	extract_path(t_header *tx, char *path)
+static bool	extract_path(t_header *tx, char *path)
 {
 	char	**type;
 	int		fd;
@@ -77,7 +81,7 @@ bool	extract_path(t_header *tx, char *path)
 /// @param dir can be either "NO ", "SO ", "WE " or "EA "
 /// @param tx header struct containig possible textures
 /// @return pointer to where that texture should be stored
-char	**assign_direction(char *dir, t_header *tx)
+static char	**assign_direction(char *dir, t_header *tx)
 {
 	if (!ft_strncmp(dir, "NO ", 3))
 		return (&tx->no);
