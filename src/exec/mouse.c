@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:26:20 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/09/29 18:26:21 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/09/30 10:17:57 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,17 @@ void	hide_mouse(t_game *g)
 		if (HIDE)
 			mlx_mouse_show(g->mlx, g->win);
 	}
+	if (g->counter == 42)
+		g->fun = true;
 }
 
 /// @brief Safeguard function to y axis toggle with mouse.
 /// @param value player vertical view var
 /// @param dy mouse movement
-static bool	check_valid_vertical(int value, int dy)
+static bool	check_valid_vertical(int value, int dy, t_game *g)
 {
+	if (g->fun)
+		return (true);
 	if (dy < 0 && value < (int)(HEIGHT / 5))
 		return (true);
 	if (dy > 0 && (-value < (int)(HEIGHT / 5)))
@@ -62,7 +66,7 @@ int	mouse_handler(int x, int y, t_game *g)
 	if (dx != 0 || dy != 0)
 	{
 		g->player.direction -= dx * 0.001;
-		if (check_valid_vertical(g->player.vertical_view, dy))
+		if (check_valid_vertical(g->player.vertical_view, dy, g))
 			g->player.vertical_view -= dy;
 		ignore_frame = true;
 		mlx_mouse_move(g->mlx, g->win, WIDTH / 2, HEIGHT / 2);

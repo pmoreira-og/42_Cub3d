@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_structs.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:22:55 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/09/29 18:22:58 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/09/30 10:13:11 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,21 +216,23 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	t_point		**matrix;
+	char		*paths[4];
 	int			map_height;
 	int			map_width;
+	int			counter;
+	int			floor_color;
+	int			ceiling_color;
+	double		move_speed;
+	double		rot_speed;
+	bool		debug;
+	bool		fun;
 	t_img_data	bg;
 	t_img_data	pause;
 	t_img_data	menu[4];
 	t_img_data	flash[2];
 	t_img_data	hand[2];
+	t_img_data	walls[4];
 	t_player	player;
 	t_minimap	mini;
-	int			floor_color;
-	int			ceiling_color;
-	t_img_data	walls[4];
-	char		*paths[4];
 	t_scene		scene;
-	bool		debug;
-	double		move_speed;
-	double		rot_speed;
 }				t_game;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:15:01 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/09/29 18:21:46 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/09/30 10:15:28 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ static void	handle_menu_hooks(int keycode, int *prev, t_game *g)
 			mlx_put_image_to_window(g->mlx, g->win, g->bg.img, 0, 0);
 		}
 	}
+	if (keycode == BACKSPACE && g->counter < 42)
+		g->counter += 1;
 }
 
 int	key_release_manager(int keycode, t_game *g)

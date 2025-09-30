@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_color.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:11:22 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/09/29 18:13:32 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/09/30 10:40:47 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static bool	valid_color_format(char *code)
 		j = -1;
 		num_len = len_until(&code[i], ',');
 		if (num_len < 1 || num_len > 3 || (field < 2 \
-	&& code[i + num_len] != ',') || (field == 2 && code[i + num_len]))
+&& code[i + num_len] != ',') || (field == 2 && code[i + num_len]))
 			return (false);
 		while (++j < num_len)
 			if (!ft_isdigit(code[i + j]))
