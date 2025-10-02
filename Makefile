@@ -66,18 +66,22 @@ $(MLX):
 # -->┊( EXECUTION RULES )┊.´-★☆★
 exe: fclean
 	make all
-	./$(NAME) maps/map_1.cub
+	./$(NAME) maps/aquarium.cub
+
+duck: 
+	make all
+	./$(NAME) maps/duckquarium.cub
 
 hide: fclean
 	make all HIDE=1
-	./$(NAME) maps/map_1.cub
+	./$(NAME) maps/aquarium.cub
 
 d: all
-	./$(NAME) maps/map_1.cub -d
+	./$(NAME) maps/aquarium.cub -d
 
 val: fclean
 	make all
-	$(VAL) ./$(NAME) maps/map_1.cub
+	$(VAL) ./$(NAME) maps/aquarium.cub
 
 # -->┊( STANDARD RULES )┊.´-★☆★
 clean:

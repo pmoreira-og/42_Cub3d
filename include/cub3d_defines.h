@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:22:48 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/09/29 18:22:51 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:18:52 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@
 # define M_ARGAMT "incorrect amount of arguments provided!\n"
 # define M_USAGE \
 	"usage: ./cub3D [path to .cub map file] [-d option \
-	(optional)]\n"
+(optional)]\n"
 # define M_FEXT \
 	"incorrect file extention in inputed map path, \
 	needs to be .cub\n"

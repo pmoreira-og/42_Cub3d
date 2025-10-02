@@ -1,7 +1,7 @@
 NO ./textures/duck1.xpm
 SO ./textures/duck2.xpm
 WE ./textures/fish3.xpm
-EA ./assets/main_menu_1.xpm
+EA ./textures/fish4.xpm
 C 8,73,78
 F 71,89,95
  
