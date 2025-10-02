@@ -6,7 +6,7 @@
 /*   By: rduro-pe <rduro-pe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 18:24:10 by rduro-pe          #+#    #+#             */
-/*   Updated: 2025/09/29 18:24:11 by rduro-pe         ###   ########.fr       */
+/*   Updated: 2025/10/02 13:12:06 by rduro-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static void	init_wall(t_player *p, t_dda *dda, t_wall *w)
 		w->wall_x = p->pos.x + dda->perp_dist * dda->ray_dir.x;
 	w->wall_x -= floor(w->wall_x);
 	w->tex.x = (int)(w->wall_x * w->texture->width);
-	if (dda->side == 0 && dda->ray_dir.x > 0)
+	if (dda->side == 0 && dda->ray_dir.x < 0)
 		w->tex.x = w->texture->width - w->tex.x - 1;
-	if (dda->side == 1 && dda->ray_dir.y < 0)
+	if (dda->side == 1 && dda->ray_dir.y > 0)
 		w->tex.x = w->texture->width - w->tex.x - 1;
 	dot = p->dir.x * dda->ray_dir.x + p->dir.y * dda->ray_dir.y;
 	if (dot >= p->cos_flash)
